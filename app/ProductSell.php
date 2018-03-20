@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductSell extends Model
 {
-	public $timestamps = false;
-	
     protected $fillable = [
-    	'name','brand','quantity','price'
+    	'product_id','quantity','total_price',
     ];
-
 }
