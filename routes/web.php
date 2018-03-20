@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('prodotti', 'ProductsController@index');
-Route::get('prodotti/aggiungi', 'ProductsController@create');
-Route::post('prodotti/aggiungi', 'ProductsController@store');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::resource('/products', 'ProductsController');
