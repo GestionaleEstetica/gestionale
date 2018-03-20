@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+      $products = DB::table('products')->orderBy('brand','desc')->paginate(35);
+      return view('products.index',compact('products'));
     }
 
     /**
@@ -36,7 +38,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         Product::create($request->all());
-        return redirect('/');
+        return redirect('/products');
     }
 
     /**
@@ -47,7 +49,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+      //useless
     }
 
     /**
@@ -58,7 +60,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = Product::findOrFail($id);
+      return view('products.edit', compact('product'));
     }
 
     /**
@@ -70,7 +73,11 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $product = Product::findOrFail($id);
+      $product->update($request->all());
+
+      return redirect('/products')->with('msg', Utility::alert(REPR,'Prodotto Modificato',$id));;
+
     }
 
     /**
