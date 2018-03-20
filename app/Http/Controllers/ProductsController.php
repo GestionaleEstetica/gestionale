@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Product;
 
 class ProductsController extends Controller
@@ -15,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products');
+        //
     }
 
     /**
@@ -25,7 +24,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('productsCreate');
+        return view('products.create');
     }
 
     /**
@@ -36,21 +35,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-      /*$this->validate($request, [
-          'name' => 'required',
-          'marca' => 'required',
-          'quantity' => 'required',
-          'price' => 'required'
-        ]); */
-
-      $product = new Product;
-      $product -> name = $request -> name;
-      $product -> brand = $request -> brand;
-      $product -> quantity = $request -> quantity;
-      $product -> price = $request -> price;
-
-      $product -> save();
-      return view('productsCreate');
+        Product::create($request->all());
+        return redirect('/');
     }
 
     /**
