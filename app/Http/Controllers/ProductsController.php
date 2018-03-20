@@ -45,11 +45,12 @@ class ProductsController extends Controller
 
       $product = new Product;
       $product -> name = $request -> name;
-      $product -> marca = $request -> marca;
+      $product -> brand = $request -> brand;
       $product -> quantity = $request -> quantity;
       $product -> price = $request -> price;
 
       $product -> save();
+      return view('productsCreate');
     }
 
     /**
