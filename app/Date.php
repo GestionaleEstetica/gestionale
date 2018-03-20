@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Date extends Model
 {
-	public $timestamps = false;
-	
     protected $fillable = [
-    	'name','brand','quantity','price'
+    	'client_id','date','treatment_id'
     ];
-
 }
