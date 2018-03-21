@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
+            $table->string('email')->unique();
             $table->integer('n_dates');
             $table->timestamps();
         });
