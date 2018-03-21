@@ -7,7 +7,7 @@
 <div class="row">
 	<form method="POST" action ="/products">
 		{!! csrf_field() !!}
-		<div class="col-lg-3 col-md-offset-4">
+		<div class="col-lg-7 col-md-offset-2">
 			<div class="well well-lg">
 			    <div class="form-group">
 			        <label>Nome</label>
