@@ -1,13 +1,51 @@
 @extends('layouts.default')
 @section('title')
-	Aggiungi utente
+	Aggiungi prodotto
 @endsection
 
 @section('body')
+
+<body>
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-lg-6 col-md-offset-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Dettagli prodotto
+			</div>
+			<div class="panel-body">
+				<form method="POST" action ="/products">
+					{!! csrf_field() !!}
+					<div class="form-group">
+						<label for="myName">Nome</label>
+			        <input type='text' class="form-control" name='name' placeholder="Es: Lucida labbra">
+					</div>
+					<div class="form-group">
+						<label for="lastname">Brand</label>
+			        <input type='text' class="form-control" name='brand' placeholder="Es: Sephora">
+					</div>
+					<div class="form-group">
+						<label for="age">Quantità</label>
+			        <input type='number' class="form-control" name='quantity' placeholder="Es: 12">
+					</div>
+					<div class="form-group">
+						<label for="phone">Prezzo</label>
+			        <input type='number' class="form-control" name='price' placeholder="Es: 20,99" step="0.01">
+					</div>
+					
+					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
+			
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+{{--
 <div class="row">
 	<form method="POST" action ="/products">
 		{!! csrf_field() !!}
-		<div class="col-lg-3 col-md-offset-4">
+		<div class="col-lg-3 col-lg-offset-4">
 			<div class="well well-lg">
 			    <div class="form-group">
 			        <label>Nome</label>
@@ -25,11 +63,11 @@
 			        <label>Prezzo</label>
 			        <input type='number' class="form-control" name='price' placeholder="Es: 20,99" step="0.01">
 			    </div>
-				<input type="hidden" name="remember_token" value="{{ str_random(10) }}">
 				<p class="help-block">* Ogni campo è obbligatorio.</p>
 				<input type='submit' class="btn btn-outline btn-success" name='Create'>
 		</form>
 				</div>
 		</div>
 	</div>
+--}}
 @endsection
