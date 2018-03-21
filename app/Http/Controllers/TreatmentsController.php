@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Treatment;
 
-use App\Client;
-
-class ClientsController extends Controller
+class TreatmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('first_name')->simplePaginate(20);
-        return view('clients.index', compact('clients'));
+      $treatments = Treatment::orderBy('name')->simplePaginate(20);
+      return view('treatments.index', compact('treatments'));
     }
 
     /**
@@ -26,7 +25,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('treatments.create');
     }
 
     /**
@@ -37,20 +36,8 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        Client::create($request->all());
-        return redirect('/clients');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        Client::findOrFail($id);
-        return view('clients.show', compact('id'));
+        Treatment::create($request->all());
+        return redirect('/treatments');
     }
 
     /**
@@ -61,8 +48,8 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::findOrFail($id);
-        return view('clients.edit', compact('client'));
+      $treatment = Treatment::findOrFail($id);
+      return view('treatments.edit', compact('treatment'));
     }
 
     /**
@@ -74,9 +61,8 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      Client::findOrFail($id)->update($request->all());
-      return redirect('/users');
-
+        Treatment::findOrFail($id)->update($request->all());
+        return back();
     }
 
     /**
@@ -87,9 +73,7 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      $client = Client::findOrFail($id);
-      $client->delete();
-
-      return redirect('/clients');
+        Treatment::destroy($id);
+        return back();
     }
 }

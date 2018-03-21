@@ -8,7 +8,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -57,6 +57,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Trattamenti<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/treatments/create">Aggiungi</a>
+                                </li>
+                                <li>
+                                    <a href="/treatments">Mostra tutti</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#">
                                 <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -75,7 +86,7 @@
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Magazzino</a>
                         </li>
-                        
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
