@@ -64,7 +64,7 @@ class ProductsController extends Controller
       $product = Product::findOrFail($id);
       $product->update($request->all());
 
-      return redirect('/products')->with('msg', Utility::alert(REPR,'Prodotto Modificato',$id));;
+      return redirect('/products');
 
     }
 

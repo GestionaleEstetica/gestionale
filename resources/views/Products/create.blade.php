@@ -5,7 +5,7 @@
 
 @section('body')
 <div class="row">
-	<form method="POST" action ="/users">
+	<form method="POST" action ="/products">
 		{!! csrf_field() !!}
 		<div class="col-lg-3 col-md-offset-4">
 			<div class="well well-lg">

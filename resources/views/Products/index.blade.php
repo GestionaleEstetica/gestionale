@@ -3,7 +3,7 @@
 	Mostra tutti
 @endsection
 @section('body')
-	<div class="col-lg-2 col-md-offset-4">
+	<div class="col-lg-3 col-md-offset-4">
 		<!-- include('alert') -->
 		<form method="GET" action ="/products/search">
 			<div class="form-group input-group">
@@ -14,12 +14,12 @@
 			</div>
 		</form>
 	</div>
-	<div class="col-lg-4 col-md-offset-3">
+	<div class="col-lg-7 col-md-offset-2">
 	<div class="panel panel-primary">
 	   <div class="panel-heading">
 			<i class="fa fa-shopping-cart"> TITOLO MUST BE INSERTED</i>
 	   </div>
-    <table class="table table-hover">
+    <table class="table table-hover" style="font-size:1.3em">
         <tr>
           <th>Codice</th>
           <th>Nome</th>
@@ -35,6 +35,28 @@
           <td>{{ $product->brand }}</td>
           <td>{{ $product->quantity }}</td>
           <td>{{ $product->price }}</td>
+
+		<td>
+          	<form action="/products/{{ $product->id }}/edit" method="GET">
+		  <button type="submit" class="btn btn-warning btn-sm">
+          <div class="glyphicon glyphicon-pencil"></div>
+		</button>
+		  
+		  </form>
+		</td>
+
+          <td>
+          	<form action="/products/{{ $product->id }}" method="POST" style="display: inline;">
+		  	{{ csrf_field() }}
+		  	{{ method_field('DELETE') }}
+
+		  <button type="submit" class="btn btn-danger btn-sm">
+          <div class="glyphicon glyphicon-remove"></div>
+			</button>
+		  
+		  </form>
+		</td>
+
         </tr>
         @empty<center><strong> Nessun prodotto registrato</strong></center>
 
@@ -42,20 +64,4 @@
       </tbody>
     </table>  
 <div>{{ $products->links() }}</div>
-   
-{{--  
-	   <div class="panel-footer text-center">
-		  <a href="/products/{{ $product->id }}/edit" class="btn btn-outline btn-warning">Modifica</a>
-		  <form action="/jobs/create" method="GET" style="display: inline;" >
-		  	<input type="hidden" name="product_id" value="{{ $product->id }}" />
-		  </form>
-		  <form action="/products/{{ $product->id }}" method="POST" style="display: inline;">
-		  	{{ csrf_field() }}
-		  	{{ method_field('DELETE') }}
-		  	<button class="btn btn-outline btn-danger">Elimina</button>
-		  </form>
-	   </div>
-	</div>
-	
---}}
 @endsection
