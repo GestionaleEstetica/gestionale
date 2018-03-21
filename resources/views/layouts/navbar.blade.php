@@ -58,22 +58,16 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Lavori<span class="fa arrow"></span></a>
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/jobs/ongoing">Da fare</a>
+                                    <a href="/clients/create">Aggiungi</a>
                                 </li>
                                 <li>
-                                    <a href="/jobs/recent">Aggiunti di recente</a>
+                                    <a href="#">Aggiunti di recente</a>
                                 </li>
                                 <li>
-                                    <a href="/jobs/priority">Priorità</a>
-                                </li>
-                                <li>
-                                    <a href="/jobs/done">Terminati</a>
-                                </li>
-                                <li>
-                                    <a href="/jobs">Mostra tutti</a>
+                                    <a href="/clients">Mostra tutti</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
