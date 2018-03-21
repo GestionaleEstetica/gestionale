@@ -46,13 +46,13 @@
                             <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Utenti<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Prodotti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/users/create">Aggiungi utente</a>
+                                    <a href="/products/create">Aggiungi</a>
                                 </li>
                                 <li>
-                                    <a href="/users">Mostra tutti</a>
+                                    <a href="/products">Mostra tutti</a>
                                 </li>
                             </ul>
                         </li>

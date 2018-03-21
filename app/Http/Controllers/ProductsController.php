@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -15,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-      $products = DB::table('products')->orderBy('brand','desc')->paginate(35);
+      $products = Product::orderBy('id')->simplePaginate(20);
       return view('products.index',compact('products'));
     }
 
@@ -39,17 +38,6 @@ class ProductsController extends Controller
     {
         Product::create($request->all());
         return redirect('/products');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-      //useless
     }
 
     /**
