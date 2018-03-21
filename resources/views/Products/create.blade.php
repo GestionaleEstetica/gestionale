@@ -7,15 +7,18 @@
 
 <body>
 <div class="row">
+
     <div class="col-md-6 col-sm-12 col-lg-6 col-md-offset-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Dettagli prodotto
 			</div>
 			<div class="panel-body">
-				<form method="POST" action ="/products">
-					{!! csrf_field() !!}
-					<div class="form-group">
-						<label for="myName">Nome</label>
+	<form method="POST" action ="/products">
+		{!! csrf_field() !!}
+		<div class="col-lg-7 col-md-offset-2">
+			<div class="well well-lg">
+			    <div class="form-group">
+			        <label>Nome</label>
 			        <input type='text' class="form-control" name='name' placeholder="Es: Lucida labbra">
 					</div>
 					<div class="form-group">
