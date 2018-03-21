@@ -29,14 +29,7 @@
 					<div class="form-group">
 						<label>Email</label>
 			        <input type='email' class="form-control" name='email' placeholder="Es: ciao@gmail.com">
-			    	</div>
-
-			        <input type="hidden" class="form-control" name='n_dates' value="0">
-					
-
-
-
-					
+			    	</div>					
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
 			
 				</form>
