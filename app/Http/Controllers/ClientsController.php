@@ -37,7 +37,8 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Client::create($request->all());
+        return redirect('/clients');
     }
 
     /**
@@ -48,7 +49,8 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        //
+        Client::findOrFail($id);
+        return view('clients.show', compact('id'));
     }
 
     /**
@@ -59,7 +61,8 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -71,7 +74,9 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $client = Client::findOrFail($id);
+      $client->update($request->all());
+      
     }
 
     /**
@@ -82,6 +87,9 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $client = Client::findOrFail($id);
+      $client->delete();
+      
+      return redirect('/clients');
     }
 }

@@ -19,7 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->string('email')->unique();
-            $table->integer('n_dates');
+            $table->integer('n_dates')->default(0);
             $table->timestamps();
         });
     }
