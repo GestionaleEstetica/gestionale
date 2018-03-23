@@ -9,4 +9,14 @@ class Date extends Model
 	protected $fillable = [
     	'client_id','date','time','done','description'
     ];
+
+    public function client()
+    {
+    	return $this->hasOne(Client::class);
+    }
+
+    public function treatment()
+    {
+    	return $this->hasMany(Treatment::class);
+    }
 }

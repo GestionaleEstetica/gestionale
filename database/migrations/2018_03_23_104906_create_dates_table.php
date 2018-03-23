@@ -14,13 +14,14 @@ class CreateDatesTable extends Migration
     public function up()
     {
         Schema::create('dates', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('client_id');
             $table->date('date');
             $table->time('time');
             $table->boolean('done');
             $table->string('description',128)->default("");
             $table->timestamps();
+
+            $table->primary(['client_id','date']);
 
         });
     }

@@ -10,4 +10,8 @@ class Client extends Model
     	'first_name','last_name','phone', 'email','done_dates'
     ];
     
+    public function date()
+    {
+    	return $this->belongsToMany(Date::class);
+    }
 }

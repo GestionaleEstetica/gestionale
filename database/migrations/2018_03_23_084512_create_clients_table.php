@@ -21,7 +21,6 @@ class CreateClientsTable extends Migration
             $table->string('email',128)->unique();
             $table->integer('done_dates');
             $table->timestamps();
-
         });
     }
 
