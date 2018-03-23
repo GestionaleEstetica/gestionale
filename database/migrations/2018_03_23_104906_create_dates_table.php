@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class CreateDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('dates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone');
-            $table->string('email')->unique();
-            $table->integer('n_dates')->default(0);
+            $table->integer('client_id');
+            $table->date('date');
+            $table->time('time');
+            $table->boolean('done');
+            $table->string('description',128)->default("");
             $table->timestamps();
+
         });
     }
 
@@ -31,6 +32,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('dates');
     }
 }
