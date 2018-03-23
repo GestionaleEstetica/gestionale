@@ -15,7 +15,9 @@ class CreateTreatmentSalesTable extends Migration
     {
         Schema::create('treatment_sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('sale_id');
+            $table->integer('treatment_id');
+            $table->integer('quantity');
         });
     }
 
