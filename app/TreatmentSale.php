@@ -14,7 +14,7 @@ class TreatmentSale extends Model
 
     public function treatment()
     {
-    	return $this->hasMany(Treatment::class);
+    	return $this->belongsToMany(Treatment::class);
     }
 
     public function sale()

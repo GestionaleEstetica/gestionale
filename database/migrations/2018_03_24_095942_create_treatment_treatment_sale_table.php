@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTreatmentWithTreatmentSaleTable extends Migration
+class CreateTreatmentTreatmentSaleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTreatmentWithTreatmentSaleTable extends Migration
      */
     public function up()
     {
-        Schema::create('treatment_with_treatment_sale', function (Blueprint $table) {
-            $table->integer('treatment_id','tr_id');
-            $table->integer('treatment_sale_id','tr_sale_id');
+        Schema::create('treatment_treatment_sale', function (Blueprint $table) {
+            $table->integer('treatment_id');
+            $table->integer('treatment_sale_id');
 
             $table->primary(['treatment_id','treatment_sale_id']);
         });
@@ -28,6 +28,6 @@ class CreateTreatmentWithTreatmentSaleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('treatment_with_treatment_sale');
+        Schema::dropIfExists('treatment_treatment_sale');
     }
 }

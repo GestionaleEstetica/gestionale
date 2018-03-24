@@ -8,11 +8,11 @@ class Sale extends Model
 {
     public function productSale()
     {
-    	return $this->hasMany(ProductSale::class);
+    	return $this->belongsToMany(ProductSale::class);
     }
 
     public function treatmentSale()
     {
-    	return $this->hasMany(TreatmentSale::class);
+    	return $this->belongsToMany(TreatmentSale::class);
     }
 }
