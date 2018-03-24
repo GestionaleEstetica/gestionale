@@ -19,4 +19,4 @@ Route::resource('/products', 'ProductsController');
 Route::resource('/treatments', 'TreatmentsController');
 Route::resource('/clients', 'ClientsController');
 
-Route::get('/test','HomeController@test');
+Route::get('/test','TestController@index');

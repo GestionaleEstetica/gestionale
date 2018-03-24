@@ -15,9 +15,12 @@ class CreateTreatmentWithDateTable extends Migration
     {
         Schema::create('treatment_with_date', function (Blueprint $table) {
             $table->integer('date_id');
-            $table->integer('treatment_id');
+            $table->integer('treatment_id')->unsigned();
 
-            $table->primary(['date_id','treatment_id']);
+            $table->primary(['date_id','treatment_id'],'date_and_treatment');
+
+            $table->foreign('date_id')->references('date_key')->on('dates');
+            $table->foreign('treatment_id')->references('id')->on('treatments');
         });
     }
 
