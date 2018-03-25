@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    public function productSale()
+    public function products()
     {
-    	return $this->hasMany(ProductSale::class);
+    	return $this->belongsToMany(Product::class);
     }
 
-    public function treatmentSale()
+    public function treatments()
     {
-    	return $this->hasMany(TreatmentSale::class);
+    	return $this->belongsToMany(Treatment::class);
     }
 }

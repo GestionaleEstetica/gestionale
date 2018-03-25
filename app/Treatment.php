@@ -12,14 +12,14 @@ class Treatment extends Model
     	'name','duration','price'
     ];
 
-    public function date()
+    public function dates()
     {
     	return $this->belongsToMany(Date::class);
     }
 
-    public function treatmentSale()
+    public function sales()
     {
-    	return $this->belongsToMany(TreatmentSale::class);
+    	return $this->belongsToMany(Sale::class);
     }
 
 }

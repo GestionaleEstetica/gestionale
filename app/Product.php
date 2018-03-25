@@ -12,8 +12,8 @@ class Product extends Model
     	'name','brand','price', 'quantity'
     ];
 
-    public function productSale()
+    public function sales()
     {
-    	return $this->belongsToMany(ProductSale::class);
+    	return $this->belongsToMany(Sale::class);
     }
 }
