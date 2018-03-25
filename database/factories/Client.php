@@ -8,6 +8,6 @@ $factory->define(App\Client::class, function (Faker $faker) {
         'last_name' => $faker->name,
         'phone' => $faker->phoneNumber,
         'email' => $faker->email,
-        'n_dates' => random_int(0,5),
+        'done_dates' => random_int(0,5),
     ];
 });

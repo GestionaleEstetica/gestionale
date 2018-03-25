@@ -9,7 +9,7 @@ class Product extends Model
 	public $timestamps = false;
 
     protected $fillable = [
-    	'name','brand','price'
+    	'name','brand','price', 'quantity'
     ];
 
     public function productSale()

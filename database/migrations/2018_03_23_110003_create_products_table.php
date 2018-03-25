@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name',32)->unique();
             $table->string('brand',32);
+            $table->decimal('quantity');
             $table->decimal('price');
         });
     }

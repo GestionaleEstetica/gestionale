@@ -11,11 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Date::class,20)->create();
+        factory(App\Client::class,40)->create();
+        factory(App\Treatment::class,20)->create();
         factory(App\Product::class,30)->create();
-        factory(App\ProductSell::class,5)->create();
-        factory(App\Treatment::class,8)->create();
-        factory(App\TreatmentSell::class,10)->create();
-        factory(App\Client::class,10)->create();
+        factory(App\Date::class,10)->create();
+        factory(App\Sale::class,15)->create();
+        factory(App\ProductSale::class,5)->create();
+        factory(App\TreatmentSale::class,10)->create();
     }
 }
