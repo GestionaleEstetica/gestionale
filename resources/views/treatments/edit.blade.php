@@ -20,7 +20,7 @@
 			        <input type='text' class="form-control" name='name' value="{{ $treatment->name }}">
 					</div>
 					<div class="form-group">
-						<label>Durata Min</label>
+						<label>Durata (minuti)</label>
 			        <input type='text' class="form-control" name='duration' value="{{ $treatment->duration }}">
 					</div>
 					<div class="form-group">

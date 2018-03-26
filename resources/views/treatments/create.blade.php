@@ -19,8 +19,8 @@
 			        <input type='text' class="form-control" name='name' placeholder="Es: Ceretta Gambe">
 					</div>
 					<div class="form-group">
-						<label>Durata Min</label>
-			        <input type='text' class="form-control" name='duration_time_min' placeholder="Es: Sephora">
+						<label>Durata (minuti)</label>
+			        <input type='text' class="form-control" name='duration' placeholder="Es: Sephora">
 					</div>
 					<div class="form-group">
 						<label>Prezzo</label>
