@@ -18,11 +18,11 @@ class CreateDatesTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->date('date');
             $table->time('time');
-            $table->boolean('done');
+            $table->boolean('done')->default(false);
             $table->string('description',128)->default("");
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 
         });
     }

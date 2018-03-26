@@ -16,10 +16,12 @@ class CreateProductSaleTable extends Migration
         Schema::create('product_sale', function (Blueprint $table) {
 
             $table->integer('sale_id')->unsigned();
-            $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
 
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            $table->integer('quantity')->default(1);
 
             $table->primary(['sale_id','product_id'],'sale_and_product');
 

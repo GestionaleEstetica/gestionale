@@ -22,5 +22,6 @@ Route::resource('/treatments', 'TreatmentsController');
 
 Route::get('/clients/recent','ClientsController@recent');
 Route::resource('/clients', 'ClientsController');
+Route::resource('/sales', 'SalesController');
 
 Route::get('/test','TestController@index');
