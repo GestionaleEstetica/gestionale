@@ -44,8 +44,20 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //
     }
+
+    function storeProducts(Request $request)
+   {
+       return back();
+   }
+
+    function storeTreatments(Request $request)
+   {
+       return back();
+   }
+
+
 
     /**
      * Display the specified resource.
