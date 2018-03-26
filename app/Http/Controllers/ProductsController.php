@@ -66,11 +66,6 @@ class ProductsController extends Controller
       return redirect('/products');
 
     }
-    
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -92,7 +87,6 @@ class ProductsController extends Controller
         ->orWhere('brand','like','%'.$search.'%')
         ->orderBy('id')
         ->paginate(10);
-        return view('products.index',compact('products'));
-
+        return view('/products.index', compact('products'));
     }
 }

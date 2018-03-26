@@ -14,9 +14,8 @@
 Route::get('/', function () {
     return view('home');
 });
-
-Route::resource('/products', 'ProductsController');
 Route::get('/products/search','ProductsController@search');
+Route::resource('/products', 'ProductsController');
 Route::resource('/treatments', 'TreatmentsController');
 Route::resource('/clients', 'ClientsController');
 
