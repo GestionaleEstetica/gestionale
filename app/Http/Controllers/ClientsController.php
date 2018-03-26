@@ -75,7 +75,7 @@ class ClientsController extends Controller
     public function update(Request $request, $id)
     {
       Client::findOrFail($id)->update($request->all());
-      return redirect('/users');
+      return redirect('/clients');
 
     }
 

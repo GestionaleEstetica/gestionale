@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTreatmentDateTable extends Migration
+class CreateDateTreatmentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTreatmentDateTable extends Migration
      */
     public function up()
     {
-        Schema::create('treatment_date', function (Blueprint $table) {
+        Schema::create('date_treatment', function (Blueprint $table) {
             $table->integer('date_id')->unsigned();
             $table->foreign('date_id')->references('id')->on('dates');
 
@@ -31,6 +31,6 @@ class CreateTreatmentDateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('treatment_date');
+        Schema::dropIfExists('date_treatment');
     }
 }
