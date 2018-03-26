@@ -24,6 +24,22 @@
                             <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/clients/create">Aggiungi</a>
+                                </li>
+                                <li>
+                                    <a href="/clients/recent">Aggiunti di recente</a>
+                                </li>
+                                <li>
+                                    <a href="/clients">Mostra tutti</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Prodotti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -47,16 +63,16 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Vendite<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/clients/create">Aggiungi</a>
+                                    <a href="/sales/create">Aggiungi</a>
                                 </li>
                                 <li>
-                                    <a href="/clients/recent">Aggiunti di recente</a>
+                                    <a href="/sales/recent">Aggiunte di recente</a>
                                 </li>
                                 <li>
-                                    <a href="/clients">Mostra tutti</a>
+                                    <a href="/sales">Mostra tutte</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
