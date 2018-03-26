@@ -92,4 +92,10 @@ class ClientsController extends Controller
 
       return redirect('/clients');
     }
+
+    public function recent()
+    {
+        $clients = Client::orderBy('created_at')->simplePaginate(15);
+        return view('clients.index', compact('clients'));
+    }
 }

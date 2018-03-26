@@ -24,7 +24,7 @@
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
-			        <input type='text' class="form-control" name='phone' placeholder="Es:+39 380 209 1223">
+			        <input type='text' class="form-control" name='phone' placeholder="Es: +39 380 209 1223">
 					</div>
 					<div class="form-group">
 						<label>Email</label>

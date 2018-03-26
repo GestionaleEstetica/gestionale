@@ -75,7 +75,7 @@
                                     <a href="/clients/create">Aggiungi</a>
                                 </li>
                                 <li>
-                                    <a href="#">Aggiunti di recente</a>
+                                    <a href="/clients/recent">Aggiunti di recente</a>
                                 </li>
                                 <li>
                                     <a href="/clients">Mostra tutti</a>

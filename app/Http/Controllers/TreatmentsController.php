@@ -10,7 +10,7 @@ class TreatmentsController extends Controller
 
     public function index()
     {
-      $treatments = Treatment::orderBy('name')->simplePaginate(20);
+      $treatments = Treatment::orderBy('id')->simplePaginate(20);
       return view('treatments.index', compact('treatments'));
     }
 
@@ -34,12 +34,22 @@ class TreatmentsController extends Controller
     public function update(Request $request, $id)
     {
         Treatment::findOrFail($id)->update($request->all());
-        return back();
+        return redirect('/treatments');
     }
 
     public function destroy($id)
     {
         Treatment::destroy($id);
         return back();
+    }
+
+    public function search()
+    {
+        $search = \Request::get('value');
+        $treatments = 
+        Treatment::where('name','like','%'.$search.'%')
+        ->orderBy('id')
+        ->paginate(10);
+        return view('/treatments.index', compact('treatments'));
     }
 }
