@@ -15,7 +15,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('first_name')->simplePaginate(20);
+        $clients = Client::orderBy('first_name')->simplePaginate(15);
         return view('clients.index', compact('clients'));
     }
 
@@ -95,7 +95,7 @@ class ClientsController extends Controller
 
     public function recent()
     {
-        $clients = Client::orderBy('created_at')->simplePaginate(15);
+        $clients = Client::orderBy('created_at','desc')->simplePaginate(15);
         return view('clients.index', compact('clients'));
     }
 }

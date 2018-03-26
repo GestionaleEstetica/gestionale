@@ -83,10 +83,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Magazzino</a>
-                        </li>
-
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

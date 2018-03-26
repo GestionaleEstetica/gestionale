@@ -28,19 +28,19 @@
                                         <tr>
 								          <th>Codice</th>
 								          <th>Nome</th>
-								          <th>Marca</th>
-								          <th>Quantità</th>
-								          <th>Prezzo</th>
+								          <th>Cognome</th>
+								          <th>Telefono</th>
+								          <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 					       @forelse($clients as $client)
 					        <tr>
 					          <td>{{ $client->id }}</td>
-					          <td>{{ $client->name }}</td>
-					          <td>{{ $client->brand }}</td>
-					          <td>{{ $client->quantity }}</td>
-					          <td>{{ $client->price }}</td>
+					          <td>{{ $client->first_name }}</td>
+					          <td>{{ $client->last_name }}</td>
+					          <td>{{ $client->phone }}</td>
+					          <td>{{ $client->email }}</td>
 
 							<td class="text-center">
 					          	<form action="/clients/{{ $client->id }}/edit" method="GET">

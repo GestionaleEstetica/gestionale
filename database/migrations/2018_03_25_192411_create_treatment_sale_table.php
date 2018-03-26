@@ -13,7 +13,7 @@ class CreateSaleTreatmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('sale_treatment', function (Blueprint $table) {
+        Schema::create('treatment_sale', function (Blueprint $table) {
             $table->integer('sale_id')->unsigned();
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
 
@@ -22,7 +22,7 @@ class CreateSaleTreatmentTable extends Migration
 
             $table->integer('quantity')->default(1);
 
-            $table->primary(['sale_id','treatment_id'],'sale_and_treatment');
+            $table->primary(['sale_id','treatment_id'],'treatment_and_sale');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateSaleTreatmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sale_treatment');
+        Schema::dropIfExists('treatment_sale');
     }
 }
