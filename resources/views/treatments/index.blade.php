@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-Mostra trattamenti
+Mostra tutti
 @endsection
 @section('body')
 	<div class="col-lg-4">
@@ -37,7 +37,7 @@ Mostra trattamenti
 					        <tr>
 					          <td>{{ $treatment->id }}</td>
 					          <td>{{ $treatment->name }}</td>
-					          <td>{{ $treatment->duration_time_min }}</td>
+					          <td>{{ $treatment->duration }}</td>
 					          <td>{{ $treatment->price }}</td>
 
 							<td class="text-center">

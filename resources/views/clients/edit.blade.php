@@ -9,28 +9,28 @@
 <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-md-offset-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Dettagli prodotto
+			<div class="panel-heading">Dettagli utente
 			</div>
 			<div class="panel-body">
-				<form method="POST" action ="/products">
+				<form method="POST" action ="/clients">
 					{!! csrf_field() !!}
 					<div class="form-group">
 						<label>Nome</label>
-			        <input type='text' class="form-control" name='name' placeholder="Es: Smalto">
+			        <input type='text' class="form-control" name='first_name' value="{{ $client->first_name }}">
 					</div>
 					<div class="form-group">
-						<label>Brand</label>
-			        <input type='text' class="form-control" name='brand' placeholder="Es: Sephora">
+						<label>Cognome</label>
+			        <input type='text' class="form-control" name='last_name' value="{{ $client->last_name }}">
 					</div>
 					<div class="form-group">
-						<label>Quantità</label>
-			        <input type='number' class="form-control" name='quantity' placeholder="Es: 12">
+						<label>Phone</label>
+			        <input type='text' class="form-control" name='phone' value="{{ $client->phone }}">
 					</div>
 					<div class="form-group">
-						<label>Prezzo</label>
-			        <input type='number' class="form-control" name='price' placeholder="Es: 20,99" step="0.01">
-					</div>
-					
+						<label>Email</label>
+			        <input type='email' class="form-control" name='email' value="{{ $client->email }}">
+			    	</div>				
+
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
 			
 				</form>

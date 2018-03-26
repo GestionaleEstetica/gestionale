@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 Route::get('/products/search','ProductsController@search');
 Route::resource('/products', 'ProductsController');
+
+Route::get('/treatments/search','TreatmentsController@search');
 Route::resource('/treatments', 'TreatmentsController');
+
+Route::get('/clients/recent','ClientsController@recent');
 Route::resource('/clients', 'ClientsController');
 
 Route::get('/test','TestController@index');

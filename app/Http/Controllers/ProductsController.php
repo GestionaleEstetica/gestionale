@@ -62,9 +62,7 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
       Product::findOrFail($id)->update($request->all());
-
       return redirect('/products');
-
     }
 
     /**
