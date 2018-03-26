@@ -15,10 +15,10 @@ class CreateDateTreatmentTable extends Migration
     {
         Schema::create('date_treatment', function (Blueprint $table) {
             $table->integer('date_id')->unsigned();
-            $table->foreign('date_id')->references('id')->on('dates');
+            $table->foreign('date_id')->references('id')->on('dates')->onDelete('cascade');
 
             $table->integer('treatment_id')->unsigned();
-            $table->foreign('treatment_id')->references('id')->on('treatments');
+            $table->foreign('treatment_id')->references('id')->on('treatments')->onDelete('cascade');
 
             $table->primary(['date_id','treatment_id'],'date_and_treatment');
         });

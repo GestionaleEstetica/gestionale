@@ -15,10 +15,12 @@ class CreateSaleTreatmentTable extends Migration
     {
         Schema::create('sale_treatment', function (Blueprint $table) {
             $table->integer('sale_id')->unsigned();
-            $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
 
             $table->integer('treatment_id')->unsigned();
-            $table->foreign('treatment_id')->references('id')->on('treatments');
+            $table->foreign('treatment_id')->references('id')->on('treatments')->onDelete('cascade');
+
+            $table->integer('quantity')->default(1);
 
             $table->primary(['sale_id','treatment_id'],'sale_and_treatment');
         });

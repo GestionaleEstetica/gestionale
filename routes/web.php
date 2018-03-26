@@ -18,5 +18,6 @@ Route::get('/products/search','ProductsController@search');
 Route::resource('/products', 'ProductsController');
 Route::resource('/treatments', 'TreatmentsController');
 Route::resource('/clients', 'ClientsController');
+Route::resource('/sales', 'SalesController');
 
 Route::get('/test','TestController@index');
