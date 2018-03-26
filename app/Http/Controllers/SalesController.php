@@ -47,14 +47,14 @@ class SalesController extends Controller
       //
     }
 
-    function storeProducts(Request $request)
+    public function storeProducts(Request $request)
    {
-       return back();
+       return 'product arrived';
    }
 
-    function storeTreatments(Request $request)
+    public function storeTreatments(Request $request)
    {
-       return back();
+       return 'yaaaa';
    }
 
 
