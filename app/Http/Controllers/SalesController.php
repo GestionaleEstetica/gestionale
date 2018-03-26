@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
 use App\Sale;
 
 class SalesController extends Controller
@@ -15,15 +15,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-      //$prodsale = Sale::find(1)->products()->get(); UTILE DONT DELETE
-      $alltreat = array();
-      $allproduct = array();
-      foreach (Sale::all() as $item) {
-        array_push($alltreat, $item->treatments()->get());
-        array_push($allproduct, $item->products()->get());
-      }
-
-      return view('sales.index', compact('alltreat','allproduct'));
+        return view('sales.index');
     }
 
     /**
@@ -44,20 +36,15 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        $products = $request->input('product');
+        $quantity = $request->input('quantity');
+        $sale = Sale::find(15);
+        for ($i = 0; $i <= count($products); $i++) {
+            $sale->products()->attach($products[$i]);
+        } 
+
+        return view('sales.index',compact(['input']));
     }
-
-    public function storeProducts(Request $request)
-   {
-       return 'product arrived';
-   }
-
-    public function storeTreatments(Request $request)
-   {
-       return 'yaaaa';
-   }
-
-
 
     /**
      * Display the specified resource.

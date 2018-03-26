@@ -87,7 +87,7 @@
           e.preventDefault();
           if(x < max_fields){
               x++;
-              $(wrapper).append('<input type="text" name="products" placeholder="Prodotto"><input type="text" name="quantity" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+              $(wrapper).append('<input type="text" name="product[]" placeholder="Prodotto"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
           }
   		else
   		{
@@ -105,7 +105,7 @@
           e.preventDefault();
           if(y < max_fields){
               y++;
-              $(wrapper2).append('<div><input type="text" name="treatments" placeholder="Trattamento"><input type="text" name="quantity" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+              $(wrapper2).append('<div><input type="text" name="treatment" placeholder="Trattamento"><input type="text" name="quantity" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
           }
       else
       {
@@ -118,12 +118,6 @@
       })
   });
 
-
-  submitForms = function(){
-    document.forms["products"].submit();
-    document.forms["treatments"].submit();
-
-  }
   </script>
   </head>
 <div class="row">
@@ -133,29 +127,27 @@
 			</div>
 			<div class="panel-body">
         <div class="col-md-6">
-				<form method="POST" action ="{{action('SalesController@storeProducts')}}" name="products" accept-charset="UTF-8">
+				<form method="POST" action ="/sales">
 					{!! csrf_field() !!}
 					<div class="form-group">
             <div class="container1">
                 <button class="add_form_product">Nuovo Prodotto &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
-                <div><input type="text" name="products" placeholder="Prodotto"><input type="text" name="quantity" placeholder="quantità"></div>
+                <div><input type="text" name="product[]" placeholder="Prodotto">
+                  <input type="text" name="quantity[]" placeholder="quantità"></div>
             </div>
 					</div>
         </div>
-      </form>
         <div class="col-md-6">
-          <form method="POST" action ="{{action('SalesController@storeTreatments')}}" name="treatments" accept-charset="UTF-8">
           <div class="form-group">
             <div class="container2">
               <button class="add_form_treatment">Nuovo Trattamento &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
-              <div><input type="text" name="products" placeholder="Prodotto"><input type="text" name="quantity" placeholder="quantità"></div>
+              <div><input type="text" name="treatment" placeholder="Prodotto">
+                <input type="text" name="quantity" placeholder="quantità"></div>
           </div>
         </div>
+          <button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
       </form>
       </div>
-
-
-					<button id="submit" type="submit" value="submit" class="btn btn-primary center" onclick="submitForms()">Aggiungi</button>
 
 				</form>
 
