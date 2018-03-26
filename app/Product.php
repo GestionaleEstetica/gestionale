@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 	public $timestamps = false;
-	
+
     protected $fillable = [
-    	'name','brand','quantity','price'
+    	'name','brand','price', 'quantity'
     ];
 
+    public function sales()
+    {
+    	return $this->belongsToMany(Sale::class);
+    }
 }

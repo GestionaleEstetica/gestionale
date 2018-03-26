@@ -78,4 +78,15 @@ class ProductsController extends Controller
       Product::destroy($id);
       return back();
     }
+
+    public function search()
+    {
+        $search = \Request::get('value');
+        $products = 
+        Product::where('name','like','%'.$search.'%')
+        ->orWhere('brand','like','%'.$search.'%')
+        ->orderBy('id')
+        ->paginate(10);
+        return view('/products.index', compact('products'));
+    }
 }

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductSell extends Model
+class Log extends Model
 {
     protected $fillable = [
-    	'product_id','quantity','total_price',
+    	'operation','user'
     ];
 }
