@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Sale;
+use App\Product;
+use App\Treatment;
 
 class SalesController extends Controller
 {
@@ -25,7 +27,9 @@ class SalesController extends Controller
      */
     public function create()
     {
-        return view('sales.create');
+      $products = Product::all();
+      $treatments = Product::all();
+        return view('sales.create', compact(['products', 'treatments']));
     }
 
     /**
@@ -41,7 +45,7 @@ class SalesController extends Controller
         $sale = Sale::find(15);
         for ($i = 0; $i <= count($products); $i++) {
             $sale->products()->attach($products[$i]);
-        } 
+        }
 
         return view('sales.index',compact(['input']));
     }

@@ -10,7 +10,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){
             x++;
-            $(wrapper).append('<input id="productId" type="text" name="product[]" placeholder="Prodotto"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper).append('<input list="products" type="text" name="product[]" placeholder="Prodotto"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
         }
     else
     {
@@ -28,7 +28,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(y < max_fields){
             y++;
-            $(wrapper2).append('<div><input id="treatmentId" type="text" name="treatment" placeholder="Trattamento"><input type="text" name="quantity" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper2).append('<div><input list="treatments" type="text" name="treatment[]" placeholder="Trattamento"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
         }
     else
     {
