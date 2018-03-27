@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $(addProduct).click(function(e){
         e.preventDefault();
-          $(wrapper).append('<input list="products" type="text" name="product[]" placeholder="Prodotto"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+          $(wrapper).append('<input list="products" type="text" name="product[]" placeholder="Prodotto"><input type="text" name="pQuantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
     });
     $(wrapper).on("click",".delete", function(e){
         e.preventDefault(); $(this).parent('div').remove();
@@ -15,7 +15,7 @@ $(document).ready(function() {
     //Treatment
     $(addTreatment).click(function(e){
         e.preventDefault();
-          $(wrapper2).append('<div><input list="treatments" type="text" name="treatment[]" placeholder="Trattamento"><input type="text" name="quantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+          $(wrapper2).append('<div><input list="treatments" type="text" name="treatment[]" placeholder="Trattamento"><input type="text" name="tQuantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
         });
     $(wrapper2).on("click",".delete", function(e){
         e.preventDefault(); $(this).parent('div').remove();

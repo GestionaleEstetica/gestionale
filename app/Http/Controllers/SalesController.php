@@ -27,8 +27,8 @@ class SalesController extends Controller
      */
     public function create()
     {
-      $products = Product::all();
-      $treatments = Product::all();
+        $products = Product::all();
+        $treatments = Product::all();
         return view('sales.create', compact(['products', 'treatments']));
     }
 
@@ -41,7 +41,7 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $products = $request->input('product');
-        $quantity = $request->input('quantity');
+        $pQuantity = $request->input('pQuantity');
         $sale = Sale::find(15);
         for ($i = 0; $i <= count($products); $i++) {
             $sale->products()->attach($products[$i]);

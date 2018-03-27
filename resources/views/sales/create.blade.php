@@ -20,10 +20,7 @@
 
 <body>
   <head>
-  <title>Vendita Prodotti</title>
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="/js/script.js"></script>
+  <title>Nuova vendita</title>
   </head>
 
 <div class="row">
@@ -38,8 +35,8 @@
 					<div class="form-group">
             <div class="containerP">
                 <button class="addProductForm">Nuovo Prodotto + </span></button>
-                <div><input list="products" type="text" name="product[]" placeholder="Prodotto">
-                  <input type="text" name="quantity[]" placeholder="quantità"></div>
+                <div><input list="products" type="text" name="product[]" placeholder="prodotto">
+                  <input type="text" name="pQuantity[]" placeholder="quantità"></div>
             </div>
 					</div>
         </div>
@@ -47,8 +44,8 @@
           <div class="form-group">
             <div class="containerT">
               <button class="addTreatmentForm">Nuovo Trattamento + </span></button>
-              <div><input list="treatments" type="text" name="treatment[]" placeholder="Prodotto">
-                <input type="text" name="quantity[]" placeholder="quantità"></div>
+              <div><input list="treatments" type="text" name="treatment[]" placeholder="trattamento">
+                <input type="text" name="tQuantity[]" placeholder="quantità"></div>
           </div>
         </div>
           <button type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
@@ -58,5 +55,7 @@
 		</div>
 	</div>
 </div>
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 @endsection
