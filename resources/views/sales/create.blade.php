@@ -7,13 +7,13 @@
 
 <datalist id="products">
 @foreach ($products as $product)
- PRODOTTO '<option value= <?php echo $product->name ?> />'
+ PRODOTTO '<option value= {{$product->name}} />'
 @endforeach;
 </datalist>
 
 <datalist id="treatments">
 @foreach ($treatments as $treatment)
- TRATTAMENTO '<option value= <?php echo $treatment->name ?> />'
+ TRATTAMENTO '<option value= {{ $treatment->name }} />'
 @endforeach;
 </datalist>
 
@@ -36,8 +36,8 @@
 				<form method="POST" action ="/sales">
 					{!! csrf_field() !!}
 					<div class="form-group">
-            <div class="container1">
-                <button class="add_form_product">Nuovo Prodotto &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+            <div class="containerP">
+                <button class="addProductForm">Nuovo Prodotto + </span></button>
                 <div><input list="products" type="text" name="product[]" placeholder="Prodotto">
                   <input type="text" name="quantity[]" placeholder="quantità"></div>
             </div>
@@ -45,13 +45,13 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <div class="container2">
-              <button class="add_form_treatment">Nuovo Trattamento <span style="font-size:16px; font-weight:bold;">+ </span></button>
+            <div class="containerT">
+              <button class="addTreatmentForm">Nuovo Trattamento + </span></button>
               <div><input list="treatments" type="text" name="treatment[]" placeholder="Prodotto">
                 <input type="text" name="quantity[]" placeholder="quantità"></div>
           </div>
         </div>
-          <button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
+          <button type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
       </form>
       </div>
 			</div>
