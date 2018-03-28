@@ -29,7 +29,7 @@ class SalesController extends Controller
     public function create()
     {
         $products = Product::all();
-        $treatments = Product::all();
+        $treatments = Treatment::all();
         return view('sales.create', compact(['products', 'treatments']));
     }
 
@@ -41,16 +41,23 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $products = $request->input('product');
-        $pQuantity = $request->input('pQuantity');
+        $products = $request->input('products');
+        /*$pQuantity = $request->input('pQuantity');
+
+        $treatments = $request->input('treatments');
+        $tQuantity = $request->input('tQuantity');
+
+        $sale = new Sale();
+        $sale -> save();
 
         for ($i = 0; $i < count($products); $i++)
         {
-            DB::update("UPDATE products SET quantity = quantity - '$pQuantity[$i]' WHERE name='$products[$i]' "); //diminuisci quantità prodotto
-            $product = DB::select("SELECT * FROM products WHERE name='$products[$i]' ");
-        }
+            DB::table('products')->where('name', $products[$i])->decrement('quantity',$pQuantity[$i]);
+            $productId = DB::table('products')->where('name',$products[$i])->value('id');
+            $sale->products()->attach($productId, array('quantity'=> $pQuantity[$i] ));
+        } */
 
-        return view('sales/index',compact('product'));
+        return view('sales/index',compact('products'));
     }
 
     /**

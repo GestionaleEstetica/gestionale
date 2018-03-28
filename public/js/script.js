@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $(addProduct).click(function(e){
         e.preventDefault();
-          $(wrapper).append('<div><input list="treatments" type="text" name="product[]" placeholder="prodotto"><input type="text" name="pQuantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
+          $(wrapper).append('<div><input list="products" type="text" name="products[]" placeholder="prodotto"><input type="text" name="pQuantity[]" placeholder="quantità"><a href="#" class="delete">Delete</a></div>'); //add input box
         });
     $(wrapper).on("click",".delete", function(e){
         e.preventDefault(); $(this).parent('div').remove();

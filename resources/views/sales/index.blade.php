@@ -1,1 +1,4 @@
-{{ $product[0]->name }}
+ @foreach($products as $p)
+ {{$p}}
+
+@endforeach;

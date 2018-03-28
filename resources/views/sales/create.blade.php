@@ -7,13 +7,13 @@
 
 <datalist id="products">
 @foreach ($products as $product)
-  <option value= {{$product->name}} />  </option>
+	<option value= '{{$product->name}}'/>
 @endforeach;
 </datalist>
 
 <datalist id="treatments">
 @foreach ($treatments as $treatment)
- TRATTAMENTO '<option value= {{ $treatment->name }} />'
+	<option value= '{{ $treatment->name }}'/>
 @endforeach;
 </datalist>
 
@@ -30,21 +30,19 @@
 			</div>
 			<div class="panel-body">
         <div class="col-md-6">
-				<form method="POST" action ="/sales">
+				<form method="POST" action ="/sales" class="containerP">
 					{!! csrf_field() !!}
 					<div class="form-group">
-            <div class="containerP">
                 <button class="addProductForm">Nuovo Prodotto + </span></button>
-                <div><input list="products" type="text" name="product[]" placeholder="prodotto">
+                <div><input list="products" type="text" name="products[]" placeholder="prodotto">
                   <input type="text" name="pQuantity[]" placeholder="quantità"></div>
             </div>
-					</div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <div class="containerT">
               <button class="addTreatmentForm">Nuovo Trattamento + </span></button>
-              <div><input list="treatments" type="text" name="treatment[]" placeholder="trattamento">
+              <div><input list="treatments" type="text" name="treatments[]" placeholder="trattamento">
                 <input type="text" name="tQuantity[]" placeholder="quantità"></div>
           </div>
         </div>
