@@ -43,11 +43,14 @@ class SalesController extends Controller
         $products = $request->input('product');
         $pQuantity = $request->input('pQuantity');
         $sale = Sale::find(15);
-        for ($i = 0; $i <= count($products); $i++) {
-            $sale->products()->attach($products[$i]);
+        for ($i = 0; $i <= count($products)-1; $i++) 
+        {
+            $name = $products[$i];
+            $product = Product::find($name);
+            $sale->products()->attach($product);
         }
 
-        return view('sales.index',compact(['input']));
+        return view('sales/index',compact('product'));
     }
 
     /**
