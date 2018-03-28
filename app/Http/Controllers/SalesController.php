@@ -46,10 +46,8 @@ class SalesController extends Controller
 
         for ($i = 0; $i < count($products); $i++)
         {
-            $name = $products[$i];
-            $quantity = $pQuantity[$i];
-            DB::update("UPDATE products SET quantity = quantity - '$quantity' WHERE name='$name' "); //diminuisci quantità prodotto
-            $product = DB::select("SELECT * FROM products WHERE name='$name' ");
+            DB::update("UPDATE products SET quantity = quantity - '$pQuantity[$i]' WHERE name='$products[$i]' "); //diminuisci quantità prodotto
+            $product = DB::select("SELECT * FROM products WHERE name='$products[$i]' ");
         }
 
         return view('sales/index',compact('product'));
