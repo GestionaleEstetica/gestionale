@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Sale;
 use App\Product;
 use App\Treatment;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -42,12 +43,13 @@ class SalesController extends Controller
     {
         $products = $request->input('product');
         $pQuantity = $request->input('pQuantity');
-        $sale = Sale::find(15);
-        for ($i = 0; $i <= count($products)-1; $i++) 
+
+        for ($i = 0; $i < count($products); $i++)
         {
             $name = $products[$i];
-            $product = Product::find($name);
-            $sale->products()->attach($product);
+            $quantity = $pQuantity[$i];
+            DB::update("UPDATE products SET quantity = quantity - '$quantity' WHERE name='$name' "); //diminuisci quantità prodotto
+            $product = DB::select("SELECT * FROM products WHERE name='$name' ");
         }
 
         return view('sales/index',compact('product'));

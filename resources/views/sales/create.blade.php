@@ -7,7 +7,7 @@
 
 <datalist id="products">
 @foreach ($products as $product)
- PRODOTTO '<option value= {{$product->name}} />'
+  <option value= {{$product->name}} />  </option>
 @endforeach;
 </datalist>
 
