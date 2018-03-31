@@ -6,24 +6,12 @@
 @section('body')
 <body>
   <div id='calendar'></div>
-
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-</style>
 </body>
 @endsection
+
+<script type="text/javascript">
+    var dates = <?php echo json_encode($dates); ?>;
+</script>
 
 @section('otherscript')
 <link href='/css/fullcalendar.min.css' rel='stylesheet' />

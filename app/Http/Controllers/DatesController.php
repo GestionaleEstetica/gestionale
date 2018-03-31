@@ -18,7 +18,7 @@ class DatesController extends Controller
     public function index()
     {
       $dates = Date::all();
-        return view('dates.index', compact('dates'));
+      return view('dates.index', compact('dates'));
     }
 
     /**
@@ -28,7 +28,7 @@ class DatesController extends Controller
      */
     public function create()
     {
-        $clients = Client::all();
+        $clients = Client::all()->sortBy('first_name');
         $treatments = Treatment::all();
         return view('dates.create', compact(['clients','treatments']));
     }
@@ -41,8 +41,24 @@ class DatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+      $date = Date::create($request->all());
+      $treatments = $request->input('treatments');
+       for ($i = 0; $i < count($treatments); $i++){
+          $date->treatments()->attach($treatments[$i]);
+        }
+      $date->save();
+
+      return view('dates.test', compact('treatments'));
+      /*$pQuantity = $request->input('pQuantity');
+      $sale = Sale::find(15);
+      for ($i = 0; $i <= count($products)-1; $i++)
+        $name = $products[$i];
+        $product = Product::find($name);
+        $sale->products()->attach($product);
+        $quantity = $pQuantity[$i];
+        DB::update("UPDATE products SET quantity = quantity - '$quantity' WHERE name='$name' "); //diminuisci quantità prodotto
+        $product = DB::select("SELECT * FROM products WHERE name='$name' ); */
+      }
 
     /**
      * Display the specified resource.
