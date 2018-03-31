@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::resource('/dates', 'DatesController');
+
 Route::get('/products/search','ProductsController@search');
 Route::resource('/products', 'ProductsController');
 
@@ -22,6 +24,5 @@ Route::resource('/treatments', 'TreatmentsController');
 
 Route::get('/clients/recent','ClientsController@recent');
 Route::resource('/clients', 'ClientsController');
-Route::resource('/sales', 'SalesController');
 
-Route::get('/test','TestController@index');
+Route::resource('/sales', 'SalesController');

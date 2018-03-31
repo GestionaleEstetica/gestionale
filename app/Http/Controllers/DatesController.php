@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Client;
+use App\Treatment;
+use Illuminate\Support\Facades\DB;
+use App\Date;
 
-class ClientsController extends Controller
+class DatesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('first_name')->simplePaginate(15);
-        return view('clients.index', compact('clients'));
+      $dates = Date::all();
+      return view('dates.index', compact('dates'));
     }
 
     /**
@@ -26,7 +28,9 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        $clients = Client::all()->sortBy('first_name');
+        $treatments = Treatment::all();
+        return view('dates.create', compact(['clients','treatments']));
     }
 
     /**
@@ -37,9 +41,24 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        Client::create($request->all());
-        return redirect('/clients');
-    }
+      $date = Date::create($request->all());
+      $treatments = $request->input('treatments');
+       for ($i = 0; $i < count($treatments); $i++){
+          $date->treatments()->attach($treatments[$i]);
+        }
+      $date->save();
+
+      return view('dates.test', compact('treatments'));
+      /*$pQuantity = $request->input('pQuantity');
+      $sale = Sale::find(15);
+      for ($i = 0; $i <= count($products)-1; $i++)
+        $name = $products[$i];
+        $product = Product::find($name);
+        $sale->products()->attach($product);
+        $quantity = $pQuantity[$i];
+        DB::update("UPDATE products SET quantity = quantity - '$quantity' WHERE name='$name' "); //diminuisci quantità prodotto
+        $product = DB::select("SELECT * FROM products WHERE name='$name' ); */
+      }
 
     /**
      * Display the specified resource.
@@ -49,8 +68,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        Client::findOrFail($id);
-        return view('clients.show', compact('id'));
+        //
     }
 
     /**
@@ -61,8 +79,7 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::findOrFail($id);
-        return view('clients.edit', compact('client'));
+        //
     }
 
     /**
@@ -74,9 +91,7 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      Client::findOrFail($id)->update($request->all());
-      return redirect('/clients');
-
+        //
     }
 
     /**
@@ -87,15 +102,6 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      $client = Client::findOrFail($id);
-      $client->delete();
-
-      return redirect('/clients');
-    }
-
-    public function recent()
-    {
-        $clients = Client::orderBy('created_at','desc')->simplePaginate(15);
-        return view('clients.index', compact('clients'));
+        //
     }
 }

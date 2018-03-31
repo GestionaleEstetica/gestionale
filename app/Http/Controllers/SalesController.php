@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
 use App\Sale;
+use App\Product;
+use App\Treatment;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -15,15 +18,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-      //$prodsale = Sale::find(1)->products()->get(); UTILE DONT DELETE
-      $alltreat = array();
-      $allproduct = array();
-      foreach (Sale::all() as $item) {
-        array_push($alltreat, $item->treatments()->get());
-        array_push($allproduct, $item->products()->get());
-      }
-
-      return view('sales.index', compact('alltreat','allproduct'));
+        return view('sales.index');
     }
 
     /**
@@ -33,7 +28,9 @@ class SalesController extends Controller
      */
     public function create()
     {
-        return view('sales.create');
+        $products = Product::all();
+        $treatments = Treatment::all();
+        return view('sales.create', compact(['products', 'treatments']));
     }
 
     /**
@@ -44,7 +41,8 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $objects = $request->get('sale');
+        return $objects;
     }
 
     /**

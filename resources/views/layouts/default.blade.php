@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
 
@@ -57,6 +57,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
+    <script src="{{ asset('js/app.js') }} "></script>
     <script src="/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -67,6 +68,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/js/sb-admin-2.js"></script>
+
+    <!-- Custom Script JavaScript -->
+    @yield('otherscript')
 
 </body>
 

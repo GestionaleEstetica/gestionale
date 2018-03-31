@@ -12,8 +12,9 @@
 			<div class="panel-heading">Dettagli utente
 			</div>
 			<div class="panel-body">
-				<form method="POST" action ="/clients">
+				<form method="POST" action ="/clients/{{ $client->id }}">
 					{!! csrf_field() !!}
+					{{ method_field('PUT') }}
 					<div class="form-group">
 						<label>Nome</label>
 			        <input type='text' class="form-control" name='first_name' value="{{ $client->first_name }}">
