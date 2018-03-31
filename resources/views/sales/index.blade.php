@@ -1,4 +1,1 @@
- @foreach($products as $p)
- {{$p}}
-
-@endforeach;
+{{ $objects }}

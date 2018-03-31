@@ -1,23 +1,19 @@
-<template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">Example Component</div>
+<tbody class="text-center">
+            <tr v-if="treatmentView" v-for="treatment in filteredTreatments">
+          <td>{{ treatment.id }}</td>
+          <td>{{ treatment.name }}</td>
+          <td>{{ treatment.brand }}</td>
+          <td>{{ treatment.quantity }}</td>
+          <td>{{ treatment.price }}</td>
+            
+        <td class="text-center">
+            <button @click="pushItem(treatment,'treatment')">+</button>
+        </td>
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
-<script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
-</script>
+          <td class="text-center">
+            <button @click="removeItem(treatment,'treatment')">-</button>
+        </td>
+</tr>
+        <h5>{{ this.listedProducts }}</h5>
+        <h5>{{ this.listedTreatments }}</h5>
+                </tbody>

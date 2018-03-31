@@ -41,23 +41,8 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $products = $request->input('products');
-        /*$pQuantity = $request->input('pQuantity');
-
-        $treatments = $request->input('treatments');
-        $tQuantity = $request->input('tQuantity');
-
-        $sale = new Sale();
-        $sale -> save();
-
-        for ($i = 0; $i < count($products); $i++)
-        {
-            DB::table('products')->where('name', $products[$i])->decrement('quantity',$pQuantity[$i]);
-            $productId = DB::table('products')->where('name',$products[$i])->value('id');
-            $sale->products()->attach($productId, array('quantity'=> $pQuantity[$i] ));
-        } */
-
-        return view('sales/index',compact('products'));
+        $objects = $request->get('objects');
+        return redirect('/sales',compact('objects'));
     }
 
     /**
