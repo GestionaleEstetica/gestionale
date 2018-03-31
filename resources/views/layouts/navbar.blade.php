@@ -25,6 +25,19 @@
                         </li>
                         <li>
                             <a href="#">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Appuntamenti<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/dates">Calendario</a>
+                                </li>
+                                <li>
+                                    <a href="/dates/create">Aggiungi</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#">
                                 <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

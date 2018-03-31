@@ -69,6 +69,9 @@
     <!-- Custom Theme JavaScript -->
     <script src="/js/sb-admin-2.js"></script>
 
+    <!-- Custom Script JavaScript -->
+    @yield('otherscript')
+
 </body>
 
 </html>
