@@ -41,8 +41,8 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $objects = $request->get('objects');
-        return redirect('/sales',compact('objects'));
+        $objects = $request->get('sale');
+        return $objects;
     }
 
     /**

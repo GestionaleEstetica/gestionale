@@ -47357,7 +47357,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['products', 'treatments'],
     data: function data() {
         return {
-            token: '{{ csrf_token() }}',
             search: '',
             productView: true,
             treatmentView: false,
@@ -47392,6 +47391,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var i = this.shownSales.indexOf(item);
             if (i != -1) this.shownSales.splice(i, 1);
+        },
+        create: function create() {
+            this.$http.post('sale', this.listedProducts).then(function (response) {
+                console.log(response);
+            });
         }
     },
     computed: {
@@ -47633,10 +47637,14 @@ var render = function() {
                   _vm._v(" "),
                   _c("form", { attrs: { method: "POST", action: "/sales" } }, [
                     _vm.shownSales.length > 0
-                      ? _c("input", {
-                          staticClass: "btn btn-success pull-right",
-                          attrs: { type: "submit", value: "Invia" }
-                        })
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success pull-right",
+                            on: { click: _vm.create }
+                          },
+                          [_vm._v("Invia")]
+                        )
                       : _vm._e()
                   ])
                 ],

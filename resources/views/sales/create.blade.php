@@ -7,7 +7,9 @@
 
   <div id="app">
     <sales  :products="{{ json_encode($products) }}" 
-            :treatments="{{ json_encode($treatments) }}"></sales>
+            :treatments="{{ json_encode($treatments) }}">
+            	
+    </sales>
 	</div>
 </div>
     <script src="/vendor/jquery/jquery.js"></script>
