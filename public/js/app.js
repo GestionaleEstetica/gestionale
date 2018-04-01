@@ -13395,6 +13395,8 @@ return jQuery;
 } );
 
 
+
+
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13892,12 +13894,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 Vue.component('sales', __webpack_require__(41));
 
 var app = new Vue({
-
-  el: '#app',
-  http: {
-    emulateJSON: true,
-    emulateHTTP: true
-  }
+  el: '#app'
 });
 
 /***/ }),
@@ -48936,12 +48933,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'sales',
     props: ['products', 'treatments'],
     data: function data() {
         return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             search: '',
             productView: true,
             treatmentView: false,
@@ -48977,11 +48981,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var i = this.shownSales.indexOf(item);
             if (i != -1) this.shownSales.splice(i, 1);
         },
-        sendMessage: function sendMessage() {
-            var products = this.listedProducts;
-            this.$http.post('/sales', products).then(function (response) {
-                console.log(response);
-            });
+        submit: function submit() {
+            document.submitSale.products.value = JSON.stringify(this.listedProducts);
+            document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
+            document.forms['submitSale'].submit();
         }
     },
     computed: {
@@ -49221,15 +49224,38 @@ var render = function() {
                     ])
                   }),
                   _vm._v(" "),
-                  _c("form", { attrs: { method: "POST", action: "/sales" } }, [
-                    _vm.shownSales.length > 0
-                      ? _c("input", {
-                          staticClass: "btn btn-success pull-right",
-                          attrs: { type: "submit", value: "Invia" },
-                          on: { click: _vm.sendMessage }
-                        })
-                      : _vm._e()
-                  ])
+                  _c(
+                    "form",
+                    {
+                      attrs: {
+                        name: "submitSale",
+                        method: "POST",
+                        action: "/sales"
+                      }
+                    },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "products", value: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "treatments", value: "" }
+                      }),
+                      _vm._v(" "),
+                      _vm.shownSales.length > 0
+                        ? _c("input", {
+                            staticClass: "btn btn-success pull-right",
+                            attrs: { type: "submit", value: "Invia" },
+                            on: { click: _vm.submit }
+                          })
+                        : _vm._e()
+                    ]
+                  )
                 ],
                 2
               )

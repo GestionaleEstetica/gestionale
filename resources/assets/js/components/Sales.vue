@@ -80,9 +80,15 @@
         <ul v-for="sale in shownSales">
           <li>{{sale.name}} | <span v-if="sale.brand"><label>prodotto</label></span> <span v-else><label> trattamento</label></span> </li>
         </ul>
-        <form method="POST" action="/sales">
-        <input type="submit" v-if="shownSales.length > 0" value ="Invia" class="btn btn-success pull-right" @click="sendMessage">
+        <form name="submitSale" method="POST" action="/sales">
+          <input type="hidden" name="_token" :value="csrf">
+          <input type="hidden" name="products" value="">
+          <input type="hidden" name="treatments" value="">
+
+       <input type="submit" v-if="shownSales.length > 0" value ="Invia" class="btn btn-success pull-right" @click="submit">
       </form>
+
+
   </div>
 
     </div>
@@ -98,6 +104,7 @@
         props: ['products', 'treatments'],
         data() {
             return {
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 search: '',
                 productView: true,
                 treatmentView: false,
@@ -133,13 +140,11 @@
                 var i = this.shownSales.indexOf(item);
                 if(i != -1) this.shownSales.splice(i,1);
           },
-            sendMessage: function(){
-              var products = this.listedProducts;
-              this.$http.post('/sales', products).then((response) => {
-                console.log(response)
-});
-
-            },        
+            submit: function() {
+              document.submitSale.products.value = JSON.stringify(this.listedProducts);
+              document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
+              document.forms['submitSale'].submit();
+            }
          },
         computed: {
             filteredProducts: function() {

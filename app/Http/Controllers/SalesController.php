@@ -41,8 +41,10 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $sales = $request->get('sales');
-        return view('sales.index',compact('sales'));
+        $products = json_decode($request->get('products'),true);
+        $treatments = json_decode($request->get('treatments'),true);
+
+        return [$products,$treatments];
     }
 
     /**
