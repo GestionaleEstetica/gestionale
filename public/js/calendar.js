@@ -10,8 +10,15 @@ for(i=0; i<dates.length; i++){
 }
 
 $(document).ready(function() {
-
   $('#calendar').fullCalendar({
+    eventClick: function(eventObj) {
+      alert(
+        'Clicked ' + eventObj.title + '.\n' +
+        'Will open ' + eventObj.url + ' in a new tab'
+      );
+      return false; // prevents browser from following link in current tab.
+
+    },
     header: {
       left: 'prev,next today',
       center: 'title',
