@@ -1,1 +1,1 @@
-{{ $objects }}
+{{ $sales }}

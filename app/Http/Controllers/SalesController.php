@@ -41,8 +41,8 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $objects = $request->get('sale');
-        return $objects;
+        $sales = $request->get('sales');
+        return view('sales.index',compact('sales'));
     }
 
     /**

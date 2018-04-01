@@ -81,9 +81,10 @@
           <li>{{sale.name}} | <span v-if="sale.brand"><label>prodotto</label></span> <span v-else><label> trattamento</label></span> </li>
         </ul>
         <form method="POST" action="/sales">
-        <button v-if="shownSales.length > 0" class="btn btn-success pull-right" @click="create">Invia</button>
+        <input type="submit" v-if="shownSales.length > 0" value ="Invia" class="btn btn-success pull-right" @click="sendMessage">
       </form>
-        </div>
+  </div>
+
     </div>
     </div>
   </div>
@@ -132,12 +133,14 @@
                 var i = this.shownSales.indexOf(item);
                 if(i != -1) this.shownSales.splice(i,1);
           },
-            create: function() {
-              this.$http.post('sale',this.listedProducts).then(response => {
-                console.log(response);
-              })
-            }
-        },
+            sendMessage: function(){
+              var products = this.listedProducts;
+              this.$http.post('/sales', products).then((response) => {
+                console.log(response)
+});
+
+            },        
+         },
         computed: {
             filteredProducts: function() {
                 return this.products.filter((product) => {
@@ -155,4 +158,5 @@
             },
         }
     }
+
 </script> 
