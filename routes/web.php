@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'DatesController@index');
+
+Route::resource('/stats', 'StatsController');
+
+Route::post('/dates/markasdone','DatesController@markasdone');
 Route::resource('/dates', 'DatesController');
 
 Route::get('/products/search','ProductsController@search');

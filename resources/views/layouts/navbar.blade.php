@@ -21,14 +21,11 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
-                        </li>
-                        <li>
                             <a href="#">
                                 <i class="fa fa-bar-chart-o fa-fw"></i> Appuntamenti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/dates">Calendario</a>
+                                    <a href="/">Calendario</a>
                                 </li>
                                 <li>
                                     <a href="/dates/create">Aggiungi</a>
@@ -38,7 +35,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Clienti<span class="fa arrow"></span></a>
+                                <i class="fa fa-area-chart fa-fw"></i> Clienti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/clients/create">Aggiungi</a>
@@ -86,6 +83,22 @@
                                 </li>
                                 <li>
                                     <a href="/sales">Mostra tutte</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-area-chart fa-fw"></i> Statistiche <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/stats">Generali</a>
+                                </li>
+                                <li>
+                                    <a href="/stats/sells">Vendite</a>
+                                </li>
+                                <li>
+                                    <a href="/stats/clients">Clienti</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

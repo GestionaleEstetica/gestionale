@@ -1,3 +1,1 @@
-id trattemento = {{$treatments[0]}} <br>
-
-AGGIUNTO APPUNTAMENTO + CREATO PIVOT CON TREATMENT ( DOVRà ESSERE UN ARRAY DI TRATTAMENTI, FARE CON VUE )
+{{$id}}

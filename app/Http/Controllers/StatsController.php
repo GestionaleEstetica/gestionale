@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Client;
-use App\Treatment;
-use Illuminate\Support\Facades\DB;
-use App\Date;
 
-class DatesController extends Controller
+class StatsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,7 @@ class DatesController extends Controller
      */
     public function index()
     {
-      $dates = Date::all();
-      return view('dates.index', compact('dates'));
+        return view('stats/index');
     }
 
     /**
@@ -28,9 +23,7 @@ class DatesController extends Controller
      */
     public function create()
     {
-        $clients = Client::all()->sortBy('first_name');
-        $treatments = Treatment::all();
-        return view('dates.create', compact(['clients','treatments']));
+        //
     }
 
     /**
@@ -41,15 +34,8 @@ class DatesController extends Controller
      */
     public function store(Request $request)
     {
-      $date = Date::create($request->all());
-      $treatments = $request->input('treatments');
-       for ($i = 0; $i < count($treatments); $i++){
-          $date->treatments()->attach($treatments[$i]);
-        }
-      $date->save();
-
-      return view('dates.test', compact('treatments'));
-      }
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -70,9 +56,7 @@ class DatesController extends Controller
      */
     public function edit($id)
     {
-      $clients = Client::all();
-      $date = Date::findOrFail($id);
-      return view('dates.edit', compact(['date', 'clients']));
+        //
     }
 
     /**
@@ -84,9 +68,7 @@ class DatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      Date::findOrFail($id)->update($request->all());
-      $dates = Date::all();
-      return view('dates.index', compact('dates'));
+        //
     }
 
     /**
@@ -97,14 +79,6 @@ class DatesController extends Controller
      */
     public function destroy($id)
     {
-      $date = Date::findOrFail($id);
-      $date->delete();
-
-      return redirect('/dates');
-    }
-
-    public function markasdone($id){
-      Date::findOrFail($id)->update(['done'=>1]);
-      return redirect('/dates');
+        //
     }
 }

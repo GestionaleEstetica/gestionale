@@ -12,10 +12,7 @@ for(i=0; i<dates.length; i++){
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     eventClick: function(eventObj) {
-      alert(
-        'Clicked ' + eventObj.title + '.\n' +
-        'Will open ' + eventObj.url + ' in a new tab'
-      );
+      location.href = '/dates/' + eventObj.id + '/edit';
       return false; // prevents browser from following link in current tab.
 
     },
