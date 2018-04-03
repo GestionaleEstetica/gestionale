@@ -40,14 +40,14 @@
 			        <input type='text' class="form-control" name='description' value="{{ $date->description }}">
 			    	</div>
 					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
-					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Modifica</button>
+					<button id="submit" type="submit" value="submit" class="btn btn-primary center" style="margin-left:7px;">Modifica</button>
 					@if(!$date->done)<a href="{{ route('markAsDone', $date->id) }}" class="btn btn-xs btn-info pull-right">Concludi</a>
 					@endif
+				</form><br>
 					<form action="{{ route('dates.destroy', $date->id) }}" method="POST">
-    				{{ csrf_field() }}
-    				{{ method_field('DELETE') }}
-    				<button class="btn btn-danger center" value="Cancella">Cancella</button>
-					</form>
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger center" value="Cancella">Cancella</button>
 					</form>
 			</div>
 		</div>

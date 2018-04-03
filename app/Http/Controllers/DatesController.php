@@ -48,7 +48,8 @@ class DatesController extends Controller
         }
       $date->save();
 
-      return view('dates.test', compact('treatments'));
+      $dates = Date::all();
+      return view('dates.index', compact('dates'))->with('success','Appuntamento creato con successo');
       }
 
     /**
@@ -86,7 +87,7 @@ class DatesController extends Controller
     {
       Date::findOrFail($id)->update($request->all());
       $dates = Date::all();
-      return view('dates.index', compact('dates'));
+      return view('dates.index', compact('dates'))->with('success','Appuntamento modificato con successo');
     }
 
     /**
@@ -100,7 +101,7 @@ class DatesController extends Controller
       $date = Date::findOrFail($id);
       $date->delete();
 
-      return redirect('/dates');
+      return redirect('/dates')->with('success','Appuntamento rimosso con successo');
     }
 
     public function markAsDone($id){

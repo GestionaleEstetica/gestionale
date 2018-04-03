@@ -32,7 +32,8 @@
 			        <input type='email' class="form-control" name='email' value="{{ $client->email }}">
 			    	</div>
 					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
-					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
+					
+					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Modifica</button>
 
 				</form>
 

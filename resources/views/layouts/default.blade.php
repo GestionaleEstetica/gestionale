@@ -36,6 +36,7 @@
 
 <body>
     @include('layouts.navbar')
+    @include('layouts.flashMassage')
     <div id="wrapper">
 
         <!-- Navigation -->

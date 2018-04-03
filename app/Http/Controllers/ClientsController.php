@@ -38,7 +38,7 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         Client::create($request->all());
-        return redirect('/clients');
+        return redirect('/clients')->with('success','Cliente aggiunto con successo');
     }
 
     /**
@@ -75,7 +75,7 @@ class ClientsController extends Controller
     public function update(Request $request, $id)
     {
       Client::findOrFail($id)->update($request->all());
-      return redirect('/clients');
+      return redirect('/clients')->with('success','Cliente modificato con successo');
 
     }
 
@@ -90,7 +90,7 @@ class ClientsController extends Controller
       $client = Client::findOrFail($id);
       $client->delete();
 
-      return redirect('/clients');
+      return redirect('/clients')->with('success','Cliente rimosso con successo');
     }
 
     public function recent()
