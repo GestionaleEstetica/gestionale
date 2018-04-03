@@ -41,15 +41,14 @@
 			    	</div>
 					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Modifica</button>
-					<a href="{{ url('/dates/markasdone' . $date->id) }}" class="btn btn-xs btn-info pull-right">Edit</a>
+					@if(!$date->done)<a href="{{ route('markAsDone', $date->id) }}" class="btn btn-xs btn-info pull-right">Concludi</a>
+					@endif
 					<form action="{{ route('dates.destroy', $date->id) }}" method="POST">
     				{{ csrf_field() }}
+    				{{ method_field('DELETE') }}
     				<button class="btn btn-danger center" value="Cancella">Cancella</button>
 					</form>
 					</form>
-					</form>
-
-
 			</div>
 		</div>
 	</div>

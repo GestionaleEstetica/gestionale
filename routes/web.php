@@ -15,7 +15,7 @@ Route::get('/', 'DatesController@index');
 
 Route::resource('/stats', 'StatsController');
 
-Route::post('/dates/markasdone','DatesController@markasdone');
+Route::get('/dates/done/{id}','DatesController@markAsDone')->name('markAsDone');
 Route::resource('/dates', 'DatesController');
 
 Route::get('/products/search','ProductsController@search');
