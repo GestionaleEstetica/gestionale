@@ -6,7 +6,8 @@
 
   <div id="app">
     <sales  :products="{{ json_encode($products) }}" 
-            :treatments="{{ json_encode($treatments) }}">
+            :treatments="{{ json_encode($treatments) }}"
+            :users="{{ json_encode($users) }}">
     </sales>
 	</div>
 </div>

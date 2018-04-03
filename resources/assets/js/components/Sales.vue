@@ -14,8 +14,8 @@
         <div class="table-responsive">
           <div class="row">
             <div class="col-md-7">
-              <button v-if="productView" @click="showTreatments" class="btn btn-primary"><strong>MOSTRA TRATTAMENTI</strong></button>
-              <button v-else @click="showProducts" class="btn btn-primary"><strong>MOSTRA PRODOTTI</strong></button>
+              <button v-if="productView" @click="showTreatments" class="btn btn-primary"><b>MOSTRA TRATTAMENTI</b></button>
+              <button v-else @click="showProducts" class="btn btn-primary"><b>MOSTRA PRODOTTI</b></button>
             </div>
           </div>
           <table class="table table-bordered table-hover">
@@ -62,7 +62,12 @@
             <div class="panel-heading">
               Vendite selezionate
             </div>
+            <label>Seleziona un dipendente:</label>
+              <select name="submitUser" v-model="user" class="form-control" >
+                <option name="selection" v-for="user in users" :value="user.id"> {{user.first_name}} {{user.last_name}}</option>
+            </select>
             <div class="panel-body">
+
               <ul v-for="sale in shownSales">
                 <li>{{sale.name}} | <span v-if="sale.brand"><label>prodotto</label></span> <span v-else><label> trattamento</label></span> </li>
               </ul>
@@ -70,8 +75,12 @@
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="hidden" name="products" value="">
                 <input type="hidden" name="treatments" value="">
-                <input type="submit" v-if="shownSales.length > 0" value ="Invia" class="btn btn-success pull-right" @click="submit">
+                <input type="hidden" name="user" value="">
+                <input type="submit" v-if="user != null" value ="Invia" class="btn btn-success pull-right" @click="submit">
               </form>
+              <p v-if="user == null" class="text-warning">* Selezionare un dipendente.</p>
+              <p v-if="shownSales.length == 0" class="text-warning">* Inserire almeno un prodotto/trattamento.</p>
+
             </div>
           </div>
         </div>
@@ -82,7 +91,7 @@
   <script type="text/javascript">
     export default {
         name: 'sales',
-        props: ['products', 'treatments'],
+        props: ['products', 'treatments','users'],
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -91,6 +100,7 @@
                 listedProducts: [],
                 listedTreatments: [],
                 shownSales: [],
+                user: null,
             }
         },
         methods: {
@@ -115,8 +125,11 @@
                 if(i != -1) this.shownSales.splice(i,1);
           },
             submit: function() {
+              if (this.user == null) return alert('Selezionare un dipendente');
+
               document.submitSale.products.value = JSON.stringify(this.listedProducts);
               document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
+              document.submitSale.user.value = this.user;
               document.forms['submitSale'].submit();
             }
          },

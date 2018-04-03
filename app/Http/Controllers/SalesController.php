@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Sale;
 use App\Product;
 use App\Treatment;
+use App\User;
 use App\Utility\Utility;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,8 @@ class SalesController extends Controller
     {
         $products = Product::all();
         $treatments = Treatment::all();
-        return view('sales.create', compact(['products', 'treatments']));
+        $users = User::all();
+        return view('sales.create', compact(['products', 'treatments','users']));
     }
 
     /**
@@ -44,12 +46,15 @@ class SalesController extends Controller
     {
         $products = json_decode($request->get('products'),true);
         $treatments = json_decode($request->get('treatments'),true);
+        $user = $request->get('user');
 
         $products = Utility::create_mapping($products,'name');
         $treatments = Utility::create_mapping($treatments,'name');
-        
+
         $sale = new Sale();
         $sale->save();
+
+        Utility::log($sale,$user);
 
         foreach ($products as $name => $quantity) 
         {
@@ -62,7 +67,7 @@ class SalesController extends Controller
             $treatment = Treatment::where('name', '=' , $name)->firstOrFail();
             $sale->treatments()->attach($treatment,['quantity' => $quantity]);
         }
-        return 'carlo';
+        return redirect('/sales');
     }
 
     /**

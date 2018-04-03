@@ -15,4 +15,9 @@ class Sale extends Model
     {
     	return $this->belongsToMany(Treatment::class,'treatment_sale');
     }
+
+    public function users()
+    {
+    	return $this->belongsToMany(User::class,'user_sale');
+    }
 }
