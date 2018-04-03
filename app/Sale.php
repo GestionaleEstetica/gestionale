@@ -8,11 +8,11 @@ class Sale extends Model
 {
     public function products()
     {
-    	return $this->belongsToMany(Product::class);
+    	return $this->belongsToMany(Product::class,'product_sale');
     }
 
     public function treatments()
     {
-    	return $this->belongsToMany(Treatment::class);
+    	return $this->belongsToMany(Treatment::class,'treatment_sale');
     }
 }

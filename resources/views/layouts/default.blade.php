@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
 
 
@@ -57,7 +58,6 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ asset('js/app.js') }} "></script>
     <script src="/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->

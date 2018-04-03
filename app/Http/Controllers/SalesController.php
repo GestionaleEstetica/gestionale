@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Sale;
 use App\Product;
 use App\Treatment;
+use App\Utility\Utility;
 use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
@@ -41,8 +42,27 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $objects = $request->get('sale');
-        return $objects;
+        $products = json_decode($request->get('products'),true);
+        $treatments = json_decode($request->get('treatments'),true);
+
+        $products = Utility::create_mapping($products,'name');
+        $treatments = Utility::create_mapping($treatments,'name');
+        
+        $sale = new Sale();
+        $sale->save();
+
+        foreach ($products as $name => $quantity) 
+        {
+            $product = Product::where('name', '=' , $name)->firstOrFail();
+            $sale->products()->attach($product,['quantity' => $quantity]);
+        }
+
+        foreach ($treatments as $name => $quantity) 
+        {
+            $treatment = Treatment::where('name', '=' , $name)->firstOrFail();
+            $sale->treatments()->attach($treatment,['quantity' => $quantity]);
+        }
+        return 'carlo';
     }
 
     /**
