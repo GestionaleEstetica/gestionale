@@ -18,7 +18,7 @@
 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h2 style="margin:0px">Prodotti</h2>
+                            <h2 style="margin:0px; text-align:center; font-weight:bold">Prodotti</h2>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -47,7 +47,7 @@
 							  <button type="submit" class="btn btn-warning btn-sm">
 					          <div class="glyphicon glyphicon-pencil"></div>
 							</button>
-							  
+
 							  </form>
 							</td>
 
@@ -59,14 +59,14 @@
 							  <button type="submit" class="btn btn-danger btn-sm">
 					          <div class="glyphicon glyphicon-remove"></div>
 								</button>
-							  
+
 							  </form>
 							</td>
 
 					        </tr>
 					        @empty<center><strong> Nessun prodotto registrato</strong></center>
 
-					        @endforelse  
+					        @endforelse
       					</tbody>
                                 </table>
                             <div>{{ $products->links() }}</div>

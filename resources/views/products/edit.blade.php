@@ -31,9 +31,10 @@
 						<label for="phone">Prezzo</label>
 			        <input type='number' class="form-control" name='price' step="0.01" value="{{ $product->price }}">
 					</div>
-					
+
+					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
-			
+
 				</form>
 
 			</div>

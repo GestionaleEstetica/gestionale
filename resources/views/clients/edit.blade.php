@@ -30,10 +30,10 @@
 					<div class="form-group">
 						<label>Email</label>
 			        <input type='email' class="form-control" name='email' value="{{ $client->email }}">
-			    	</div>				
-
+			    	</div>
+					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
-			
+
 				</form>
 
 			</div>

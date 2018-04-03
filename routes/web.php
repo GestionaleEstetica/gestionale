@@ -24,6 +24,7 @@ Route::resource('/products', 'ProductsController');
 Route::get('/treatments/search','TreatmentsController@search');
 Route::resource('/treatments', 'TreatmentsController');
 
+Route::get('/clients/search','ClientsController@search');
 Route::get('/clients/recent','ClientsController@recent');
 Route::resource('/clients', 'ClientsController');
 

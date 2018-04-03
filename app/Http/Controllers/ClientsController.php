@@ -98,4 +98,15 @@ class ClientsController extends Controller
         $clients = Client::orderBy('created_at','desc')->simplePaginate(15);
         return view('clients.index', compact('clients'));
     }
+
+    public function search()
+    {
+        $search = \Request::get('value');
+        $clients =
+        Client::where('first_name','like','%'.$search.'%')
+        ->orWhere('last_name','like','%'.$search.'%')
+        ->orderBy('id')
+        ->paginate(10);
+        return view('/clients.index', compact('clients'));
+    }
 }

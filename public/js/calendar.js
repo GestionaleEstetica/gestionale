@@ -21,7 +21,7 @@ $(document).ready(function() {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listWeek'
     },
-    defaultDate: '2018-03-12',
+    timeFormat: 'H(:mm)',
     navLinks: true, // can click day/week names to navigate views
     editable: true,
     eventLimit: true, // allow "more" link when too many events

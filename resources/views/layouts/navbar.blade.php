@@ -1,28 +1,16 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-
-                </button>
-                <a class="navbar-brand" href="index.html">My Gestionale</a>
-            </div>
-            <!-- /.navbar-header -->
-            <div class="navbar-default sidebar" role="navigation">
+          <!-- /.navbar-header -->
+            <div class="navbar-default sidebar" role="navigation" style="margin-top: 0">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Cerca...">
+                                <div style="text-align:center; font-weight: bold; font-size:17px; color:#337ab7;">Gestione Estetica Galante</div>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
                                 </span>
-                            </div>
                             <!-- /input-group -->
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Appuntamenti<span class="fa arrow"></span></a>
+                                <i class="fa fa-calendar fa-fw"></i> Appuntamenti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/">Calendario</a>
@@ -35,7 +23,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-area-chart fa-fw"></i> Clienti<span class="fa arrow"></span></a>
+                                <i class="fa fa-users fa-fw"></i> Clienti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/clients/create">Aggiungi</a>
@@ -50,7 +38,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Prodotti<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cubes fa-fw"></i> Prodotti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/products/create">Aggiungi</a>
@@ -61,7 +49,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Trattamenti<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-signing fa-fw"></i> Trattamenti<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/treatments/create">Aggiungi</a>
@@ -73,7 +61,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Vendite<span class="fa arrow"></span></a>
+                                <i class="fa fa-shopping-bag fa-fw"></i> Vendite<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/sales/create">Aggiungi</a>
