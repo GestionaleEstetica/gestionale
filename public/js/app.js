@@ -48920,10 +48920,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'sales',
-    props: ['products', 'treatments'],
+    props: ['products', 'treatments', 'users'],
     data: function data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -48931,7 +48940,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             productView: true,
             listedProducts: [],
             listedTreatments: [],
-            shownSales: []
+            shownSales: [],
+            user: null
         };
     },
 
@@ -48960,8 +48970,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (i != -1) this.shownSales.splice(i, 1);
         },
         submit: function submit() {
+            if (this.user == null) return alert('Selezionare un dipendente');
+
             document.submitSale.products.value = JSON.stringify(this.listedProducts);
             document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
+            document.submitSale.user.value = this.user;
             document.forms['submitSale'].submit();
         }
     },
@@ -49037,7 +49050,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         on: { click: _vm.showTreatments }
                       },
-                      [_c("strong", [_vm._v("MOSTRA TRATTAMENTI")])]
+                      [_c("b", [_vm._v("MOSTRA TRATTAMENTI")])]
                     )
                   : _c(
                       "button",
@@ -49045,7 +49058,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         on: { click: _vm.showProducts }
                       },
-                      [_c("strong", [_vm._v("MOSTRA PRODOTTI")])]
+                      [_c("b", [_vm._v("MOSTRA PRODOTTI")])]
                     )
               ])
             ]),
@@ -49175,6 +49188,56 @@ var render = function() {
                 _vm._v("\r\n              Vendite selezionate\r\n            ")
               ]),
               _vm._v(" "),
+              _c("label", [_vm._v("Seleziona un dipendente:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user,
+                      expression: "user"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "submitUser" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.user = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.users, function(user) {
+                  return _c(
+                    "option",
+                    {
+                      attrs: { name: "selection" },
+                      domProps: { value: user.id }
+                    },
+                    [
+                      _vm._v(
+                        " " +
+                          _vm._s(user.first_name) +
+                          " " +
+                          _vm._s(user.last_name)
+                      )
+                    ]
+                  )
+                })
+              ),
+              _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "panel-body" },
@@ -49213,7 +49276,11 @@ var render = function() {
                         attrs: { type: "hidden", name: "treatments", value: "" }
                       }),
                       _vm._v(" "),
-                      _vm.shownSales.length > 0
+                      _c("input", {
+                        attrs: { type: "hidden", name: "user", value: "" }
+                      }),
+                      _vm._v(" "),
+                      _vm.user != null
                         ? _c("input", {
                             staticClass: "btn btn-success pull-right",
                             attrs: { type: "submit", value: "Invia" },
@@ -49221,7 +49288,19 @@ var render = function() {
                           })
                         : _vm._e()
                     ]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _vm.user == null
+                    ? _c("p", { staticClass: "text-warning" }, [
+                        _vm._v("* Selezionare un dipendente.")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.shownSales.length == 0
+                    ? _c("p", { staticClass: "text-warning" }, [
+                        _vm._v("* Inserire almeno un prodotto/trattamento.")
+                      ])
+                    : _vm._e()
                 ],
                 2
               )
