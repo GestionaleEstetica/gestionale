@@ -103,8 +103,10 @@ class DatesController extends Controller
       return redirect('/dates');
     }
 
-    public function markasdone($id){
-      Date::findOrFail($id)->update(['done'=>1]);
+    public function markAsDone($id){
+      $date = Date::findOrFail($id);
+      $date->done = 1;
+      $date->save();
       return redirect('/dates');
     }
 }
