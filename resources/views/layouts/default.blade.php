@@ -58,7 +58,6 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ asset('js/app.js') }} "></script>
     <script src="/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->

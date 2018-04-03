@@ -17,6 +17,6 @@ class Date extends Model
 
     public function treatments()
     {
-    	return $this->belongsToMany(Treatment::class);
+    	return $this->belongsToMany(Treatment::class,'date_treatment');
     }
 }

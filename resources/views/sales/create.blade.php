@@ -10,8 +10,6 @@
     </sales>
 	</div>
 </div>
-    <script src="/vendor/jquery/jquery.js"></script>
-    <script src="/js/script.js"></script>
-
+    <script src="{{ asset('js/app.js') }} "></script>
 </body>
 @endsection
