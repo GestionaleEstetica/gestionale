@@ -3,7 +3,7 @@
 	Mostra tutti
 @endsection
 @section('body')
-	<div class="col-lg-4">
+	<div class="col-lg-4 col-lg-offset-1">
 		<!-- include('alert') -->
 		<form method="GET" action ="/clients/search">
 			<div class="form-group input-group">
@@ -15,7 +15,7 @@
 		</form>
 	</div>
 	<div class="row">
-<div class="col-lg-12">
+<div class="col-md-8 col-sm-12 col-lg-10 col-md-offset-1">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h2 style="margin:0px; text-align:center; font-weight:bold">Clienti</h2>

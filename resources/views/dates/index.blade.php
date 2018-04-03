@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-	Calendar
+	Calendario
 @endsection
 
 @section('body')
