@@ -49280,7 +49280,7 @@ var render = function() {
                         attrs: { type: "hidden", name: "user", value: "" }
                       }),
                       _vm._v(" "),
-                      _vm.user != null
+                      _vm.user != null && _vm.shownSales.length != 0
                         ? _c("input", {
                             staticClass: "btn btn-success pull-right",
                             attrs: { type: "submit", value: "Invia" },

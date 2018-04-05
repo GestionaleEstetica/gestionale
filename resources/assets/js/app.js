@@ -20,7 +20,6 @@ Vue.use(Resource);
  */
 
 Vue.component('sales', require('./components/Sales.vue'));
-
 const app = new Vue({
     el: '#app',
 });

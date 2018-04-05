@@ -8,16 +8,16 @@ class Sale extends Model
 {
     public function products()
     {
-    	return $this->belongsToMany(Product::class,'product_sale');
+    	return $this->belongsToMany(Product::class,'product_sale')->withPivot('quantity');;
     }
 
     public function treatments()
     {
-    	return $this->belongsToMany(Treatment::class,'treatment_sale');
+    	return $this->belongsToMany(Treatment::class,'treatment_sale')->withPivot('quantity');;
     }
 
-    public function users()
+    public function user()
     {
-    	return $this->belongsToMany(User::class,'user_sale');
+    	return $this->belongsTo(User::class);
     }
 }

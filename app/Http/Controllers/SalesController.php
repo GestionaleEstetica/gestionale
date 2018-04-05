@@ -20,7 +20,8 @@ class SalesController extends Controller
      */
     public function index()
     {
-        return view('sales.index');
+        $sales = Sale::all();
+        return view('sales.index',compact('sales'));
     }
 
     /**
@@ -52,9 +53,8 @@ class SalesController extends Controller
         $treatments = Utility::create_mapping($treatments,'name');
 
         $sale = new Sale();
+        $sale->user_id = $user;
         $sale->save();
-
-        Utility::log($sale,$user);
 
         foreach ($products as $name => $quantity) 
         {
@@ -68,17 +68,6 @@ class SalesController extends Controller
             $sale->treatments()->attach($treatment,['quantity' => $quantity]);
         }
         return redirect('/sales');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -113,5 +102,16 @@ class SalesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function recent()
+    {
+        $sales = Sale::orderBy('created_at','desc')->simplePaginate(15);
+        return view('sales.index',compact('sales'));
+    }
+
+    public function search()
+    {
+
     }
 }
