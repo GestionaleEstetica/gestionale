@@ -101,9 +101,9 @@ class SalesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Sale::destroy($id);
+      return back();
     }
-
     public function recent()
     {
         $sales = Sale::orderBy('created_at','desc')->simplePaginate(15);

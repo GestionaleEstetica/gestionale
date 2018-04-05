@@ -36,6 +36,7 @@
                                 </li>
                                 <li><a href="#messages{{ $sale->id }}" data-toggle="tab">Trattamenti</a>
                                 </li>
+
                             </ul>
 
                             <!-- Tab panes -->
@@ -44,7 +45,15 @@
                                     <br>
                                     <p>Vendita effettuata il <b>{{ $sale->created_at }}</b></p>
                                     <p>Segnata da: <b>{{ $sale->user->first_name }} {{ $sale->user->last_name }}</b>
-
+                                    <p class="pull-right">
+                                        <form method="POST" action="/sales/{{ $sale->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button class="btn btn-danger">
+                                                <div class="glyphicon glyphicon-remove"></div>
+                                            </button>
+                                        </form>
+                                    </p>
                                 </div>
                                 <div class="tab-pane fade" id="profile{{ $sale->id }}">
                                     <h4><b>Prodotti venduti</b></h4>
