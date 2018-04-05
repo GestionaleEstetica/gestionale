@@ -33,6 +33,6 @@ class Utility
 	*/
 	public static function log($sale,$user)
 	{
-		$sale->users()->attach($user);
+		$sale->user_id = $user;
 	}
 }

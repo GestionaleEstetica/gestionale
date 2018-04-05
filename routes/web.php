@@ -28,4 +28,6 @@ Route::get('/clients/search','ClientsController@search');
 Route::get('/clients/recent','ClientsController@recent');
 Route::resource('/clients', 'ClientsController');
 
+Route::get('/sales/search', 'SalesController@search');
+Route::get('/sales/recent', 'SalesController@recent');
 Route::resource('/sales', 'SalesController');

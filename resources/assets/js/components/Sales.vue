@@ -76,7 +76,7 @@
                 <input type="hidden" name="products" value="">
                 <input type="hidden" name="treatments" value="">
                 <input type="hidden" name="user" value="">
-                <input type="submit" v-if="user != null" value ="Invia" class="btn btn-success pull-right" @click="submit">
+                <input type="submit" v-if="user != null && shownSales.length != 0" value ="Invia" class="btn btn-success pull-right" @click="submit">
               </form>
               <p v-if="user == null" class="text-warning">* Selezionare un dipendente.</p>
               <p v-if="shownSales.length == 0" class="text-warning">* Inserire almeno un prodotto/trattamento.</p>
