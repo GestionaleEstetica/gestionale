@@ -36,7 +36,6 @@
 
 <body>
     @include('layouts.navbar')
-    @include('layouts.flashMassage')
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -45,9 +44,10 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
+                      @include('layouts.flashMassage')
                         <h1 class="page-header">@yield('title')</h1>
                     <!-- /.col-lg-12 -->
-                    @yield('body')
+                   @yield('body')
                 </div>
                 <!-- /.row -->
             </div>

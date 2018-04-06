@@ -38,7 +38,8 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         Client::create($request->all());
-        return redirect('/clients')->with('success','Cliente aggiunto con successo');
+        $clients = Client::orderBy('first_name')->simplePaginate(15);
+        return view('clients.index', compact('clients'))->with('success','Cliente aggiunto con successo');
     }
 
     /**
@@ -75,7 +76,8 @@ class ClientsController extends Controller
     public function update(Request $request, $id)
     {
       Client::findOrFail($id)->update($request->all());
-      return redirect('/clients')->with('success','Cliente modificato con successo');
+      $clients = Client::orderBy('first_name')->simplePaginate(15);
+      return view('clients.index', compact('clients'))->with('success','Cliente modificato con successo');
 
     }
 
@@ -87,10 +89,10 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      $client = Client::findOrFail($id);
-      $client->delete();
+      Client::destroy($id);
 
-      return redirect('/clients')->with('success','Cliente rimosso con successo');
+      $clients = Client::orderBy('first_name')->simplePaginate(15);
+      return view('clients.index', compact('clients'))->with('success','Cliente rimosso con successo');
     }
 
     public function recent()

@@ -37,7 +37,8 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         Product::create($request->all());
-        return redirect('/products');
+        $products = Product::orderBy('id')->simplePaginate(20);
+        return view('products.index', compact('products'))->with('success','Prodotto aggiunto con successo');
     }
 
     /**
@@ -62,7 +63,8 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
       Product::findOrFail($id)->update($request->all());
-      return redirect('/products');
+      $products = Product::orderBy('id')->simplePaginate(20);
+      return view('products.index', compact('products'))->with('success','Prodotto modificato con successo');
     }
 
     /**
@@ -74,13 +76,14 @@ class ProductsController extends Controller
     public function destroy($id)
     {
       Product::destroy($id);
-      return back();
+      $products = Product::orderBy('id')->simplePaginate(20);
+      return view('products.index', compact('products'))->with('success','Prodotto eliminato con successo');
     }
 
     public function search()
     {
         $search = \Request::get('value');
-        $products = 
+        $products =
         Product::where('name','like','%'.$search.'%')
         ->orWhere('brand','like','%'.$search.'%')
         ->orderBy('id')

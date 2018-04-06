@@ -22,7 +22,8 @@ class TreatmentsController extends Controller
     public function store(Request $request)
     {
         Treatment::create($request->all());
-        return redirect('/treatments');
+        $treatments = Treatment::orderBy('id')->simplePaginate(20);
+        return view('treatments.index', compact('treatments'))->with('success','Trattamento aggiunto con successo');
     }
 
     public function edit($id)
@@ -34,19 +35,21 @@ class TreatmentsController extends Controller
     public function update(Request $request, $id)
     {
         Treatment::findOrFail($id)->update($request->all());
-        return redirect('/treatments');
+        $treatments = Treatment::orderBy('id')->simplePaginate(20);
+        return view('treatments.index', compact('treatments'))->with('success','Trattamento modificato con successo');
     }
 
     public function destroy($id)
     {
         Treatment::destroy($id);
-        return back();
+        $treatments = Treatment::orderBy('id')->simplePaginate(20);
+        return view('treatments.index', compact('treatments'))->with('success','Trattamento eliminato con successo');
     }
 
     public function search()
     {
         $search = \Request::get('value');
-        $treatments = 
+        $treatments =
         Treatment::where('name','like','%'.$search.'%')
         ->orderBy('id')
         ->paginate(10);

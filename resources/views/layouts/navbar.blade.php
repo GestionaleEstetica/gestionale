@@ -1,7 +1,7 @@
           <!-- /.navbar-header -->
             <div class="navbar-default sidebar" role="navigation" style="margin-top: 0">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+                    <ul class="nav" id="side-menu" style="font-size: 16px">
                         <li class="sidebar-search">
                                 <div style="text-align:center; font-weight: bold; font-size:17px; color:#337ab7;">Gestione Estetica Galante</div>
                                 <span class="input-group-btn">
