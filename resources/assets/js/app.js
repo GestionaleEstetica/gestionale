@@ -20,6 +20,8 @@ Vue.use(Resource);
  */
 
 Vue.component('sales', require('./components/Sales.vue'));
+Vue.component('dates', require('./components/Dates.vue'));
+
 const app = new Vue({
-    el: '#app',
+    el:'#app'
 });

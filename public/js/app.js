@@ -13892,6 +13892,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
  */
 
 Vue.component('sales', __webpack_require__(41));
+Vue.component('dates', __webpack_require__(50));
 
 var app = new Vue({
   el: '#app'
@@ -49337,6 +49338,488 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(51)
+/* template */
+var __vue_template__ = __webpack_require__(52)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Dates.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a981f1e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a981f1e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'dates',
+    props: ['clients', 'treatments'],
+    data: function data() {
+        return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            search: '',
+            listedTreatments: [],
+            client: '',
+            date: '',
+            time: '',
+            description: ''
+        };
+    },
+
+    methods: {
+        addTreatment: function addTreatment(treatment) {
+            this.listedTreatments.push(treatment);
+            this.search = "";
+        },
+        submit: function submit() {
+            document.submitSale.client_id.value = this.client.id;
+            document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
+            document.submitSale.description.value = this.description;
+            document.forms['submitSale'].submit();
+        }
+    },
+    computed: {
+        sortedClients: function sortedClients() {
+            return _.orderBy(this.clients, 'first_name');
+        },
+
+        filteredTreatments: function filteredTreatments() {
+            var _this = this;
+
+            return this.treatments.filter(function (treatment) {
+                var treatment = treatment.name.toLowerCase();
+                var search = _this.search.toLowerCase();
+                return treatment.match(search);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { attrs: { name: "submitSale", method: "POST", action: "/dates" } },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-6 col-sm-12 col-lg-6 col-md-offset-2" },
+          [
+            _c("div", { staticClass: "panel panel-primary" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("Appuntamento")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Cliente")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.client,
+                          expression: "client"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.client = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    _vm._l(_vm.sortedClients, function(client) {
+                      return _c("option", { domProps: { value: client } }, [
+                        _vm._v(
+                          "\r\n\t\t\t\t\t\t" +
+                            _vm._s(client.first_name) +
+                            " " +
+                            _vm._s(client.last_name) +
+                            " || " +
+                            _vm._s(client.email)
+                        )
+                      ])
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Data")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.date,
+                        expression: "date"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "date", type: "date" },
+                    domProps: { value: _vm.date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.date = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Ora")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.time,
+                        expression: "time"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { name: "time", type: "time" },
+                    domProps: { value: _vm.time },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.time = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Ricerca uno o più trattamenti")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cerca.." },
+                    domProps: { value: _vm.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "panel-footer" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "list-group" },
+                      _vm._l(_vm.filteredTreatments, function(treatment) {
+                        return _vm.search != ""
+                          ? _c(
+                              "li",
+                              {
+                                staticClass: "list-group-item",
+                                staticStyle: { cursor: "pointer" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.addTreatment(treatment)
+                                  }
+                                }
+                              },
+                              [
+                                _c("b", [_vm._v(_vm._s(treatment.name))]),
+                                _vm._v(
+                                  " | " +
+                                    _vm._s(treatment.duration) +
+                                    " MIN | " +
+                                    _vm._s(treatment.price) +
+                                    " €\r\n\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      })
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Descrizione opzionale")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.description,
+                        expression: "description"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    domProps: { value: _vm.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.description = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-2 col-lg-2" }, [
+          _c(
+            "div",
+            {
+              staticClass: "panel panel-primary",
+              staticStyle: { position: "fixed" }
+            },
+            [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("\r\n\t\t\t\t\t\tScheda appuntamento\r\n\t\t\t\t\t")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "panel-body" },
+                [
+                  _c("div", [
+                    _c("b", [_vm._v("Cliente:")]),
+                    _vm._v(" " + _vm._s(_vm.client.first_name))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("b", [_vm._v("Data:")]),
+                    _vm._v(" " + _vm._s(_vm.date))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("b", [_vm._v("Orario:")]),
+                    _vm._v(" " + _vm._s(_vm.time))
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.listedTreatments, function(treatment) {
+                    return _c("ul", [
+                      _c("li", [
+                        _vm._v(
+                          _vm._s(treatment.name) +
+                            " || " +
+                            _vm._s(treatment.price) +
+                            " €"
+                        )
+                      ])
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "client_id", value: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "treatments", value: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "description", value: "" }
+                  }),
+                  _vm._v(" "),
+                  _vm.listedTreatments.length > 0 &&
+                  _vm.client &&
+                  _vm.date &&
+                  _vm.time
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success pull-right",
+                          on: { click: _vm.submit }
+                        },
+                        [_vm._v("Invia")]
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("b", [_vm._v("Trattamenti prenotati:")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a981f1e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
