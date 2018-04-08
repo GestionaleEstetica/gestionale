@@ -20,6 +20,8 @@ class CreateDateTreatmentTable extends Migration
             $table->integer('treatment_id')->unsigned();
             $table->foreign('treatment_id')->references('id')->on('treatments')->onDelete('cascade');
 
+            $table->integer('quantity')->default(1);
+            
             $table->primary(['date_id','treatment_id'],'date_and_treatment');
         });
     }

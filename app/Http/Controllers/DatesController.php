@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Treatment;
+use App\Utility\Utility;
 use Illuminate\Support\Facades\DB;
 use App\Date;
 
@@ -18,7 +19,7 @@ class DatesController extends Controller
     public function index()
     {
       $dates = Date::all();
-      return view('dates.index', compact('dates'));
+      return view('dates.index',compact('dates'));
     }
 
     /**
@@ -28,7 +29,7 @@ class DatesController extends Controller
      */
     public function create()
     {
-        $clients = Client::all()->sortBy('first_name');
+        $clients = Client::all();
         $treatments = Treatment::all();
         return view('dates.create', compact(['clients','treatments']));
     }
@@ -41,16 +42,22 @@ class DatesController extends Controller
      */
     public function store(Request $request)
     {
-      $date = Date::create($request->all());
-      $treatments = $request->input('treatments');
-       for ($i = 0; $i < count($treatments); $i++){
-          $date->treatments()->attach($treatments[$i]);
-        }
-      $date->save();
+      $date = Date::create($request->except('treatments'));
+      
+      $treatments = json_decode($request->get('treatments'),true);
+
+      $treatments = Utility::create_mapping($treatments,'name');
+
+      foreach ($treatments as $name => $quantity) 
+      {
+          $treatment = Treatment::where('name', '=' , $name)->firstOrFail();
+          $date->treatments()->attach($treatment,['quantity' => $quantity]);
+      }
 
       $dates = Date::all();
       return view('dates.index', compact('dates'))->with('success','Appuntamento creato con successo');
-      }
+    
+    }
 
     /**
      * Display the specified resource.
