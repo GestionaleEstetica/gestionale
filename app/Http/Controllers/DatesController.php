@@ -67,7 +67,9 @@ class DatesController extends Controller
      */
     public function show($id)
     {
-        //
+      $date = Date::findOrFail($id);
+      $client = Client::findOrFail($date->client_id);
+      return view('dates.show',compact(['date','client']));
     }
 
     /**
