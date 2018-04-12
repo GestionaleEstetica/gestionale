@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Utility;
-
+use App\Treatment;
 class Utility
 {
 	/**
@@ -28,6 +28,20 @@ class Utility
             }
         return $map;
 	}
+
+	public static function create_date_mapping($array,$key)
+	{
+		$map = [];
+        foreach($array as $element)
+            if (!array_key_exists($element[$key], $map))
+            {
+            	$treatment = $element[$key];
+                $counted= array($element[$key] => ['quantity' => Utility::map($array,$element)]);
+                $map = array_merge($map,$counted);
+            }
+        return $map;
+	}
+
 	/**
 		Registra su pivot user_sale la vendita.
 	*/
