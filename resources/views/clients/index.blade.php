@@ -42,12 +42,19 @@
 					          <td>{{ $client->phone }}</td>
 					          <td>{{ $client->email }}</td>
 
+								<td class="text-center">
+								        	<form action="/clients/{{ $client->id }}" method="GET">
+								  <button type="submit" class="btn btn-info btn-sm">
+								        <div class="glyphicon glyphicon-user"></div>
+								</button>
+								  </form>
+								</td>
+
 							<td class="text-center">
 					          	<form action="/clients/{{ $client->id }}/edit" method="GET">
 							  <button type="submit" class="btn btn-warning btn-sm">
 					          <div class="glyphicon glyphicon-pencil"></div>
 							</button>
-
 							  </form>
 							</td>
 

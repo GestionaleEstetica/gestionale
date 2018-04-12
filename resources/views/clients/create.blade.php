@@ -23,15 +23,19 @@
 			        <input type='text' class="form-control" name='last_name' placeholder="Es: Rossi">
 					</div>
 					<div class="form-group">
+						<label>Data di nascita</label>
+							<input type='date' class="form-control" name='birthday' placeholder="01/01/1900">
+					</div>
+					<div class="form-group">
 						<label>Phone</label>
 			        <input type='text' class="form-control" name='phone' placeholder="Es: +39 380 209 1223">
 					</div>
 					<div class="form-group">
 						<label>Email</label>
 			        <input type='email' class="form-control" name='email' placeholder="Es: ciao@gmail.com">
-			    	</div>					
+			    	</div>
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
-			
+
 				</form>
 
 			</div>

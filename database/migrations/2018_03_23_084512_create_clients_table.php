@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('first_name',32);
             $table->string('last_name',32);
+            $table->date('birthday');
             $table->string('phone',32);
             $table->string('email',128)->unique();
             $table->integer('done_dates')->default(0);
