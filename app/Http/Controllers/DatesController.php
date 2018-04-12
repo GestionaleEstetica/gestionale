@@ -80,9 +80,11 @@ class DatesController extends Controller
      */
     public function edit($id)
     {
-      $clients = Client::all();
       $date = Date::findOrFail($id);
-      return view('dates.edit', compact(['date', 'clients']));
+      $clients = Client::all();
+      $client = Client::findOrFail($date->client_id);
+      $treatments = Treatment::all();
+      return view('dates.edit', compact(['date', 'clients','client','treatments']));
     }
 
     /**
@@ -94,9 +96,23 @@ class DatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      Date::findOrFail($id)->update($request->all());
+      $date = Date::where('id', '=' , $id)->firstOrFail();
       $dates = Date::all();
-      return view('dates.index', compact('dates'))->with('success','Appuntamento modificato con successo');
+
+      $treatments = json_decode($request->get('treatments'),true);
+      $quantity = Utility::create_date_mapping($treatments,'name');
+
+      foreach($quantity as $key => $value)
+      {
+          $treatment = Treatment::where('name', '=' , $key)->firstOrFail();
+          $quantity[ucfirst($treatment->id)] = $value;
+          unset($quantity[$key]);
+      }
+
+      $date->treatments()->sync($quantity);
+
+      return view('dates.index',compact('dates'));
+      
     }
 
     /**
