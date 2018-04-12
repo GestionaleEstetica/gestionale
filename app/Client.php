@@ -14,4 +14,9 @@ class Client extends Model
     {
     	return $this->hasMany(Date::class);
     }
+
+    public function promos()
+    {
+      return $this->hasMany(Promo::class);
+    }
 }

@@ -22,4 +22,9 @@ class Treatment extends Model
     	return $this->belongsToMany(Sale::class,'treatment_sale');
     }
 
+		public function promo()
+		{
+			return $this->belongsTo(Promo::class);
+		}
+
 }
