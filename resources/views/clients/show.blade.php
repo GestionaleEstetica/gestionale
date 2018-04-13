@@ -47,8 +47,11 @@
                     </tbody>
                   </table>
 
-                  <a href="#" class="btn btn-primary">My Sales Performance</a>
-                  <a href="#" class="btn btn-primary">Team Sales Performance</a>
+									<form action="{{ action('PromosController@store') }}" method="POST">
+										{!! csrf_field() !!}
+										<input type="hidden" name="client_id" value="{{$client->id}}" />
+										<input type="text" name="treatment_id" /><input type="text" name="quantity" />
+										<button type="submit" class="btn btn-primary sm"> Aggiungi Promozione
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class PromosController extends Controller
 {
@@ -13,7 +14,7 @@ class PromosController extends Controller
      */
     public function index()
     {
-        //
+        return view('promos.index');
     }
 
     /**
@@ -34,7 +35,8 @@ class PromosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $all = Input::all();
+        return view('promos.index', compact('all'));
     }
 
     /**
