@@ -4,19 +4,6 @@
 @endsection
 
 @section('body')
-<div class="row">
-    <div class="col-md-6 col-lg-4 col-md-offset-3">
-        <!-- include('alert') -->
-        <form method="GET" action ="/sales/search">
-            <div class="form-group input-group">
-                <input type="search" name="value" class="form-control" placeholder="Cerca..">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </form>
-    </div>
-</div>
 @foreach($sales as $sale)
     <div class="col-md-6 col-sm-12 col-lg-4 col-md-offset-1">
 	<div class="panel panel-default">
