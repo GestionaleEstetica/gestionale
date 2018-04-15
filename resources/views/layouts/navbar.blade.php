@@ -73,23 +73,11 @@
                                     <a href="/sales">Mostra tutte</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-area-chart fa-fw"></i> Statistiche <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/stats">Generali</a>
-                                </li>
-                                <li>
-                                    <a href="/stats/sells">Vendite</a>
-                                </li>
-                                <li>
-                                    <a href="/stats/clients">Clienti</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="/stats">
+                                <i class="fa fa-area-chart fa-fw"></i> Statistiche
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Client;
 use App\Sale;
+use App\Date;
+use App\Treatment;
+use App\Product;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +22,12 @@ class StatsController extends Controller
      */
     public function index()
     {
-        $dates = DB::table("dates")->where('done', 1)->get();
+        $clients = Client::all();
+        $dates = Date::all();
         $sales = Sale::all();
-        $treatments = DB::table('treatment_sale')->get();
-        $products = DB::table('product_sale')->get();
-        $gain = 0;
-        return view('stats/index', compact(['dates', 'sales', 'treatments', 'products', 'gain']) );
+        $treatments = Treatment::all();
+        $products = Product::all();
+        return view('stats.index', compact(['clients','dates', 'sales', 'treatments', 'products']));
     }
 
     /**

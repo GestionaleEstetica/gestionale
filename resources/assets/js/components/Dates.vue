@@ -51,7 +51,9 @@
 <br>
 						<div><b>Trattamenti prenotati:</b></div>
 						<ul v-for="treatment in listedTreatments">
-							<li>{{treatment.name}} || {{treatment.price}} €</li>
+							<li @click="removeTreatment(treatment)" style="cursor:pointer">{{treatment.name}} || {{treatment.price}} €</li>
+						</ul>
+						<p class="text-danger">* Clicca sul trattamento per rimuoverlo</p>
 						</ul>
 						<input type="hidden" name="_token" :value="csrf">
 						<input type="hidden" name="client_id" value="">
@@ -86,6 +88,11 @@
         		this.listedTreatments.push(treatment)
         		this.search = ""
         	},
+        	removeTreatment: function(treatment)
+			{
+				var index = this.listedTreatments.indexOf(treatment);
+				this.listedTreatments.splice(index,1)
+			},
         	submit: function() 
         	{
               document.submitSale.client_id.value = this.client.id;

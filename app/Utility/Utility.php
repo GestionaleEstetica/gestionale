@@ -21,11 +21,11 @@ class Utility
 	{
 		$map = [];
         foreach($array as $element)
-            if (!array_key_exists($element[$key], $map))
-            {
-                $counted= array($element[$key] => Utility::map($array,$element));
-                $map = array_merge($map,$counted);
-            }
+	    if (!array_key_exists($element[$key], $map))
+	    {
+	        $counted= array($element[$key] => Utility::map($array,$element));
+	        $map = array_merge($map,$counted);
+	    }
         return $map;
 	}
 
@@ -33,12 +33,11 @@ class Utility
 	{
 		$map = [];
         foreach($array as $element)
-            if (!array_key_exists($element[$key], $map))
-            {
-            	$treatment = $element[$key];
-                $counted= array($element[$key] => ['quantity' => Utility::map($array,$element)]);
-                $map = array_merge($map,$counted);
-            }
+        if (!array_key_exists($element[$key], $map))
+        {
+            $counted= array($element[$key] => ['quantity' => Utility::map($array,$element)]);
+            $map = array_merge($map,$counted);
+        }
         return $map;
 	}
 
