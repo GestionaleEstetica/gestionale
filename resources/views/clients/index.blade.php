@@ -71,7 +71,7 @@
 							</td>
 
 					        </tr>
-					        @empty<center><strong> Nessun prodotto registrato</strong></center>
+					        @empty<center><strong> Nessun cliente registrato</strong></center>
 
 					        @endforelse
       					</tbody>

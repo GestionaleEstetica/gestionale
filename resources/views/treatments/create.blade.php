@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group">
 						<label>Durata (minuti)</label>
-			        <input type='text' class="form-control" name='duration' placeholder="Es: Sephora">
+			        <input type='text' class="form-control" name='duration' placeholder="Es: 30">
 					</div>
 					<div class="form-group">
 						<label>Prezzo</label>

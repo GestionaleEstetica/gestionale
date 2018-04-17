@@ -19,7 +19,7 @@ class CreateDatesTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->boolean('done')->default(false);
-            $table->string('description',128)->default("");
+            $table->string('description',128)->nullable(true);
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

@@ -34,6 +34,10 @@
 						<label>Email</label>
 			        <input type='email' class="form-control" name='email' placeholder="Es: ciao@gmail.com">
 			    	</div>
+					<div class="form-group">
+						<label>Promozioni ( opzionale )</label>
+				       <textarea class="form-control" rows="5" name="promozioni" placeholder="3 cerette total body, 2 pedicure"></textarea>
+				   	</div>
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>
 
 				</form>

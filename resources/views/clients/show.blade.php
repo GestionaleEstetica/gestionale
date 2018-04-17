@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-	Aggiungi
+	Mostra Cliente
 @endsection
 
 @section('body')
@@ -41,23 +41,17 @@
                       </tr>
                       <tr>
                         <td>Offerte attive</td>
-                        <td></td>
+                        <td>{{$client->promozioni}}</td>
                       </tr>
 
                     </tbody>
                   </table>
-
-									<form action="{{ action('PromosController@store') }}" method="POST">
-										{!! csrf_field() !!}
-										<input type="hidden" name="client_id" value="{{$client->id}}" />
-										<input type="text" name="treatment_id" /><input type="text" name="quantity" />
-										<button type="submit" class="btn btn-primary sm"> Aggiungi Promozione
                 </div>
               </div>
             </div>
                  <div class="panel-footer">
                         <button class="btn btn-md btn-info" onclick="history.back();">Indietro</button>
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+												<button class="btn btn-md btn-info" onclick="location.href='/clients/{{$client->id}}/edit'">Modifica</button>
                         <span class="pull-right">
                           <form action="/clients/{{ $client->id }}/edit" method="GET">
                             <button type="submit" class="btn btn-warning btn-sm">
