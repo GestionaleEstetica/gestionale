@@ -96,7 +96,13 @@ class DatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $date = Date::where('id', '=' , $id)->firstOrFail();
+      //$date = Date::where('id', '=' , $id)->firstOrFail()->update($request->except('treatments'));
+      Date::findOrFail($id)->update([
+        'client_id' => $request->get('client_id'),
+        'date' => $request->get('date'),
+        'time' => $request->get('time'),
+        'description' => $request->get('description')]);
+      $date = Date::findOrFail($id);
       $dates = Date::all();
 
       $treatments = json_decode($request->get('treatments'),true);

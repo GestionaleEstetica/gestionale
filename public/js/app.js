@@ -49468,7 +49468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             client: '',
             date: '',
             time: '',
-            description: ''
+            description: 'Nessuna descrizione'
         };
     },
 
@@ -49984,11 +49984,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return array;
         },
+        quantity: function quantity(value) {
+
+            var count = this.listedTreatments.reduce(function (n, val) {
+                return n + (val === value);
+            }, 0);
+
+            return count;
+        },
         submit: function submit() {
             document.submitSale.client_id.value = this.client.id;
             this.listedTreatments = this.trim(this.listedTreatments);
             document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
             document.submitSale.description.value = this.description;
+            console.log(this.description);
             document.forms['submitSale'].submit();
         }
     },
@@ -50283,7 +50292,9 @@ var render = function() {
                             _vm._s(treatment.name) +
                               " || " +
                               _vm._s(treatment.price) +
-                              " €"
+                              " € || " +
+                              _vm._s(treatment["pivot"].quantity) +
+                              " "
                           )
                         ]
                       )
