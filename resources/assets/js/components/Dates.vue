@@ -78,7 +78,7 @@
                 client:'',
                 date:'',
                 time:'',
-                description:''
+                description:'Nessuna descrizione'
             }
         },
         methods: 

@@ -50,7 +50,7 @@
 <br>
 						<div><b>Trattamenti prenotati:</b></div>
 						<ul v-for="treatment in listedTreatments">
-							<li @click="removeTreatment(treatment)" style="cursor:pointer">{{treatment.name}} || {{treatment.price}} €</li>
+							<li @click="removeTreatment(treatment)" style="cursor:pointer">{{treatment.name}} || {{treatment.price}} € || {{treatment['pivot'].quantity}} </li>
 						</ul>
 						<p class="text-danger">* Clicca sul trattamento per rimuoverlo</p>
 						<input type="hidden" name="_token" :value="csrf">
@@ -98,12 +98,22 @@ export default {
     		}
     		return array;
     	},
+    	quantity: function(value)
+    	{
+
+			var count = this.listedTreatments.reduce(function(n, val) {
+			    return n + (val === value);
+			}, 0);
+
+			return count
+    	},
     	submit: function() 
     	{
 	        document.submitSale.client_id.value = this.client.id;
     		this.listedTreatments = this.trim(this.listedTreatments);
 	        document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
 	        document.submitSale.description.value = this.description;
+	        console.log(this.description)
 	        document.forms['submitSale'].submit();
         }
     },
