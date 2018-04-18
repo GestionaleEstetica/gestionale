@@ -4,16 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Client;
-use App\Sale;
-use App\Date;
-use App\Treatment;
-use App\Product;
+use App\User;
 
-
-use Illuminate\Support\Facades\DB;
-
-class StatsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,12 +15,8 @@ class StatsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        $dates = Date::all();
-        $sales = Sale::all();
-        $treatments = Treatment::all();
-        $products = Product::all();
-        return view('admin.stats.index', compact(['clients','dates', 'sales', 'treatments', 'products']));
+        $users = User::orderBy('first_name')->simplePaginate(15);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -37,7 +26,7 @@ class StatsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -48,7 +37,9 @@ class StatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      User::create($request->all());
+      $users = User::orderBy('first_name')->simplePaginate(15);
+      return view('admin.users.index', compact('users'))->with('success','Utente aggiunto con successo');
     }
 
     /**
@@ -70,7 +61,8 @@ class StatsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $user = User::findOrFail($id);
+      return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -82,7 +74,10 @@ class StatsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      User::findOrFail($id)->update($request->all());
+      $users = User::orderBy('first_name')->simplePaginate(15);
+      return view('admin.users.index', compact('users'))->with('success','Utente modificato con successo');
+
     }
 
     /**
@@ -93,6 +88,8 @@ class StatsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      User::destroy($id);
+      $users = User::orderBy('first_name')->simplePaginate(15);
+      return view('admin.users.index', compact('users'))->with('success','Utente rimosso con successo');
     }
 }

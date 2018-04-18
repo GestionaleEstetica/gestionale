@@ -15,6 +15,8 @@ Route::get('/', 'DatesController@index');
 
 Route::resource('/stats', 'StatsController');
 
+Route::resource('/users', 'UsersController');
+
 Route::get('/dates/done/{id}','DatesController@markAsDone')->name('markAsDone');
 Route::resource('/dates', 'DatesController');
 

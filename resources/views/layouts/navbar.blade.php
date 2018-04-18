@@ -75,11 +75,20 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/stats">
-                                <i class="fa fa-area-chart fa-fw"></i> Statistiche
-                            </a>
+                            <a href="#">
+                                <i class="fa fa-area-chart fa-fw"></i> Admin<span class="fa arrow"></span></a>
+                              <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/stats">Statistiche</a>
+                                    </li>
+                                    <li>
+                                        <a href="/users">Mostra Utenti</a>
+                                    </li>
+                                    <li>
+                                        <a href="/users/create">Aggiungi Utente</a>
+                                    </li>
+                              </ul>
                         </li>
-                    </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
