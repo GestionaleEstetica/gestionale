@@ -49468,7 +49468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             client: '',
             date: '',
             time: '',
-            description: 'Nessuna descrizione'
+            description: ''
         };
     },
 
@@ -49984,14 +49984,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return array;
         },
-        quantity: function quantity(value) {
-
-            var count = this.listedTreatments.reduce(function (n, val) {
-                return n + (val === value);
-            }, 0);
-
-            return count;
-        },
         submit: function submit() {
             document.submitSale.client_id.value = this.client.id;
             this.listedTreatments = this.trim(this.listedTreatments);
@@ -50292,9 +50284,7 @@ var render = function() {
                             _vm._s(treatment.name) +
                               " || " +
                               _vm._s(treatment.price) +
-                              " € || " +
-                              _vm._s(treatment["pivot"].quantity) +
-                              " "
+                              " € "
                           )
                         ]
                       )
