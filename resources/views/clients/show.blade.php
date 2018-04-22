@@ -52,12 +52,6 @@
                  <div class="panel-footer">
                         <button class="btn btn-md btn-info" onclick="history.back();">Indietro</button>
 												<button class="btn btn-md btn-info" onclick="location.href='/clients/{{$client->id}}/edit'">Modifica</button>
-                        <span class="pull-right">
-                          <form action="/clients/{{ $client->id }}/edit" method="GET">
-                            <button type="submit" class="btn btn-warning btn-sm">
-                              <div class="glyphicon glyphicon-pencil"></div>
-                            </button>
-                          </form>
 
                         </span>
                     </div>
