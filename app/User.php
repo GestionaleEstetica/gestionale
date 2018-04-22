@@ -13,4 +13,9 @@ class User extends Model
     {
     	return $this->hasMany(Sale::class);
     }
+
+    public function dates()
+    {
+      return $this->hasMany(Date::class);
+    }
 }

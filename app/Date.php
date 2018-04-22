@@ -19,4 +19,9 @@ class Date extends Model
     {
     	return $this->belongsToMany(Treatment::class,'date_treatment')->withPivot('quantity');
     }
+
+		public function user()
+		{
+			return $this->hasOne(User::class);
+		}
 }
