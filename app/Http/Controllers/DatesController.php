@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use App\User;
 use App\Treatment;
 use App\Utility\Utility;
 use Illuminate\Support\Facades\DB;
 use App\Date;
+use Carbon\Carbon; 
+use Illuminate\Support\Facades\Input;
 
 class DatesController extends Controller
 {
@@ -18,8 +21,15 @@ class DatesController extends Controller
      */
     public function index()
     {
-      $dates = Date::all();
-      return view('dates.index',compact('dates'));
+      $date = Carbon::parse(Input::get('date'))->toDateString();
+      if (!isset($date)) $date = Carbon::today()->toDateString();
+      $dates = DB::table('dates')
+        ->select('*')
+        ->where('date', '=', $date)
+        ->get();
+      $users = User::all();
+      $clients = Client::all();
+      return view('dates.index',compact(['date','dates','users','clients']));
     }
 
     /**
@@ -53,9 +63,14 @@ class DatesController extends Controller
           $treatment = Treatment::where('name', '=' , $name)->firstOrFail();
           $date->treatments()->attach($treatment,['quantity' => $quantity]);
       }
-
-      $dates = Date::all();
-      return view('dates.index', compact('dates'))->with('success','Appuntamento creato con successo');
+      $date = Carbon::today()->toDateString();
+      $dates = DB::table('dates')
+        ->select('*')
+        ->where('date', '=', Carbon::today()->toDateString())
+        ->get();
+      $users = User::all();
+      $clients = Client::all();
+      return view('dates.index', compact(['dates','users','date','clients']))->with('success','Appuntamento creato con successo');
     
     }
 
@@ -116,8 +131,10 @@ class DatesController extends Controller
       }
 
       $date->treatments()->sync($quantity);
-
-      return view('dates.index',compact('dates'));
+      $date = Carbon::today()->toDateString();
+      $users = User::all();
+      $clients = Client::all();
+      return view('dates.index',compact('dates','date','users','clients'));
       
     }
 

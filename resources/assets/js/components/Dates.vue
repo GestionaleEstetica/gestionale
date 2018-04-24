@@ -59,6 +59,7 @@
 						<input type="hidden" name="client_id" value="">
 						<input type="hidden" name="treatments" value="">
 						<input type="hidden" name="description" value="">
+						<input type="hidden" name="user_id" value="1">
 						<button class="btn btn-success pull-right" v-if="listedTreatments.length > 0 && client && date && time" @click="submit">Invia</button>
 					</div>
 				</div>
