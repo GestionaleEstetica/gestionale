@@ -51055,7 +51055,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'index-date',
@@ -51064,7 +51063,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             orari: ['9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
-            settedOrario: []
+            settedOrario: [],
+            active: false
         };
     },
 
@@ -51120,7 +51120,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
-            _vm._v("\r\n\t\t\t\t\t" + _vm._s(_vm.dates) + "\r\n\t\t\t\t\t"),
             _c(
               "table",
               { staticClass: "table table-striped table-bordered table-hover" },
@@ -51149,33 +51148,44 @@ var render = function() {
                   _vm._l(_vm.orari, function(orario) {
                     return _c(
                       "tr",
-                      { staticClass: "text-center" },
                       [
                         _c("td", [_c("b", [_vm._v(_vm._s(orario))])]),
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
-                          return _c("td", [
-                            _vm.hasDate(orario, user)
-                              ? _c("p", [
-                                  _vm._v(
-                                    "\r\n\t\t\t\t\t\t\t\t\t\tCliente: " +
-                                      _vm._s(
-                                        _vm.getClient(_vm.settedAppuntamento)
+                          return _c(
+                            "td",
+                            { staticStyle: { "vertical-align": "center" } },
+                            [
+                              _vm.hasDate(orario, user)
+                                ? _c("div", [
+                                    _c("div", { staticClass: "pull-left" }, [
+                                      _c("b", [_vm._v("Cliente")]),
+                                      _vm._v(
+                                        ": " +
+                                          _vm._s(
+                                            _vm.getClient(
+                                              _vm.settedAppuntamento
+                                            )
+                                          )
                                       )
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\r\n\t\t\t\t\t\t\t\t\t\tDescrizione: " +
-                                      _vm._s(
-                                        _vm.getDescription(
-                                          _vm.settedAppuntamento
-                                        )
-                                      ) +
-                                      "\r\n\t\t\t\t\t\t\t\t\t"
-                                  )
-                                ])
-                              : _vm._e()
-                          ])
+                                    ]),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "pull-left" }, [
+                                      _c("b", [_vm._v("Descrizione")]),
+                                      _vm._v(
+                                        ": " +
+                                          _vm._s(
+                                            _vm.getDescription(
+                                              _vm.settedAppuntamento
+                                            )
+                                          )
+                                      )
+                                    ])
+                                  ])
+                                : _vm._e()
+                            ]
+                          )
                         })
                       ],
                       2

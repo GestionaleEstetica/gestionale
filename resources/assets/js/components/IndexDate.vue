@@ -8,7 +8,6 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<div class="table-responsive">
-					{{dates}}
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
@@ -17,13 +16,13 @@
 							</tr>
 						</thead>
 						<tbody class="">
-							<tr class="text-center" v-for="orario in orari">
+							<tr v-for="orario in orari">
 								<td><b>{{orario}}</b></td>
-								<td v-for="user in users">
-									<p v-if="hasDate(orario,user)">
-										Cliente: {{getClient(settedAppuntamento)}}<br>
-										Descrizione: {{getDescription(settedAppuntamento)}}
-									</p>
+								<td v-for="user in users" style="vertical-align: center">
+									<div v-if="hasDate(orario,user)">
+										<div class="pull-left"><b>Cliente</b>: {{getClient(settedAppuntamento)}}</div><br>
+                                        <div class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</div>
+									</div>
 								</td>
 							</tr>
 						</tbody>
@@ -51,7 +50,8 @@
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 orari: ['9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
-                settedOrario: []
+                settedOrario: [],
+                active: false
             }
         },
         methods: 
