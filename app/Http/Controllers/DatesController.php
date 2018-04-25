@@ -41,7 +41,11 @@ class DatesController extends Controller
     {
         $clients = Client::all();
         $treatments = Treatment::all();
-        return view('dates.create', compact(['clients','treatments']));
+        $orario = Input::get('orario');
+        $orario = Carbon::createFromTimeString($orario)->format('H:i:s');
+        $user = Input::get('user');
+        $data = Input::get('data');
+        return view('dates.create', compact(['clients','treatments','orario','user','data']));
     }
 
     /**

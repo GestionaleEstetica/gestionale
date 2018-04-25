@@ -15,19 +15,27 @@
 								<th class="text-center" v-for="user in users">{{user.first_name}}</th>
 							</tr>
 						</thead>
-						<tbody class="">
+						<tbody>
 							<tr v-for="orario in orari">
 								<td><b>{{orario}}</b></td>
-								<td v-for="user in users" style="vertical-align: center">
-									<div v-if="hasDate(orario,user)">
-										<div class="pull-left"><b>Cliente</b>: {{getClient(settedAppuntamento)}}</div><br>
-                                        <div class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</div>
+								<td v-for="user in users" v-if="hasDate(orario,user)">
+									<div>
+										<span class="pull-left"><b>Cliente</b>: {{getClient(settedAppuntamento)}}</span>
+                                        <form :action="'/dates/'+settedAppuntamento.id" method="GET">
+                                        <button type="submit" class="btn btn-outline btn-primary pull-right clearfix">Mostra</button>
+                                        </form>
+                                        <br>
+                                        <span class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</span>
 									</div>
-								</td>
+                                <td v-else @click="create(orario,user)" class="block__wrap" style="cursor: pointer;">
+                                    <p class="block__description text-center">Clicca per aggiungere un appuntamento</p>
+                                </td>
+                                </td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+                Centrare il testo, abbellire il testo, (colore definitivo?), quando passo l'orario vue lancia un eccezione che non se capisce, quando passo la data esce fuori solo un anno a caso.
 				<!-- /.table-responsive -->
 			</div>
 			<!-- /.panel-body -->
@@ -40,6 +48,13 @@
 			<input type="date" name="date" v-model="date" @change="changeDate()">
 		</form>
 	</div>
+
+    <form name="create" action="/dates/create" method="GET">
+        <input type="hidden" name="orario" value="">
+        <input type="hidden" name="user" value="">
+        <input type="hidden" name="data" value="">
+    </form>
+
 </div>
 	</template>
   <script type="text/javascript">
@@ -95,7 +110,14 @@
         		var desc = appuntamento.description
         		if (desc == null) return "Nessuna descrizione"
         		return desc.length > 20? desc.substring(0,20) + "..." : desc
-        	}
+        	},
+            create: function(orario,user)
+            {
+                document.create.orario.value = orario;
+                document.create.user.value = JSON.stringify(user);
+                document.create.data.value = this.date;
+                document.forms['create'].submit();
+            }
         }
     }
 </script> 

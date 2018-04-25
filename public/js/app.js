@@ -13969,7 +13969,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
@@ -14003,8 +14003,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 Vue.component('sales', __webpack_require__(42));
 Vue.component('dates', __webpack_require__(45));
 Vue.component('edit-date', __webpack_require__(48));
-Vue.component('index-date', __webpack_require__(59));
-Vue.component('stats', __webpack_require__(51));
+Vue.component('index-date', __webpack_require__(51));
+Vue.component('stats', __webpack_require__(54));
 
 var app = new Vue({
   el: '#app'
@@ -49461,7 +49461,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'dates',
-    props: ['clients', 'treatments'],
+    props: ['clients', 'treatments', 'user', 'orario', 'data'],
     data: function data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -49532,7 +49532,9 @@ var render = function() {
               _c("div", { staticClass: "panel-body" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Cliente")]),
-                  _vm._v(" "),
+                  _vm._v(
+                    "\r\n\t\t\t\t\t" + _vm._s(_vm.orario) + "\r\n\t\t\t\t\t"
+                  ),
                   _c(
                     "select",
                     {
@@ -49610,19 +49612,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.time,
-                        expression: "time"
+                        value: _vm.orario,
+                        expression: "orario"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { name: "time", type: "time" },
-                    domProps: { value: _vm.time },
+                    domProps: { value: _vm.orario },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.time = $event.target.value
+                        _vm.orario = $event.target.value
                       }
                     }
                   })
@@ -49797,7 +49799,8 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("input", {
-                    attrs: { type: "hidden", name: "user_id", value: "1" }
+                    attrs: { type: "hidden", name: "user_id" },
+                    domProps: { value: _vm.us }
                   }),
                   _vm._v(" "),
                   _vm.listedTreatments.length > 0 &&
@@ -50388,6 +50391,394 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\IndexDate.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3d8fbe39", Component.options)
+  } else {
+    hotAPI.reload("data-v-3d8fbe39", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'index-date',
+    props: ['users', 'dates', 'date', 'clients'],
+    data: function data() {
+        return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            orari: ['9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
+            settedOrario: [],
+            active: false
+        };
+    },
+
+    methods: {
+        changeDate: function changeDate() {
+            document.forms['changeDate'].submit();
+        },
+        hasDate: function hasDate(orario, user) {
+            for (var i = 0; i < this.dates.length; i++) {
+                var appuntamento = this.dates[i];
+                if (this.normalize(appuntamento.time) == orario && appuntamento.user_id == user.id) {
+                    this.settedAppuntamento = appuntamento;
+                    return true;
+                }
+            }
+            return false;
+        },
+        normalize: function normalize(orario) {
+            var ind = orario.lastIndexOf(':');
+            return orario.substring(0, ind);
+        },
+        getClient: function getClient(appuntamento) {
+            var clientId = appuntamento.client_id;
+            var clientInfo = "";
+            for (var i = this.clients.length - 1; i >= 0; i--) {
+                var client = this.clients[i];
+                if (client.id == clientId) {
+                    clientInfo += client.first_name + client.last_name;
+                    return clientInfo;
+                }
+            }
+        },
+        getDescription: function getDescription(appuntamento) {
+            var desc = appuntamento.description;
+            if (desc == null) return "Nessuna descrizione";
+            return desc.length > 20 ? desc.substring(0, 20) + "..." : desc;
+        },
+        create: function create(orario, user) {
+            document.create.orario.value = orario;
+            document.create.user.value = JSON.stringify(user);
+            document.create.data.value = this.date;
+            document.forms['create'].submit();
+        }
+    }
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-8 col-sm-12 col-lg-10" }, [
+      _c("div", { staticClass: "panel panel-primary" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              { staticClass: "table table-striped table-bordered table-hover" },
+              [
+                _c("thead", [
+                  _c(
+                    "tr",
+                    [
+                      _c("th", { staticClass: "text-center" }, [
+                        _vm._v("Orario")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.users, function(user) {
+                        return _c("th", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(user.first_name))
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.orari, function(orario) {
+                    return _c(
+                      "tr",
+                      [
+                        _c("td", [_c("b", [_vm._v(_vm._s(orario))])]),
+                        _vm._v(" "),
+                        _vm._l(_vm.users, function(user) {
+                          return _vm.hasDate(orario, user)
+                            ? _c("td", [
+                                _c("div", [
+                                  _c("span", { staticClass: "pull-left" }, [
+                                    _c("b", [_vm._v("Cliente")]),
+                                    _vm._v(
+                                      ": " +
+                                        _vm._s(
+                                          _vm.getClient(_vm.settedAppuntamento)
+                                        )
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action:
+                                          "/dates/" + _vm.settedAppuntamento.id,
+                                        method: "GET"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-outline btn-primary pull-right clearfix",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Mostra")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "pull-left" }, [
+                                    _c("b", [_vm._v("Descrizione")]),
+                                    _vm._v(
+                                      ": " +
+                                        _vm._s(
+                                          _vm.getDescription(
+                                            _vm.settedAppuntamento
+                                          )
+                                        )
+                                    )
+                                  ])
+                                ])
+                              ])
+                            : _c(
+                                "td",
+                                {
+                                  staticClass: "block__wrap",
+                                  staticStyle: { cursor: "pointer" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.create(orario, user)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "block__description text-center"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Clicca per aggiungere un appuntamento"
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                        })
+                      ],
+                      2
+                    )
+                  })
+                )
+              ]
+            )
+          ]),
+          _vm._v(
+            "\r\n                Centrare il testo, abbellire il testo, (colore definitivo?), quando passo l'orario vue lancia un eccezione che non se capisce, quando passo la data esce fuori solo un anno a caso.\r\n\t\t\t\t"
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-2" }, [
+      _c("label", [_vm._v("Seleziona il giorno:")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        { attrs: { name: "changeDate", action: "/", method: "GET" } },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.date,
+                expression: "date"
+              }
+            ],
+            attrs: { type: "date", name: "date" },
+            domProps: { value: _vm.date },
+            on: {
+              change: function($event) {
+                _vm.changeDate()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.date = $event.target.value
+              }
+            }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c(
+        "h2",
+        {
+          staticStyle: {
+            margin: "0px",
+            "text-align": "center",
+            "font-weight": "bold"
+          }
+        },
+        [_vm._v("Calendario")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "form",
+      { attrs: { name: "create", action: "/dates/create", method: "GET" } },
+      [
+        _c("input", { attrs: { type: "hidden", name: "orario", value: "" } }),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "hidden", name: "user", value: "" } }),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "hidden", name: "data", value: "" } })
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3d8fbe39", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\Stats.vue"
 
 /* hot reload */
@@ -50410,7 +50801,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50596,7 +50987,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50949,319 +51340,10 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(60)
-/* template */
-var __vue_template__ = __webpack_require__(61)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\IndexDate.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3d8fbe39", Component.options)
-  } else {
-    hotAPI.reload("data-v-3d8fbe39", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 60 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'index-date',
-    props: ['users', 'dates', 'date', 'clients'],
-    data: function data() {
-        return {
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            orari: ['9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
-            settedOrario: [],
-            active: false
-        };
-    },
-
-    methods: {
-        changeDate: function changeDate() {
-            document.forms['changeDate'].submit();
-        },
-        hasDate: function hasDate(orario, user) {
-            for (var i = 0; i < this.dates.length; i++) {
-                var appuntamento = this.dates[i];
-                if (this.normalize(appuntamento.time) == orario && appuntamento.user_id == user.id) {
-                    this.settedAppuntamento = appuntamento;
-                    return true;
-                }
-            }
-            return false;
-        },
-        normalize: function normalize(orario) {
-            var ind = orario.lastIndexOf(':');
-            return orario.substring(0, ind);
-        },
-        getClient: function getClient(appuntamento) {
-            var clientId = appuntamento.client_id;
-            var clientInfo = "";
-            for (var i = this.clients.length - 1; i >= 0; i--) {
-                var client = this.clients[i];
-                if (client.id == clientId) {
-                    clientInfo += client.first_name + client.last_name;
-                    return clientInfo;
-                }
-            }
-        },
-        getDescription: function getDescription(appuntamento) {
-            var desc = appuntamento.description;
-            if (desc == null) return "Nessuna descrizione";
-            return desc.length > 20 ? desc.substring(0, 20) + "..." : desc;
-        }
-    }
-});
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-8 col-sm-12 col-lg-10" }, [
-      _c("div", { staticClass: "panel panel-primary" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel-body" }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c(
-              "table",
-              { staticClass: "table table-striped table-bordered table-hover" },
-              [
-                _c("thead", [
-                  _c(
-                    "tr",
-                    [
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Orario")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.users, function(user) {
-                        return _c("th", { staticClass: "text-center" }, [
-                          _vm._v(_vm._s(user.first_name))
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  {},
-                  _vm._l(_vm.orari, function(orario) {
-                    return _c(
-                      "tr",
-                      [
-                        _c("td", [_c("b", [_vm._v(_vm._s(orario))])]),
-                        _vm._v(" "),
-                        _vm._l(_vm.users, function(user) {
-                          return _c(
-                            "td",
-                            { staticStyle: { "vertical-align": "center" } },
-                            [
-                              _vm.hasDate(orario, user)
-                                ? _c("div", [
-                                    _c("div", { staticClass: "pull-left" }, [
-                                      _c("b", [_vm._v("Cliente")]),
-                                      _vm._v(
-                                        ": " +
-                                          _vm._s(
-                                            _vm.getClient(
-                                              _vm.settedAppuntamento
-                                            )
-                                          )
-                                      )
-                                    ]),
-                                    _c("br"),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "pull-left" }, [
-                                      _c("b", [_vm._v("Descrizione")]),
-                                      _vm._v(
-                                        ": " +
-                                          _vm._s(
-                                            _vm.getDescription(
-                                              _vm.settedAppuntamento
-                                            )
-                                          )
-                                      )
-                                    ])
-                                  ])
-                                : _vm._e()
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  })
-                )
-              ]
-            )
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-2" }, [
-      _c("label", [_vm._v("Seleziona il giorno:")]),
-      _vm._v(" "),
-      _c(
-        "form",
-        { attrs: { name: "changeDate", action: "/", method: "GET" } },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.date,
-                expression: "date"
-              }
-            ],
-            attrs: { type: "date", name: "date" },
-            domProps: { value: _vm.date },
-            on: {
-              change: function($event) {
-                _vm.changeDate()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.date = $event.target.value
-              }
-            }
-          })
-        ]
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c(
-        "h2",
-        {
-          staticStyle: {
-            margin: "0px",
-            "text-align": "center",
-            "font-weight": "bold"
-          }
-        },
-        [_vm._v("Calendario")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3d8fbe39", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
