@@ -5,8 +5,11 @@
 @section('body')
 	<div id="app">
 		<dates  
-			:clients="{{ json_encode($clients) }}"
+			:clients="{{ $clients }}"
 			:treatments="{{ json_encode($treatments) }}"
+			:user="{{ json_encode($user) }}"
+			:orario="{{ $orario }}"
+			:data="{{ $data }}"
 			>
 		</dates>
 	</div>

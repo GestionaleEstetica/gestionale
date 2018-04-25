@@ -6,8 +6,8 @@
 			<div class="panel-heading">Appuntamento</div>
 			<div class="panel-body">
 				<div class="form-group">
-
 					<label>Cliente</label>
+					{{orario}}
 					<select class="form-control" v-model="client">
 						<option v-for="client in sortedClients" :value="client" >
 						{{client.first_name}} {{client.last_name}} || {{client.email}}</option>
@@ -19,7 +19,7 @@
 				</div>
 				<div class="form-group">
 					<label>Ora</label>
-					<input name="time" type='time' class="form-control" v-model="time">
+					<input name="time" type='time' class="form-control" v-model="orario">
 				</div>
 				<div class="form-group">
 					<label>Ricerca uno o più trattamenti</label>
@@ -59,6 +59,7 @@
 						<input type="hidden" name="client_id" value="">
 						<input type="hidden" name="treatments" value="">
 						<input type="hidden" name="description" value="">
+						<input type="hidden" name="user_id" :value="us">
 						<button class="btn btn-success pull-right" v-if="listedTreatments.length > 0 && client && date && time" @click="submit">Invia</button>
 					</div>
 				</div>
@@ -69,7 +70,7 @@
   <script type="text/javascript">
     export default {
         name: 'dates',
-        props: ['clients', 'treatments'],
+        props: ['clients', 'treatments','user','orario','data'],
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

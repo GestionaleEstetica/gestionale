@@ -22,7 +22,9 @@ Vue.use(Resource);
 Vue.component('sales', require('./components/Sales.vue'));
 Vue.component('dates', require('./components/Dates.vue'));
 Vue.component('edit-date', require('./components/EditDate.vue'));
+Vue.component('index-date', require('./components/IndexDate.vue'));
 Vue.component('stats', require('./components/Stats.vue'));
+
 
 
 

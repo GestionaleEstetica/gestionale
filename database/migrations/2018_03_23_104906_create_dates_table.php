@@ -16,12 +16,16 @@ class CreateDatesTable extends Migration
         Schema::create('dates', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->date('date');
             $table->time('time');
             $table->boolean('done')->default(false);
             $table->string('description',128)->nullable(true);
             $table->timestamps();
 
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 
         });

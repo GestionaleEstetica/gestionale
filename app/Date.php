@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Date extends Model
 {
 	protected $fillable = [
-    	'client_id','date','time','done','description'
+    	'client_id','user_id','date','time','done','description'
     ];
 
     public function client()
@@ -22,6 +22,6 @@ class Date extends Model
 
 		public function user()
 		{
-			return $this->hasOne(User::class);
+			return $this->belongsTo(User::class);
 		}
 }
