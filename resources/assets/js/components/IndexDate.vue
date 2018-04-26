@@ -3,7 +3,10 @@
 	<div class="col-md-8 col-sm-12 col-lg-10">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 style="margin:0px; text-align:center; font-weight:bold">Calendario</h2>
+                <h3 style="margin:0">
+                    <span>Calendario</span>
+                    <span class="pull-right">{{date}}</span>                  
+                </h3>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -28,14 +31,13 @@
                                         <span class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</span>
 									</div>
                                 <td v-else @click="create(orario,user)" class="block__wrap" style="cursor: pointer;">
-                                    <p class="block__description text-center">Clicca per aggiungere un appuntamento</p>
+                                    <p class="block__description text-center">Nuovo appuntamento</p>
                                 </td>
                                 </td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-                Centrare il testo, abbellire il testo, (colore definitivo?), quando passo l'orario vue lancia un eccezione che non se capisce, quando passo la data esce fuori solo un anno a caso.
 				<!-- /.table-responsive -->
 			</div>
 			<!-- /.panel-body -->

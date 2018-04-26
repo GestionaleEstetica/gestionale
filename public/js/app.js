@@ -49457,7 +49457,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'dates',
@@ -49468,8 +49467,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             search: '',
             listedTreatments: [],
             client: '',
-            date: '',
-            time: '',
             description: ''
         };
     },
@@ -49532,9 +49529,7 @@ var render = function() {
               _c("div", { staticClass: "panel-body" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Cliente")]),
-                  _vm._v(
-                    "\r\n\t\t\t\t\t" + _vm._s(_vm.orario) + "\r\n\t\t\t\t\t"
-                  ),
+                  _vm._v(" "),
                   _c(
                     "select",
                     {
@@ -49586,19 +49581,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.date,
-                        expression: "date"
+                        value: _vm.data,
+                        expression: "data"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: { name: "date", type: "date" },
-                    domProps: { value: _vm.date },
+                    domProps: { value: _vm.data },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.date = $event.target.value
+                        _vm.data = $event.target.value
                       }
                     }
                   })
@@ -49800,13 +49795,13 @@ var render = function() {
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "hidden", name: "user_id" },
-                    domProps: { value: _vm.us }
+                    domProps: { value: _vm.user.id }
                   }),
                   _vm._v(" "),
                   _vm.listedTreatments.length > 0 &&
                   _vm.client &&
-                  _vm.date &&
-                  _vm.time
+                  _vm.data &&
+                  _vm.orario
                     ? _c(
                         "button",
                         {
@@ -50477,6 +50472,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'index-date',
@@ -50544,7 +50541,15 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-md-8 col-sm-12 col-lg-10" }, [
       _c("div", { staticClass: "panel panel-primary" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "panel-heading" }, [
+          _c("h3", { staticStyle: { margin: "0" } }, [
+            _c("span", [_vm._v("Calendario")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pull-right" }, [
+              _vm._v(_vm._s(_vm.date))
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -50647,11 +50652,7 @@ var render = function() {
                                       staticClass:
                                         "block__description text-center"
                                     },
-                                    [
-                                      _vm._v(
-                                        "Clicca per aggiungere un appuntamento"
-                                      )
-                                    ]
+                                    [_vm._v("Nuovo appuntamento")]
                                   )
                                 ]
                               )
@@ -50663,10 +50664,7 @@ var render = function() {
                 )
               ]
             )
-          ]),
-          _vm._v(
-            "\r\n                Centrare il testo, abbellire il testo, (colore definitivo?), quando passo l'orario vue lancia un eccezione che non se capisce, quando passo la data esce fuori solo un anno a caso.\r\n\t\t\t\t"
-          )
+          ])
         ])
       ])
     ]),
@@ -50705,28 +50703,10 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c(
-        "h2",
-        {
-          staticStyle: {
-            margin: "0px",
-            "text-align": "center",
-            "font-weight": "bold"
-          }
-        },
-        [_vm._v("Calendario")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

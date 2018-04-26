@@ -7,7 +7,6 @@
 			<div class="panel-body">
 				<div class="form-group">
 					<label>Cliente</label>
-					{{orario}}
 					<select class="form-control" v-model="client">
 						<option v-for="client in sortedClients" :value="client" >
 						{{client.first_name}} {{client.last_name}} || {{client.email}}</option>
@@ -15,7 +14,7 @@
 				</div>
 				<div class="form-group" >
 					<label>Data</label>
-					<input name="date" type="date" class="form-control" v-model="date">
+					<input name="date" type="date" class="form-control" v-model="data">
 				</div>
 				<div class="form-group">
 					<label>Ora</label>
@@ -59,8 +58,8 @@
 						<input type="hidden" name="client_id" value="">
 						<input type="hidden" name="treatments" value="">
 						<input type="hidden" name="description" value="">
-						<input type="hidden" name="user_id" :value="us">
-						<button class="btn btn-success pull-right" v-if="listedTreatments.length > 0 && client && date && time" @click="submit">Invia</button>
+						<input type="hidden" name="user_id" :value="user.id">
+						<button class="btn btn-success pull-right" v-if="listedTreatments.length > 0 && client && data && orario" @click="submit">Invia</button>
 					</div>
 				</div>
 			</div>
@@ -77,8 +76,6 @@
                 search:'',
                 listedTreatments: [],
                 client:'',
-                date:'',
-                time:'',
                 description:''
             }
         },

@@ -7,9 +7,9 @@
 		<dates  
 			:clients="{{ $clients }}"
 			:treatments="{{ json_encode($treatments) }}"
-			:user="{{ json_encode($user) }}"
-			:orario="{{ $orario }}"
-			:data="{{ $data }}"
+			:user="{{ $user }}"
+			data="{{ $data }}"
+			orario="{{ $orario }}"
 			>
 		</dates>
 	</div>

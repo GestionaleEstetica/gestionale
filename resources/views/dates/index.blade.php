@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('title')
-	Calendario Estetica Galante <span class="pull-right">{{$date}}</span>
+	Calendario
 @endsection
 @section('body')
 	<div id="app">
@@ -8,7 +8,7 @@
 			:users="{{ json_encode($users) }}"
 			:dates="{{ json_encode($dates) }}"
 			:clients="{{ $clients }}"
-			:date="{{ $date }}"
+			date="{{ $date }}"
 			>
 		</index-date>
 	</div>
