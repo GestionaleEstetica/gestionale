@@ -27,7 +27,6 @@
                                     <a href="/clients">Mostra tutti</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-cubes fa-fw"></i> Prodotti<span class="fa arrow"></span></a>
