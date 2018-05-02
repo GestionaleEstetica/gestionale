@@ -1,11 +1,11 @@
 <?php
 
 $dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
-$user => $dbopts["user"]??null;
-$password => $dbopts["pass"]??null;
-$host => $dbopts["host"]??null;
-$port => $dbopts["port"]??null;
-$dbname => ltrim($dbopts["path"],'/')??null;
+$user = $dbopts["user"]??null;
+$password = $dbopts["pass"]??null;
+$host = $dbopts["host"]??null;
+$port = $dbopts["port"]??null;
+$dbname = ltrim($dbopts["path"],'/')??null;
 
 return [
 
