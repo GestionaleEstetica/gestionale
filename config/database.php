@@ -1,6 +1,6 @@
 <?php
 
-$dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
+$dbopts = parse_url(getenv('DATABASE_URL'));
 $user = $dbopts["user"]??null;
 $password = $dbopts["pass"]??null;
 $host = $dbopts["host"]??null;
