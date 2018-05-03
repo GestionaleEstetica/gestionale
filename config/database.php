@@ -1,5 +1,10 @@
 <?php
 
+$dbopts = parse_url(getenv('DATABASE_URL'));
+$user = $dbopts["user"]??null;
+$password = $dbopts["pass"]??null;
+$host = $dbopts["host"]??null;
+
 return [
 
     /*
@@ -13,7 +18,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql_production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,6 +72,18 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'pgsql_production' => [
+          'driver' => 'pgsql',
+          'host' => $host,
+          'port' => $port,
+          'database' => $dbname,
+          'username' => $user,
+          'password' => $password,
+          'charset' => 'utf8',
+          'prefix' => '',
+          'schema' => 'public',
+          'sslmode' => 'prefer',
+        ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
