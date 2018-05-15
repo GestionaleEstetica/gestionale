@@ -24,7 +24,7 @@
                       </tr>
                       <tr>
                         <td>Data compleanno:</td>
-                        <td>{{$client->birthday}}</td>
+                        <td>{{Carbon\Carbon::createFromFormat('Y-m-d', $client->birthday)->format('d-m-Y')}}</td>
                       </tr>
                       <tr>
                         <td>Appuntamenti conclusi</td>
@@ -51,7 +51,8 @@
             </div>
                  <div class="panel-footer">
                         <button class="btn btn-md btn-info" onclick="history.back();">Indietro</button>
-												<button class="btn btn-md btn-info" onclick="location.href='/clients/{{$client->id}}/edit'">Modifica</button>
+												<button class="btn btn-md btn-warning" onclick="location.href='/clients/{{$client->id}}/edit'">Modifica</button>
+												<button class="btn btn-md btn-success" onclick="location.href='/clients/{{$client->id}}/showDates'">Mostra Appuntamenti</button>
 
                         </span>
                     </div>

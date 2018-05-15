@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -507,6 +480,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -3131,7 +3131,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 5 */
@@ -13967,7 +13967,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(57);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
@@ -31172,7 +31172,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(16)(module)))
 
 /***/ }),
 /* 16 */
@@ -46954,7 +46954,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(38).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(38).setImmediate))
 
 /***/ }),
 /* 38 */
@@ -47021,7 +47021,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 39 */
@@ -47214,7 +47214,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(7)))
 
 /***/ }),
 /* 40 */
@@ -48793,7 +48793,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
@@ -48841,6 +48841,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49041,137 +49049,172 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-sm-12 col-lg-8" }, [
-        _c("div", { staticClass: "panel-body" }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-7" }, [
-                _vm.productView
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        on: { click: _vm.showTreatments }
-                      },
-                      [_c("b", [_vm._v("MOSTRA TRATTAMENTI")])]
-                    )
-                  : _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        on: { click: _vm.showProducts }
-                      },
-                      [_c("b", [_vm._v("MOSTRA PRODOTTI")])]
-                    )
+        _c("div", { staticClass: "panel panel-info" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _c("h3", { staticStyle: { margin: "0" } }, [
+              _c("span", [_vm._v("Seleziona Prodotti / Trattamenti")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "pull-right" }, [
+                _vm._v(_vm._s(_vm.date))
               ])
-            ]),
-            _vm._v(" "),
-            _c("table", { staticClass: "table table-bordered table-hover" }, [
-              _c("thead", { staticClass: "text-center" }, [
-                _c("tr", [
-                  _c("th", [_vm._v("Codice")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Nome")]),
-                  _vm._v(" "),
-                  _vm.productView ? _c("th", [_vm._v("Marca")]) : _vm._e(),
-                  _vm._v(" "),
-                  _vm.productView
-                    ? _c("th", [_vm._v("Quantità")])
-                    : _c("th", [_vm._v("Durata")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Prezzo")])
-                ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-md-7",
+                    staticStyle: { "margin-bottom": "1.5%" }
+                  },
+                  [
+                    _vm.productView
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: { click: _vm.showTreatments }
+                          },
+                          [_c("b", [_vm._v("MOSTRA TRATTAMENTI")])]
+                        )
+                      : _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: { click: _vm.showProducts }
+                          },
+                          [_c("b", [_vm._v("MOSTRA PRODOTTI")])]
+                        )
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm._l(_vm.filteredProducts, function(product) {
-                    return _vm.productView
-                      ? _c("tr", [
-                          _c("td", [_vm._v(_vm._s(product.id))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(product.name))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(product.brand))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(product.quantity))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(product.price))]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-center" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success",
-                                on: {
-                                  click: function($event) {
-                                    _vm.pushItem(product, "product")
-                                  }
-                                }
-                              },
-                              [_vm._v("+")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                on: {
-                                  click: function($event) {
-                                    _vm.removeItem(product, "product")
-                                  }
-                                }
-                              },
-                              [_vm._v("-")]
-                            )
-                          ])
+              _c("table", { staticClass: "table table-bordered table-hover" }, [
+                _c("thead", { staticClass: "text-center" }, [
+                  _c("tr", [
+                    _c("th", { staticClass: "text-center" }, [
+                      _vm._v("Codice")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "text-center" }, [_vm._v("Nome")]),
+                    _vm._v(" "),
+                    _vm.productView
+                      ? _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Marca")
                         ])
-                      : _vm._e()
-                  }),
-                  _vm._l(_vm.filteredTreatments, function(treatment) {
-                    return !_vm.productView
-                      ? _c("tr", [
-                          _c("td", [_vm._v(_vm._s(treatment.id))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(treatment.name))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(treatment.duration))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(treatment.price))]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-center" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success",
-                                on: {
-                                  click: function($event) {
-                                    _vm.pushItem(treatment, "treatment")
-                                  }
-                                }
-                              },
-                              [_vm._v("+")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                on: {
-                                  click: function($event) {
-                                    _vm.removeItem(treatment, "treatment")
-                                  }
-                                }
-                              },
-                              [_vm._v("-")]
-                            )
-                          ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.productView
+                      ? _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Quantità")
                         ])
-                      : _vm._e()
-                  })
-                ],
-                2
-              )
+                      : _c("th", { staticClass: "text-center" }, [
+                          _vm._v("Durata")
+                        ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "text-center" }, [
+                      _vm._v("Prezzo")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "text-center" }, [
+                      _vm._v("Aggiungi")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.filteredProducts, function(product) {
+                      return _vm.productView
+                        ? _c("tr", [
+                            _c("td", [_vm._v(_vm._s(product.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.brand))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.quantity))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(product.price))]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.pushItem(product, "product")
+                                    }
+                                  }
+                                },
+                                [_vm._v("+")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.removeItem(product, "product")
+                                    }
+                                  }
+                                },
+                                [_vm._v("-")]
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    }),
+                    _vm._l(_vm.filteredTreatments, function(treatment) {
+                      return !_vm.productView
+                        ? _c("tr", [
+                            _c("td", [_vm._v(_vm._s(treatment.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(treatment.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(treatment.duration))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(treatment.price))]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.pushItem(treatment, "treatment")
+                                    }
+                                  }
+                                },
+                                [_vm._v("+")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.removeItem(treatment, "treatment")
+                                    }
+                                  }
+                                },
+                                [_vm._v("-")]
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    })
+                  ],
+                  2
+                )
+              ])
             ])
           ])
         ])
@@ -49339,7 +49382,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -49841,7 +49884,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(49)
 /* template */
@@ -50363,7 +50406,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(52)
 /* template */
@@ -50486,6 +50529,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        normalizeDate: function normalizeDate(date) {
+            var d = new Date(date);
+            return d.toLocaleDateString();
+        },
+
         changeDate: function changeDate() {
             document.forms['changeDate'].submit();
         },
@@ -50509,7 +50557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             for (var i = this.clients.length - 1; i >= 0; i--) {
                 var client = this.clients[i];
                 if (client.id == clientId) {
-                    clientInfo += client.first_name + client.last_name;
+                    clientInfo += client.first_name + " " + client.last_name;
                     return clientInfo;
                 }
             }
@@ -50544,7 +50592,7 @@ var render = function() {
             _c("span", [_vm._v("Calendario")]),
             _vm._v(" "),
             _c("span", { staticClass: "pull-right" }, [
-              _vm._v(_vm._s(_vm.date))
+              _vm._v(_vm._s(_vm.normalizeDate(_vm.date)))
             ])
           ])
         ]),
@@ -50555,13 +50603,17 @@ var render = function() {
               "table",
               { staticClass: "table table-striped table-bordered table-hover" },
               [
-                _c("thead", [
+                _c("thead", { staticClass: "thead-light" }, [
                   _c(
                     "tr",
                     [
-                      _c("th", { staticClass: "text-center" }, [
-                        _vm._v("Orario")
-                      ]),
+                      _c(
+                        "th",
+                        {
+                          staticClass: "col-md-1 col-sm-1 col-lg-1 text-center"
+                        },
+                        [_vm._v("Orario")]
+                      ),
                       _vm._v(" "),
                       _vm._l(_vm.users, function(user) {
                         return _c("th", { staticClass: "text-center" }, [
@@ -50579,7 +50631,9 @@ var render = function() {
                     return _c(
                       "tr",
                       [
-                        _c("td", [_c("b", [_vm._v(_vm._s(orario))])]),
+                        _c("td", { staticClass: "text-center" }, [
+                          _c("b", [_vm._v(_vm._s(orario))])
+                        ]),
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
                           return _vm.hasDate(orario, user)
@@ -50736,7 +50790,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(55)
 /* template */
@@ -51017,17 +51071,25 @@ var render = function() {
       _c("div", { staticClass: "col-lg-3 col-md-6" }, [
         _c("div", { staticClass: "panel panel-yellow" }, [
           _c("div", { staticClass: "panel-heading" }, [
-            _c("div", { staticClass: "row" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-8 text-right" }, [
-                _c("h2", [
-                  _c("div", { staticClass: "huge" }, [
-                    _vm._v(_vm._s(_vm.sales.length))
+            _c(
+              "div",
+              {
+                staticClass: "row",
+                staticStyle: { cursor: "pointer" },
+                attrs: { onclick: "location.href='/admin/stats/showSales'" }
+              },
+              [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-xs-8 text-right" }, [
+                  _c("h2", [
+                    _c("div", { staticClass: "huge" }, [
+                      _vm._v(_vm._s(_vm.sales.length))
+                    ])
                   ])
                 ])
-              ])
-            ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _vm._m(5)
@@ -51082,7 +51144,7 @@ var render = function() {
               [_vm._v(_vm._s(_vm.todayStats(_vm.sales, _vm.day)))]
             )
           ]),
-          _vm._v("\r\n\t\t\t\t\r\n\t\t\t\tAppuntamenti annotati"),
+          _vm._v("\r\n\r\n\t\t\t\tAppuntamenti annotati"),
           _c("span", { staticClass: "pull-right strong" }),
           _vm._v(" "),
           _c("div", { staticClass: "progress" }, [
@@ -51104,7 +51166,7 @@ var render = function() {
               [_vm._v(_vm._s(_vm.todayStats(_vm.dates, _vm.day)))]
             )
           ]),
-          _vm._v("\r\n\t\t\t\t\r\n\t\t\t\tNuovi clienti"),
+          _vm._v("\r\n\r\n\t\t\t\tNuovi clienti"),
           _c("span", { staticClass: "pull-right strong" }),
           _vm._v(" "),
           _c("div", { staticClass: "progress" }, [
@@ -51318,7 +51380,10 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

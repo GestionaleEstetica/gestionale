@@ -12,7 +12,7 @@
 			<div class="panel-heading">Dettagli utente
 			</div>
 			<div class="panel-body">
-				<form method="POST" action ="/users/{{ $user->id }}">
+				<form method="POST" action ="/admin/users/{{ $user->id }}">
 					{!! csrf_field() !!}
 					{{ method_field('PUT') }}
 					<div class="form-group">

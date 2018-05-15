@@ -70,16 +70,28 @@
                                 <i class="fa fa-area-chart fa-fw"></i> Admin<span class="fa arrow"></span></a>
                               <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/stats">Statistiche</a>
+                                        <a href="/admin/stats">Statistiche</a>
                                     </li>
                                     <li>
-                                        <a href="/users">Mostra Utenti</a>
+                                        <a href="/admin/users">Mostra Utenti</a>
                                     </li>
                                     <li>
-                                        <a href="/users/create">Aggiungi Utente</a>
+                                        <a href="/admin/users/create">Aggiungi Utente</a>
                                     </li>
+                                    @guest
+                                    @else <li>
+                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                                       document.getElementById('logout-form').submit();">
+                                          {{ __('Logout') }}
+                                      </a>
+                                    </li>
+                                    @endguest
                               </ul>
                         </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>

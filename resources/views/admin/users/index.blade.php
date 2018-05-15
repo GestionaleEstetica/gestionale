@@ -33,7 +33,7 @@
 					          <td>{{ $user->phone }}</td>
 
 							<td class="text-center">
-					          	<form action="/users/{{ $user->id }}/edit" method="GET">
+					          	<form action="/admin/users/{{ $user->id }}/edit" method="GET">
 							  <button type="submit" class="btn btn-warning btn-sm">
 					          <div class="glyphicon glyphicon-pencil"></div>
 							</button>
@@ -41,7 +41,7 @@
 							</td>
 
 					          <td class="text-center">
-					          	<form action="/users/{{ $user->id }}" method="POST" style="display: inline;">
+					          	<form action="/admin/users/{{ $user->id }}" method="POST" style="display: inline;">
 							  	{{ csrf_field() }}
 							  	{{ method_field('DELETE') }}
 

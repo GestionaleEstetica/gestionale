@@ -10,10 +10,17 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-8">
+      <div class="panel panel-info">
+  			<div class="panel-heading">
+                  <h3 style="margin:0">
+                      <span>Seleziona Prodotti / Trattamenti</span>
+                      <span class="pull-right">{{date}}</span>
+                  </h3>
+  			</div>
       <div class="panel-body">
         <div class="table-responsive">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7" style="margin-bottom: 1.5%">
               <button v-if="productView" @click="showTreatments" class="btn btn-primary"><b>MOSTRA TRATTAMENTI</b></button>
               <button v-else @click="showProducts" class="btn btn-primary"><b>MOSTRA PRODOTTI</b></button>
             </div>
@@ -21,12 +28,13 @@
           <table class="table table-bordered table-hover">
             <thead class="text-center">
               <tr>
-                <th>Codice</th>
-                <th>Nome</th>
-                <th v-if="productView">Marca</th>
-                <th v-if="productView">Quantità</th>
-                <th v-else>Durata</th>
-                <th>Prezzo</th>
+                <th class="text-center">Codice</th>
+                <th class="text-center">Nome</th>
+                <th class="text-center" v-if="productView">Marca</th>
+                <th class="text-center" v-if="productView">Quantità</th>
+                <th class="text-center" v-else>Durata</th>
+                <th class="text-center">Prezzo</th>
+                <th class="text-center">Aggiungi</th>
               </tr>
             </thead>
             <tbody>
@@ -50,12 +58,12 @@
                     <button class="btn btn-danger" @click="removeItem(treatment,'treatment')">-</button>
                   </td>
                 </tr>
-                
               </tbody>
             </table>
           </div>
         </div>
       </div>
+    </div>
       <div class="row">
         <div class="col-lg-4">
           <div class="panel panel-primary" style="position:fixed;">
@@ -151,4 +159,4 @@
         }
     }
 
-</script> 
+</script>

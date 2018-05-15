@@ -54,6 +54,13 @@ class ClientsController extends Controller
         return view('clients.show', compact('client'));
     }
 
+    public function showDates($id)
+    {
+        $client = Client::findOrFail($id);
+
+        return view('clients.showDates', compact('client'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

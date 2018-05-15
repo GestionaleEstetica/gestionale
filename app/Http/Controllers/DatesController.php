@@ -9,7 +9,7 @@ use App\Treatment;
 use App\Utility\Utility;
 use Illuminate\Support\Facades\DB;
 use App\Date;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 
 class DatesController extends Controller
@@ -23,6 +23,7 @@ class DatesController extends Controller
     {
       $date = Carbon::parse(Input::get('date'))->toDateString();
       if (!isset($date)) $date = Carbon::today()->toDateString();
+      //$date = Carbon::createFromFormat('Y-m-d', $date)->format('d-m-Y');
       $dates = DB::table('dates')
         ->select('*')
         ->where('date', '=', $date)
@@ -57,12 +58,12 @@ class DatesController extends Controller
     public function store(Request $request)
     {
       $date = Date::create($request->except('treatments'));
-      
+
       $treatments = json_decode($request->get('treatments'),true);
 
       $treatments = Utility::create_mapping($treatments,'name');
 
-      foreach ($treatments as $name => $quantity) 
+      foreach ($treatments as $name => $quantity)
       {
           $treatment = Treatment::where('name', '=' , $name)->firstOrFail();
           $date->treatments()->attach($treatment,['quantity' => $quantity]);
@@ -75,7 +76,7 @@ class DatesController extends Controller
       $users = User::all();
       $clients = Client::all();
       return view('dates.index', compact(['dates','users','date','clients']))->with('success','Appuntamento creato con successo');
-    
+
     }
 
     /**
@@ -139,7 +140,7 @@ class DatesController extends Controller
       $users = User::all();
       $clients = Client::all();
       return view('dates.index',compact('dates','date','users','clients'));
-      
+
     }
 
     /**

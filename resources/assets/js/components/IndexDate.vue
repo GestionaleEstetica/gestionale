@@ -5,22 +5,22 @@
 			<div class="panel-heading">
                 <h3 style="margin:0">
                     <span>Calendario</span>
-                    <span class="pull-right">{{date}}</span>                  
+                    <span class="pull-right">{{normalizeDate(date)}}</span>
                 </h3>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover">
-						<thead>
+						<thead class="thead-light">
 							<tr>
-								<th class="text-center">Orario</th>
+								<th class="col-md-1 col-sm-1 col-lg-1 text-center">Orario</th>
 								<th class="text-center" v-for="user in users">{{user.first_name}}</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="orario in orari">
-								<td><b>{{orario}}</b></td>
+								<td class="text-center"><b>{{orario}}</b></td>
 								<td v-for="user in users" v-if="hasDate(orario,user)">
 									<div>
 										<span class="pull-left"><b>Cliente</b>: {{getClient(settedAppuntamento)}}</span>
@@ -71,8 +71,14 @@
                 active: false
             }
         },
-        methods: 
+        methods:
         {
+					normalizeDate: function(date)
+					{
+						var d = new Date(date);
+						return d.toLocaleDateString();
+					},
+
         	changeDate: function()
         	{
 		        document.forms['changeDate'].submit();
@@ -102,7 +108,7 @@
         		for (var i = this.clients.length - 1; i >= 0; i--) {
         			var client = this.clients[i]
         			if (client.id == clientId){
-        				clientInfo += client.first_name + client.last_name
+        				clientInfo += client.first_name +" "+ client.last_name
         				return clientInfo
         			}
         		}
@@ -122,4 +128,4 @@
             }
         }
     }
-</script> 
+</script>

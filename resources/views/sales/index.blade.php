@@ -30,7 +30,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="home{{ $sale->id }}">
                                     <br>
-                                    <p>Vendita effettuata il <b>{{ $sale->created_at }}</b></p>
+                                    <p>Vendita effettuata il <b>{{Carbon\Carbon::createFromFormat('Y-m-d', ($sale->created_at)->toDateString())->format('d-m-Y') }}</b></p>
                                     <p>Segnata da: <b>{{ $sale->user->first_name }} {{ $sale->user->last_name }}</b>
                                     <p class="pull-right">
                                         <form method="POST" action="/sales/{{ $sale->id }}">

@@ -1,0 +1,2 @@
+AuthName "stats"
+AuthUserFile "/home/akzwxnmx/.htpasswds/gestionale/resources/views/admin/stats/passwd"

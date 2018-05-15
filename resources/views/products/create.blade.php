@@ -16,19 +16,19 @@
 					{!! csrf_field() !!}
 					<div class="form-group">
 						<label>Nome</label>
-			        <input type='text' class="form-control" name='name' placeholder="Es: Smalto">
+			        <input type='text' class="form-control" name='name' placeholder="Es: Smalto" required>
 					</div>
 					<div class="form-group">
 						<label>Brand</label>
-			        <input type='text' class="form-control" name='brand' placeholder="Es: Sephora">
+			        <input type='text' class="form-control" name='brand' placeholder="Es: Sephora" required>
 					</div>
 					<div class="form-group">
 						<label>Quantità</label>
-			        <input type='number' class="form-control" name='quantity' placeholder="Es: 12">
+			        <input type='number' class="form-control" name='quantity' placeholder="Es: 12" required>
 					</div>
 					<div class="form-group">
 						<label>Prezzo</label>
-			        <input type='number' class="form-control" name='price' placeholder="Es: 20,99" step="0.01">
+			        <input type='number' class="form-control" name='price' placeholder="Es: 20,99" step="0.01" required>
 					</div>
 					
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Aggiungi</button>

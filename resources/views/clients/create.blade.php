@@ -16,23 +16,23 @@
 					{!! csrf_field() !!}
 					<div class="form-group">
 						<label>Nome</label>
-			        <input type='text' class="form-control" name='first_name' placeholder="Es: Mario">
+			        <input type='text' class="form-control" name='first_name' placeholder="Es: Mario" required>
 					</div>
 					<div class="form-group">
 						<label>Cognome</label>
-			        <input type='text' class="form-control" name='last_name' placeholder="Es: Rossi">
+			        <input type='text' class="form-control" name='last_name' placeholder="Es: Rossi" required>
 					</div>
 					<div class="form-group">
 						<label>Data di nascita</label>
-							<input type='date' class="form-control" name='birthday' placeholder="01/01/1900">
+							<input type='date' class="form-control" name='birthday' placeholder="01/01/1900" required>
 					</div>
 					<div class="form-group">
 						<label>Phone</label>
-			        <input type='text' class="form-control" name='phone' placeholder="Es: +39 380 209 1223">
+			        <input type='text' class="form-control" name='phone' placeholder="Es: +39 380 209 1223" required>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-			        <input type='email' class="form-control" name='email' placeholder="Es: ciao@gmail.com">
+			        <input type='email' class="form-control" name='email' placeholder="Es: ciao@gmail.com" >
 			    	</div>
 					<div class="form-group">
 						<label>Promozioni ( opzionale )</label>

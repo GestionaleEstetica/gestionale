@@ -40,7 +40,7 @@
 		<div class="col-lg-3 col-md-6">
 			<div class="panel panel-yellow">
 				<div class="panel-heading">
-					<div class="row">
+					<div class="row" onclick="location.href='/admin/stats/showSales'" style="cursor: pointer;">
 						<div class="col-xs-3">
 							<i class="fa fa-shopping-cart fa-5x"></i>
 						</div>
@@ -86,12 +86,12 @@
 				<div class="progress">
 					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="15"aria-valuemin="0" aria-valuemax="100" :style="'width:'+ getBarWidth(todayStats(sales,day)) + '%'">{{todayStats(sales,day)}}</div>
 				</div>
-				
+
 				Appuntamenti annotati<span class="pull-right strong"></span>
 				<div class="progress">
 					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="30"aria-valuemin="0" aria-valuemax="100" :style="'width:'+ getBarWidth(todayStats(dates,day)) + '%'">{{todayStats(dates,day)}}</div>
 				</div>
-				
+
 				Nuovi clienti<span class="pull-right strong"></span>
 				<div class="progress">
 					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="8"aria-valuemin="0" aria-valuemax="100" :style="'width:'+ getBarWidth(todayStats(clients,day)) + '%'">{{todayStats(clients,day)}}</div>
@@ -135,11 +135,11 @@ export default {
             	month: this.thisMonth()
             }
         },
-    methods: 
+    methods:
     {
     	today: function()
     	{
-    		var today = new Date();
+    	var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth()+1; //January is 0!
 			var yyyy = today.getFullYear();
@@ -184,9 +184,9 @@ export default {
     		else if (valore > 8) return 90;
     	}
     },
-    computed: 
+    computed:
     {
 
     }
 }
-</script> 
+</script>

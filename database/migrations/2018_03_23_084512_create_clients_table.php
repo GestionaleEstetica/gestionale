@@ -19,9 +19,9 @@ class CreateClientsTable extends Migration
             $table->string('last_name',32);
             $table->date('birthday');
             $table->string('phone',32);
-            $table->string('email',128)->unique();
+            $table->string('email',128)->unique()->nullable();
             $table->integer('done_dates')->default(0);
-            $table->string('promozioni',256)->default("");
+            $table->string('promozioni',256)->nullable();
             $table->timestamps();
         });
     }

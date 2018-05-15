@@ -13,13 +13,18 @@
 
 Route::get('/', 'DatesController@index');
 
-Route::resource('/stats', 'StatsController');
+Route::get('/auguri', function () {
+    return view('auguri');
+});
 
-Route::resource('/users', 'UsersController');
+Route::get('/admin/stats', 'StatsController@index')->middleware("auth");
+Route::get('/admin/stats/showSales', 'StatsController@showSales');
+Route::resource('/admin/users', 'UsersController')->middleware("auth");
 
 Route::get('/dates/done/{id}','DatesController@markAsDone')->name('markAsDone');
 Route::resource('/dates', 'DatesController');
 
+Route::put('/products/{id}', 'ProductsController@update');
 Route::get('/products/search','ProductsController@search');
 Route::resource('/products', 'ProductsController');
 
@@ -28,6 +33,7 @@ Route::resource('/treatments', 'TreatmentsController');
 
 Route::get('/clients/search','ClientsController@search');
 Route::get('/clients/recent','ClientsController@recent');
+Route::get('/clients/{id}/showDates','ClientsController@showDates');
 Route::resource('/clients', 'ClientsController');
 
 Route::get('/promos/store/{id}','ClientsController@store');
@@ -36,3 +42,7 @@ Route::resource('/promos', 'PromosController');
 Route::get('/sales/search', 'SalesController@search');
 Route::get('/sales/recent', 'SalesController@recent');
 Route::resource('/sales', 'SalesController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
