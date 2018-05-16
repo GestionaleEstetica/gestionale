@@ -377,6 +377,33 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -480,33 +507,6 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
 
 
 /***/ }),
@@ -3131,7 +3131,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 5 */
@@ -13967,7 +13967,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(60);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
@@ -31172,7 +31172,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(16)(module)))
 
 /***/ }),
 /* 16 */
@@ -46954,7 +46954,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(38).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(38).setImmediate))
 
 /***/ }),
 /* 38 */
@@ -47021,7 +47021,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 39 */
@@ -47214,7 +47214,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
 
 /***/ }),
 /* 40 */
@@ -48793,7 +48793,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
@@ -49382,7 +49382,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -49498,6 +49498,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'dates',
@@ -49505,6 +49517,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            searchClient: '',
             search: '',
             listedTreatments: [],
             client: '',
@@ -49520,6 +49533,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         removeTreatment: function removeTreatment(treatment) {
             var index = this.listedTreatments.indexOf(treatment);
             this.listedTreatments.splice(index, 1);
+        },
+        setClient: function setClient(client) {
+            this.client = client;
+            this.searchClient = "";
         },
         submit: function submit() {
             document.submitSale.client_id.value = this.client.id;
@@ -49540,6 +49557,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var treatment = treatment.name.toLowerCase();
                 var search = _this.search.toLowerCase();
                 return treatment.match(search);
+            });
+        },
+        filteredClients: function filteredClients() {
+            var _this2 = this;
+
+            return this.clients.filter(function (client) {
+                var client = client.last_name.toLowerCase();
+                var search = _this2.searchClient.toLowerCase();
+                return client.match(search);
             });
         }
     }
@@ -49569,49 +49595,68 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "panel-body" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Cliente")]),
+                  _c("label", [
+                    _vm._v("Seleziona Cliente ( ricerca per cognome )")
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.client,
-                          expression: "client"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.client = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.searchClient,
+                        expression: "searchClient"
                       }
-                    },
-                    _vm._l(_vm.sortedClients, function(client) {
-                      return _c("option", { domProps: { value: client } }, [
-                        _vm._v(
-                          "\r\n\t\t\t\t\t\t" +
-                            _vm._s(client.first_name) +
-                            " " +
-                            _vm._s(client.last_name) +
-                            " || " +
-                            _vm._s(client.email)
-                        )
-                      ])
-                    })
-                  )
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cerca.." },
+                    domProps: { value: _vm.searchClient },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.searchClient = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "panel-footer" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "list-group" },
+                      _vm._l(_vm.filteredClients, function(client) {
+                        return _vm.searchClient != ""
+                          ? _c(
+                              "li",
+                              {
+                                staticClass: "list-group-item",
+                                staticStyle: { cursor: "pointer" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.setClient(client)
+                                  }
+                                }
+                              },
+                              [
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(client.first_name) +
+                                      " " +
+                                      _vm._s(client.last_name)
+                                  )
+                                ]),
+                                _vm._v(
+                                  " | telefono: " +
+                                    _vm._s(client.phone) +
+                                    "\r\n\t\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      })
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -49772,7 +49817,12 @@ var render = function() {
                 [
                   _c("div", [
                     _c("b", [_vm._v("Cliente:")]),
-                    _vm._v(" " + _vm._s(_vm.client.first_name))
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.client.first_name) +
+                        " " +
+                        _vm._s(_vm.client.last_name)
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", [
@@ -49884,7 +49934,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(49)
 /* template */
@@ -50406,7 +50456,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(52)
 /* template */
@@ -50529,6 +50579,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        isNotFree: function isNotFree(orario, user) {
+            var orarioSplitted = orario.split(':');
+            for (var i = 0; i < this.dates.length; i++) {
+                var date = this.dates[i];
+                if (date.user_id == user.id) {
+                    if (orario < date.time) return false;
+                    console.log(date);
+                    var appTimeSplitted = date.time.split(':');
+                    var minutesFromTreats = 0;
+                    for (var i = 0; i < date.treatments.length; i++) {
+                        var treat = date.treatments[i];
+                        minutesFromTreats += treat.duration;
+                    }
+                }
+            }
+        },
+
         normalizeDate: function normalizeDate(date) {
             var d = new Date(date);
             return d.toLocaleDateString();
@@ -50537,6 +50604,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changeDate: function changeDate() {
             document.forms['changeDate'].submit();
         },
+
         hasDate: function hasDate(orario, user) {
             for (var i = 0; i < this.dates.length; i++) {
                 var appuntamento = this.dates[i];
@@ -50790,7 +50858,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(55)
 /* template */
@@ -51380,10 +51448,7 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */
+/* 57 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

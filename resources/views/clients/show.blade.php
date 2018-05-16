@@ -20,7 +20,7 @@
                     <tbody>
                       <tr>
                           <td>Data registrazione:</td>
-                        <td>{{$client->created_at}}</td>
+                        <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $client->created_at)->format('d-m-Y H:i:00')}}</td>
                       </tr>
                       <tr>
                         <td>Data compleanno:</td>

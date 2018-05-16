@@ -23,7 +23,6 @@ class DatesController extends Controller
     {
       $date = Carbon::parse(Input::get('date'))->toDateString();
       if (!isset($date)) $date = Carbon::today()->toDateString();
-      //$date = Carbon::createFromFormat('Y-m-d', $date)->format('d-m-Y');
       $dates = DB::table('dates')
         ->select('*')
         ->where('date', '=', $date)

@@ -30,10 +30,10 @@
                                         <br>
                                         <span class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</span>
 									</div>
-                                <td v-else @click="create(orario,user)" class="block__wrap" style="cursor: pointer;">
-                                    <p class="block__description text-center">Nuovo appuntamento</p>
-                                </td>
-                                </td>
+                <td v-else @click="create(orario,user)" class="block__wrap" style="cursor: pointer;">
+                    <p class="block__description text-center">Nuovo appuntamento</p>
+                </td>
+                </td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,6 +73,25 @@
         },
         methods:
         {
+					isNotFree: function(orario, user)
+					{
+						var orarioSplitted = orario.split(':');
+						for (var i = 0; i < this.dates.length; i++) {
+							var date = this.dates[i];
+							if (date.user_id == user.id){
+								if ( orario < date.time ) return false;
+								console.log(date);
+								var appTimeSplitted = date.time.split(':')
+								var minutesFromTreats = 0;
+								for (var i = 0; i < date.treatments.length; i++)
+								{
+							 		var treat = date.treatments[i];
+									minutesFromTreats += treat.duration;
+								}
+							}
+						}
+					},
+
 					normalizeDate: function(date)
 					{
 						var d = new Date(date);
@@ -83,6 +102,7 @@
         	{
 		        document.forms['changeDate'].submit();
         	},
+
         	hasDate: function(orario,user)
         	{
         		for (var i=0; i < this.dates.length; i++)

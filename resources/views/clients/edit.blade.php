@@ -33,10 +33,10 @@
 			    	</div>
 					<div class="form-group">
 						<label>Promozioni Attive</label>
-							 <textarea class="form-control" rows="5" name="promozione" value="{{ $client->promozioni }}"></textarea>
+							 <textarea class="form-control" rows="5" name="promozioni" value="{{ $client->promozioni }}"></textarea>
 						</div>
 					<input type="button" onclick="history.back();" value="Indietro" class="btn btn-success center" />
-					
+
 					<button id="submit" type="submit" value="submit" class="btn btn-primary center">Modifica</button>
 
 				</form>

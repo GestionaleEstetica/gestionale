@@ -57,7 +57,6 @@ class ClientsController extends Controller
     public function showDates($id)
     {
         $client = Client::findOrFail($id);
-
         return view('clients.showDates', compact('client'));
     }
 

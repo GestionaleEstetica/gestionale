@@ -5,13 +5,21 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Appuntamento</div>
 			<div class="panel-body">
-				<div class="form-group">
-					<label>Cliente</label>
-					<select class="form-control" v-model="client">
-						<option v-for="client in sortedClients" :value="client" >
-						{{client.first_name}} {{client.last_name}} || {{client.email}}</option>
-					</select>
-				</div>
+					<div class="form-group">
+						<label>Seleziona Cliente ( ricerca per cognome )</label>
+						<input type="text" placeholder="Cerca.." v-model="searchClient" class="form-control">
+						<div class="panel-footer">
+							<ul class="list-group">
+								<li @click="setClient(client)"
+								class="list-group-item"
+								v-if="searchClient!=''"
+								v-for="client in filteredClients"
+								style="cursor: pointer;">
+									<b>{{ client.first_name }} {{ client.last_name }}</b> | telefono: {{client.phone}}
+								</li>
+							</ul>
+						</div>
+					</div>
 				<div class="form-group" >
 					<label>Data</label>
 					<input name="date" type="date" class="form-control" v-model="data">
@@ -25,7 +33,11 @@
 					<input type="text" placeholder="Cerca.." v-model="search" class="form-control">
 					<div class="panel-footer">
 						<ul class="list-group">
-							<li @click="addTreatment(treatment)" class="list-group-item" v-if="search!=''" v-for="treatment in filteredTreatments" style="cursor: pointer;">
+							<li @click="addTreatment(treatment)"
+							class="list-group-item"
+							v-if="search!=''"
+							v-for="treatment in filteredTreatments"
+							style="cursor: pointer;">
 								<b>{{ treatment.name }}</b> | {{treatment.duration}} MIN | {{treatment.price}} €
 							</li>
 						</ul>
@@ -44,7 +56,7 @@
 						Scheda appuntamento
 					</div>
 					<div class="panel-body">
-						<div><b>Cliente:</b> {{ client.first_name }}</div>
+						<div><b>Cliente:</b> {{ client.first_name }} {{ client.last_name }}</div>
 						<div><b>Data:</b> {{ date }}</div>
 						<div><b>Orario:</b> {{ time }}</div>
 <br>
@@ -73,13 +85,14 @@
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+				searchClient:'',
                 search:'',
                 listedTreatments: [],
                 client:'',
                 description:''
             }
         },
-        methods: 
+        methods:
         {
         	addTreatment: function(treatment)
         	{
@@ -91,7 +104,12 @@
 				var index = this.listedTreatments.indexOf(treatment);
 				this.listedTreatments.splice(index,1)
 			},
-        	submit: function() 
+			setClient: function(client)
+			{
+				this.client = client;
+				this.searchClient = "";
+			},
+        	submit: function()
         	{
               document.submitSale.client_id.value = this.client.id;
               document.submitSale.treatments.value = JSON.stringify(this.listedTreatments);
@@ -99,21 +117,30 @@
               document.forms['submitSale'].submit();
             }
         },
-        computed: 
+        computed:
         {
-		    sortedClients() 
+		    sortedClients()
 		    {
-		      return _.orderBy(this.clients, 'first_name'); 
+		      return _.orderBy(this.clients, 'first_name');
 		    },
-			filteredTreatments: function() 
+			filteredTreatments: function()
 			{
-                return this.treatments.filter((treatment) => 
+                return this.treatments.filter((treatment) =>
                 {
                     var treatment = treatment.name.toLowerCase();
                     var search = this.search.toLowerCase();
                     return treatment.match(search);
                 })
             },
+			filteredClients: function()
+			{
+                return this.clients.filter((client) =>
+                {
+                    var client = client.last_name.toLowerCase();
+                    var search = this.searchClient.toLowerCase();
+                    return client.match(search);
+                })
+            },
         }
     }
-</script> 
+</script>

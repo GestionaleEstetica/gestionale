@@ -26,21 +26,23 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-								          <th>Codice</th>
-								          <th>Nome</th>
-								          <th>Marca</th>
-								          <th>Quantità</th>
-								          <th>Prezzo</th>
+								          <th class="text-center">Codice</th>
+								          <th class="text-center">Nome</th>
+								          <th class="text-center">Marca</th>
+								          <th class="text-center">Quantità</th>
+								          <th class="text-center">Prezzo</th>
+													<th class="text-center">Modifica</th>
+													<th class="text-center">Cancella</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 					       @forelse($products as $product)
 					        <tr>
-					          <td>{{ $product->id }}</td>
-					          <td>{{ $product->name }}</td>
-					          <td>{{ $product->brand }}</td>
-					          <td>{{ $product->quantity }}</td>
-					          <td>{{ $product->price }}</td>
+					          <td class="text-center">{{ $product->id }}</td>
+					          <td class="text-center">{{ $product->name }}</td>
+					          <td class="text-center">{{ $product->brand }}</td>
+					          <td class="text-center">{{ $product->quantity }}</td>
+					          <td class="text-center">{{ $product->price }}</td>
 
 							<td class="text-center">
 					          	<form action="/products/{{ $product->id }}/edit" method="GET">

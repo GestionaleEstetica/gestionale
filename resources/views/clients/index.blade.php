@@ -26,21 +26,24 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-								          <th>Codice</th>
-								          <th>Nome</th>
-								          <th>Cognome</th>
-								          <th>Telefono</th>
-								          <th>Email</th>
+								          <th class="text-center">Codice</th>
+								          <th class="text-center">Nome</th>
+								          <th class="text-center">Cognome</th>
+								          <th class="text-center">Telefono</th>
+								          <th class="text-center">Email</th>
+													<th class="text-center">Mostra</th>
+													<th class="text-center">Appuntamenti</th>
+													<th class="text-center">Cancella</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 					       @forelse($clients as $client)
 					        <tr>
-					          <td>{{ $client->id }}</td>
-					          <td>{{ $client->first_name }}</td>
-					          <td>{{ $client->last_name }}</td>
-					          <td>{{ $client->phone }}</td>
-					          <td>{{ $client->email }}</td>
+					          <td class="text-center">{{ $client->id }}</td>
+					          <td class="text-center">{{ $client->first_name }}</td>
+					          <td class="text-center">{{ $client->last_name }}</td>
+					          <td class="text-center">{{ $client->phone }}</td>
+					          <td class="text-center">{{ $client->email }}</td>
 
 								<td class="text-center">
 								        	<form action="/clients/{{ $client->id }}" method="GET">
@@ -51,7 +54,7 @@
 								</td>
 
 							<td class="text-center">
-					          	<form action="/clients/{{ $client->id }}/edit" method="GET">
+					          	<form action="/clients/{{$client->id}}/showDates" method="GET">
 							  <button type="submit" class="btn btn-warning btn-sm">
 					          <div class="glyphicon glyphicon-pencil"></div>
 							</button>

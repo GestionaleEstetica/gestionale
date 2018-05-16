@@ -26,19 +26,21 @@ Mostra tutti
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
-									<th>Codice</th>
-									<th>Nome</th>
-									<th>Durata Min</th>
-									<th>Prezzo</th>
+									<th class="text-center">Codice</th>
+									<th class="text-center">Nome</th>
+									<th class="text-center">Durata Min</th>
+									<th class="text-center">Prezzo</th>
+									<th class="text-center">Modifica</th>
+									<th class="text-center">Cancella</th>
 								</tr>
 							</thead>
 							<tbody>
 								@forelse($treatments as $treatment)
 								<tr>
-									<td>{{ $treatment->id }}</td>
-									<td>{{ $treatment->name }}</td>
-									<td>{{ $treatment->duration }}</td>
-									<td>{{ $treatment->price }}</td>
+									<td class="text-center">{{ $treatment->id }}</td>
+									<td class="text-center">{{ $treatment->name }}</td>
+									<td class="text-center">{{ $treatment->duration }}</td>
+									<td class="text-center">{{ $treatment->price }}</td>
 									<td class="text-center">
 										<form action="/treatments/{{ $treatment->id }}/edit" method="GET">
 											<button type="submit" class="btn btn-warning btn-sm">

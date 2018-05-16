@@ -7,8 +7,8 @@
 	<div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad" >
-   
-   
+
+
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Appuntamento</h3>
@@ -16,7 +16,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://14.139.245.36/esp/images/4.png" class="img-circle img-responsive"> </div>
-                <div class=" col-md-9 col-lg-9 "> 
+                <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
@@ -29,7 +29,7 @@
                       </tr>
                       <tr>
                         <td><b>Fissato il giorno:</b></td>
-                        <td>{{$date->date}}</td>
+                        <td>{{Carbon\Carbon::createFromFormat('Y-m-d', $date->date)->format('d-m-Y')}}</td>
                       </tr>
                         <td><b>Orario:</b></td>
                         <td>{{$date->time}}</td>
@@ -44,7 +44,7 @@
                       </tr>
                       <tr>
                         <td><b>Creato il giorno:</b></td>
-                        <td>{{$date->created_at}}</td>
+                        <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date->created_at)->format('d-m-Y H:i:00')}}</td>
                       </tr>
                       @if($date->created_at != $date->updated_at)
                       <tr>
@@ -65,7 +65,7 @@
                         	</ul>
                         </td>
                       </tr>
-                     
+
                     </tbody>
                   </table>
                 </div>

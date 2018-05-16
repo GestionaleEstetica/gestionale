@@ -2,6 +2,8 @@
 
 namespace App\Utility;
 use App\Treatment;
+use App\Date;
+use Illuminate\Support\Facades\DB;
 class Utility
 {
 	/**
@@ -13,6 +15,7 @@ class Utility
 		foreach($array as $e) if($e == $element) $quantity++;
 		return $quantity;
 	}
+
 
 	/**
 		Funzione che mappa oggetto -> occorrenze nell'array.
@@ -48,4 +51,21 @@ class Utility
 	{
 		$sale->user_id = $user;
 	}
+
+	/**
+		Per indexDate.vue prende i trattamenti da pivot
+	*/
+
+	}
+	/**public static function getDatesWithPivot($dates)
+	    {
+	        $new = [];
+	        foreach($dates as $date)
+	        {
+	            $treatments = json_decode($date->treatments);
+	            $elem = array_merge(array($date), $treatments);
+	            $new = array_merge($new,$elem);
+	        }
+	        return $new;
+	    }
 }
