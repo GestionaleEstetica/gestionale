@@ -122,7 +122,10 @@ class DatesController extends Controller
         'time' => $request->get('time'),
         'description' => $request->get('description')]);
       $date = Date::findOrFail($id);
-      $dates = Date::all();
+      $dates = DB::table('dates')
+        ->select('*')
+        ->where('date', '=', $date)
+        ->get();
 
       $treatments = json_decode($request->get('treatments'),true);
       $quantity = Utility::create_date_mapping($treatments,'name');
