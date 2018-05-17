@@ -56,15 +56,15 @@ class Utility
 		Per indexDate.vue prende i trattamenti da pivot
 	*/
 
-	}
-	/**public static function getDatesWithPivot($dates)
+
+	public static function getDatesWithPivot($dates)
 	    {
 	        $new = [];
 	        foreach($dates as $date)
 	        {
-	            $treatments = json_decode($date->treatments);
-	            $elem = array_merge(array($date), $treatments);
-	            $new = array_merge($new,$elem);
+	            $treatments = $date->treatments;
+	            $elem = array_merge(array($date), array($treatments));
+							array_push($new, $elem[0]);
 	        }
 	        return $new;
 	    }

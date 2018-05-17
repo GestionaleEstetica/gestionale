@@ -13,10 +13,6 @@
 
 Route::get('/', 'DatesController@index');
 
-Route::get('/auguri', function () {
-    return view('auguri');
-});
-
 Route::get('/admin/stats', 'StatsController@index')->middleware("auth");
 Route::get('/admin/stats/showSales', 'StatsController@showSales');
 Route::resource('/admin/users', 'UsersController')->middleware("auth");

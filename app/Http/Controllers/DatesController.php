@@ -23,10 +23,8 @@ class DatesController extends Controller
     {
       $date = Carbon::parse(Input::get('date'))->toDateString();
       if (!isset($date)) $date = Carbon::today()->toDateString();
-      $dates = DB::table('dates')
-        ->select('*')
-        ->where('date', '=', $date)
-        ->get();
+      $dates = Date::where('date', '=', $date)->get();
+      $dates = Utility::getDatesWithPivot($dates);
       $users = User::all();
       $clients = Client::all();
       return view('dates.index',compact(['date','dates','users','clients']));
@@ -68,10 +66,8 @@ class DatesController extends Controller
           $date->treatments()->attach($treatment,['quantity' => $quantity]);
       }
       $date = Carbon::today()->toDateString();
-      $dates = DB::table('dates')
-        ->select('*')
-        ->where('date', '=', Carbon::today()->toDateString())
-        ->get();
+      $dates = Date::where('date', '=', $date)->get();
+      $dates = Utility::getDatesWithPivot($dates);
       $users = User::all();
       $clients = Client::all();
       return view('dates.index', compact(['dates','users','date','clients']))->with('success','Appuntamento creato con successo');
@@ -122,10 +118,8 @@ class DatesController extends Controller
         'time' => $request->get('time'),
         'description' => $request->get('description')]);
       $date = Date::findOrFail($id);
-      $dates = DB::table('dates')
-        ->select('*')
-        ->where('date', '=', $date)
-        ->get();
+      $dates = Date::where('date', '=', $date)->get();
+      $dates = Utility::getDatesWithPivot($dates);
 
       $treatments = json_decode($request->get('treatments'),true);
       $quantity = Utility::create_date_mapping($treatments,'name');
@@ -141,7 +135,7 @@ class DatesController extends Controller
       $date = Carbon::today()->toDateString();
       $users = User::all();
       $clients = Client::all();
-      return view('dates.index',compact('dates','date','users','clients'));
+      return redirect('/dates')->with('success','Appuntamento modificato con successo');
 
     }
 

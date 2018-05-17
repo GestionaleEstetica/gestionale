@@ -1,12 +1,15 @@
 <template>
 <div class="row">
-	<div class="col-md-8 col-sm-12 col-lg-10">
+	<div class="col-md-8 col-sm-12 col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-                <h3 style="margin:0">
-                    <span>Calendario</span>
-                    <span class="pull-right">{{normalizeDate(date)}}</span>
-                </h3>
+				<form name="changeDate" action="/" method="GET" style="color:white">
+                    <span style="font-size: 30px; font-weight: bold">Giorno: {{normalizeDate(date)}}</span>
+										<span class="pull-right">
+											Seleziona Giorno<br>
+											<input type="date" name="date" v-model="date" @change="changeDate()" style="color: black;">
+										</span>
+										</form>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -21,15 +24,14 @@
 						<tbody>
 							<tr v-for="orario in orari">
 								<td class="text-center"><b>{{orario}}</b></td>
-								<td v-for="user in users" v-if="hasDate(orario,user)">
-									<div>
+								<td v-for="user in users" v-if="hasDate(orario,user)" v-on:click.prevent="showDate($event)" v-bind:date-id="settedAppuntamento.id"  style="cursor:pointer" >
+									<div >
 										<span class="pull-left"><b>Cliente</b>: {{getClient(settedAppuntamento)}}</span>
-                                        <form :action="'/dates/'+settedAppuntamento.id" method="GET">
-                                        <button type="submit" class="btn btn-outline btn-primary pull-right clearfix">Mostra</button>
-                                        </form>
                                         <br>
-                                        <span class="pull-left"><b>Descrizione</b>: {{getDescription(settedAppuntamento)}}</span>
+                                        <span class="pull-left"><b>Trattamenti</b>: {{getTreatments(settedAppuntamento)}}</span>
 									</div>
+								<td v-else-if="isNotFree(orario,user)" class="text-center" style="cursor: not-allowed; background-color: #FFE9B4; width:20%">
+								</td>
                 <td v-else @click="create(orario,user)" class="block__wrap" style="cursor: pointer;">
                     <p class="block__description text-center">Nuovo appuntamento</p>
                 </td>
@@ -43,12 +45,6 @@
 			<!-- /.panel-body -->
 		</div>
 		<!-- /.panel -->
-	</div>
-		<div class="col-md-2">
-			<label>Seleziona il giorno:</label>
-		<form name="changeDate" action="/" method="GET">
-			<input type="date" name="date" v-model="date" @change="changeDate()">
-		</form>
 	</div>
 
     <form name="create" action="/dates/create" method="GET">
@@ -73,29 +69,68 @@
         },
         methods:
         {
-					isNotFree: function(orario, user)
+					showDate: function(obj)
 					{
-						var orarioSplitted = orario.split(':');
+
+						var element = event.currentTarget
+						console.log(element);
+						var id = element.getAttribute('date-id');
+						window.location.href = "/dates/"+id;
+					},
+
+					calcolateTH: function(timeSplitted, duration)
+					{
+						var treatH = parseInt( (duration+Number(timeSplitted[1])) / 60);
+						var treatM = ( (duration+Number(timeSplitted[1])) % 60);
+						var Hsum = Number(timeSplitted[0])+treatH;
+						if (Hsum.toString().length < 2) Hsum = "0"+Hsum;
+						if ( treatM == 0)
+							var sum = (Hsum)+":"+(treatM+"0");
+						else
+							var sum = (Hsum)+":"+(treatM);
+						return sum;
+					},
+
+					calcolateAllTimeTreatments: function(treatments)
+					{
+						var totTreatsTime = 0;
+						for ( var k = 0; k < treatments.length; k++)
+							totTreatsTime += ( Number(treatments[k].duration) * treatments[k].pivot.quantity );
+						return totTreatsTime;
+					},
+
+					takeClosest: function(orario, user)
+					{
+						var closest = null;
 						for (var i = 0; i < this.dates.length; i++) {
 							var date = this.dates[i];
-							if (date.user_id == user.id){
-								if ( orario < date.time ) return false;
-								console.log(date);
-								var appTimeSplitted = date.time.split(':')
-								var minutesFromTreats = 0;
-								for (var i = 0; i < date.treatments.length; i++)
-								{
-							 		var treat = date.treatments[i];
-									minutesFromTreats += treat.duration;
-								}
+							if ( user.id == date.user_id && orario > date.time){
+								if ( closest == null || date.time > closest.time ) closest = date;
+								else continue;
 							}
 						}
+						return closest;
 					},
+
+					isNotFree: function(orario, user)
+					{
+
+						var date = this.takeClosest(orario, user);
+							if ( date != null) {
+								var timeSplitted = date.time.split(':');
+								var totTreatsTimeM = this.calcolateAllTimeTreatments(date.treatments);
+								var dateTotTime = this.calcolateTH(timeSplitted, totTreatsTimeM);
+								console.log(dateTotTime);
+								if ( orario < dateTotTime) return true
+							}
+						return false;
+					},
+
 
 					normalizeDate: function(date)
 					{
 						var d = new Date(date);
-						return d.toLocaleDateString();
+						return d.toLocaleDateString(["it"],{"year": "numeric","month": "2-digit","day": "2-digit"});
 					},
 
         	changeDate: function()
@@ -139,6 +174,16 @@
         		if (desc == null) return "Nessuna descrizione"
         		return desc.length > 20? desc.substring(0,20) + "..." : desc
         	},
+
+					getTreatments: function(appuntamento){
+						var treatments;
+						for (var i = 0; i < appuntamento.treatments.length; i++) {
+							if ( treatments == null ) treatments = appuntamento.treatments[i].name;
+							else treatments += (" | " + appuntamento.treatments[i].name);
+						}
+						return treatments.length > 25? treatments.substring(0,25) + "..." : treatments;
+					},
+
             create: function(orario,user)
             {
                 document.create.orario.value = orario;

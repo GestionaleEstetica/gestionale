@@ -50561,87 +50561,123 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'index-date',
-    props: ['users', 'dates', 'date', 'clients'],
-    data: function data() {
-        return {
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            orari: ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
-            settedOrario: [],
-            active: false
-        };
-    },
+	name: 'index-date',
+	props: ['users', 'dates', 'date', 'clients'],
+	data: function data() {
+		return {
+			csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			orari: ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'],
+			settedOrario: [],
+			active: false
+		};
+	},
 
-    methods: {
-        isNotFree: function isNotFree(orario, user) {
-            var orarioSplitted = orario.split(':');
-            for (var i = 0; i < this.dates.length; i++) {
-                var date = this.dates[i];
-                if (date.user_id == user.id) {
-                    if (orario < date.time) return false;
-                    console.log(date);
-                    var appTimeSplitted = date.time.split(':');
-                    var minutesFromTreats = 0;
-                    for (var i = 0; i < date.treatments.length; i++) {
-                        var treat = date.treatments[i];
-                        minutesFromTreats += treat.duration;
-                    }
-                }
-            }
-        },
+	methods: {
+		showDate: function showDate(obj) {
 
-        normalizeDate: function normalizeDate(date) {
-            var d = new Date(date);
-            return d.toLocaleDateString();
-        },
+			var element = event.currentTarget;
+			console.log(element);
+			var id = element.getAttribute('date-id');
+			window.location.href = "/dates/" + id;
+		},
 
-        changeDate: function changeDate() {
-            document.forms['changeDate'].submit();
-        },
+		calcolateTH: function calcolateTH(timeSplitted, duration) {
+			var treatH = parseInt((duration + Number(timeSplitted[1])) / 60);
+			var treatM = (duration + Number(timeSplitted[1])) % 60;
+			var Hsum = Number(timeSplitted[0]) + treatH;
+			if (Hsum.toString().length < 2) Hsum = "0" + Hsum;
+			if (treatM == 0) var sum = Hsum + ":" + (treatM + "0");else var sum = Hsum + ":" + treatM;
+			return sum;
+		},
 
-        hasDate: function hasDate(orario, user) {
-            for (var i = 0; i < this.dates.length; i++) {
-                var appuntamento = this.dates[i];
-                if (this.normalize(appuntamento.time) == orario && appuntamento.user_id == user.id) {
-                    this.settedAppuntamento = appuntamento;
-                    return true;
-                }
-            }
-            return false;
-        },
-        normalize: function normalize(orario) {
-            var ind = orario.lastIndexOf(':');
-            return orario.substring(0, ind);
-        },
-        getClient: function getClient(appuntamento) {
-            var clientId = appuntamento.client_id;
-            var clientInfo = "";
-            for (var i = this.clients.length - 1; i >= 0; i--) {
-                var client = this.clients[i];
-                if (client.id == clientId) {
-                    clientInfo += client.first_name + " " + client.last_name;
-                    return clientInfo;
-                }
-            }
-        },
-        getDescription: function getDescription(appuntamento) {
-            var desc = appuntamento.description;
-            if (desc == null) return "Nessuna descrizione";
-            return desc.length > 20 ? desc.substring(0, 20) + "..." : desc;
-        },
-        create: function create(orario, user) {
-            document.create.orario.value = orario;
-            document.create.user.value = JSON.stringify(user);
-            document.create.data.value = this.date;
-            document.forms['create'].submit();
-        }
-    }
+		calcolateAllTimeTreatments: function calcolateAllTimeTreatments(treatments) {
+			var totTreatsTime = 0;
+			for (var k = 0; k < treatments.length; k++) {
+				totTreatsTime += Number(treatments[k].duration) * treatments[k].pivot.quantity;
+			}return totTreatsTime;
+		},
+
+		takeClosest: function takeClosest(orario, user) {
+			var closest = null;
+			for (var i = 0; i < this.dates.length; i++) {
+				var date = this.dates[i];
+				if (user.id == date.user_id && orario > date.time) {
+					if (closest == null || date.time > closest.time) closest = date;else continue;
+				}
+			}
+			return closest;
+		},
+
+		isNotFree: function isNotFree(orario, user) {
+
+			var date = this.takeClosest(orario, user);
+			if (date != null) {
+				var timeSplitted = date.time.split(':');
+				var totTreatsTimeM = this.calcolateAllTimeTreatments(date.treatments);
+				var dateTotTime = this.calcolateTH(timeSplitted, totTreatsTimeM);
+				console.log(dateTotTime);
+				if (orario < dateTotTime) return true;
+			}
+			return false;
+		},
+
+		normalizeDate: function normalizeDate(date) {
+			var d = new Date(date);
+			return d.toLocaleDateString(["it"], { "year": "numeric", "month": "2-digit", "day": "2-digit" });
+		},
+
+		changeDate: function changeDate() {
+			document.forms['changeDate'].submit();
+		},
+
+		hasDate: function hasDate(orario, user) {
+			for (var i = 0; i < this.dates.length; i++) {
+				var appuntamento = this.dates[i];
+				if (this.normalize(appuntamento.time) == orario && appuntamento.user_id == user.id) {
+					this.settedAppuntamento = appuntamento;
+					return true;
+				}
+			}
+			return false;
+		},
+		normalize: function normalize(orario) {
+			var ind = orario.lastIndexOf(':');
+			return orario.substring(0, ind);
+		},
+		getClient: function getClient(appuntamento) {
+			var clientId = appuntamento.client_id;
+			var clientInfo = "";
+			for (var i = this.clients.length - 1; i >= 0; i--) {
+				var client = this.clients[i];
+				if (client.id == clientId) {
+					clientInfo += client.first_name + " " + client.last_name;
+					return clientInfo;
+				}
+			}
+		},
+		getDescription: function getDescription(appuntamento) {
+			var desc = appuntamento.description;
+			if (desc == null) return "Nessuna descrizione";
+			return desc.length > 20 ? desc.substring(0, 20) + "..." : desc;
+		},
+
+		getTreatments: function getTreatments(appuntamento) {
+			var treatments;
+			for (var i = 0; i < appuntamento.treatments.length; i++) {
+				if (treatments == null) treatments = appuntamento.treatments[i].name;else treatments += " | " + appuntamento.treatments[i].name;
+			}
+			return treatments.length > 25 ? treatments.substring(0, 25) + "..." : treatments;
+		},
+
+		create: function create(orario, user) {
+			document.create.orario.value = orario;
+			document.create.user.value = JSON.stringify(user);
+			document.create.data.value = this.date;
+			document.forms['create'].submit();
+		}
+	}
 });
 
 /***/ }),
@@ -50653,16 +50689,53 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-8 col-sm-12 col-lg-10" }, [
+    _c("div", { staticClass: "col-md-8 col-sm-12 col-lg-12" }, [
       _c("div", { staticClass: "panel panel-primary" }, [
         _c("div", { staticClass: "panel-heading" }, [
-          _c("h3", { staticStyle: { margin: "0" } }, [
-            _c("span", [_vm._v("Calendario")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pull-right" }, [
-              _vm._v(_vm._s(_vm.normalizeDate(_vm.date)))
-            ])
-          ])
+          _c(
+            "form",
+            {
+              staticStyle: { color: "white" },
+              attrs: { name: "changeDate", action: "/", method: "GET" }
+            },
+            [
+              _c(
+                "span",
+                { staticStyle: { "font-size": "30px", "font-weight": "bold" } },
+                [_vm._v("Giorno: " + _vm._s(_vm.normalizeDate(_vm.date)))]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "pull-right" }, [
+                _vm._v("\r\n\t\t\t\t\t\t\t\t\t\t\tSeleziona Giorno"),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.date,
+                      expression: "date"
+                    }
+                  ],
+                  staticStyle: { color: "black" },
+                  attrs: { type: "date", name: "date" },
+                  domProps: { value: _vm.date },
+                  on: {
+                    change: function($event) {
+                      _vm.changeDate()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.date = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
@@ -50705,77 +50778,81 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
                           return _vm.hasDate(orario, user)
-                            ? _c("td", [
-                                _c("div", [
-                                  _c("span", { staticClass: "pull-left" }, [
-                                    _c("b", [_vm._v("Cliente")]),
-                                    _vm._v(
-                                      ": " +
-                                        _vm._s(
-                                          _vm.getClient(_vm.settedAppuntamento)
-                                        )
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "form",
-                                    {
-                                      attrs: {
-                                        action:
-                                          "/dates/" + _vm.settedAppuntamento.id,
-                                        method: "GET"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "btn btn-outline btn-primary pull-right clearfix",
-                                          attrs: { type: "submit" }
-                                        },
-                                        [_vm._v("Mostra")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("br"),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "pull-left" }, [
-                                    _c("b", [_vm._v("Descrizione")]),
-                                    _vm._v(
-                                      ": " +
-                                        _vm._s(
-                                          _vm.getDescription(
-                                            _vm.settedAppuntamento
-                                          )
-                                        )
-                                    )
-                                  ])
-                                ])
-                              ])
-                            : _c(
+                            ? _c(
                                 "td",
                                 {
-                                  staticClass: "block__wrap",
                                   staticStyle: { cursor: "pointer" },
+                                  attrs: {
+                                    "date-id": _vm.settedAppuntamento.id
+                                  },
                                   on: {
                                     click: function($event) {
-                                      _vm.create(orario, user)
+                                      $event.preventDefault()
+                                      _vm.showDate($event)
                                     }
                                   }
                                 },
                                 [
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "block__description text-center"
-                                    },
-                                    [_vm._v("Nuovo appuntamento")]
-                                  )
+                                  _c("div", [
+                                    _c("span", { staticClass: "pull-left" }, [
+                                      _c("b", [_vm._v("Cliente")]),
+                                      _vm._v(
+                                        ": " +
+                                          _vm._s(
+                                            _vm.getClient(
+                                              _vm.settedAppuntamento
+                                            )
+                                          )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "pull-left" }, [
+                                      _c("b", [_vm._v("Trattamenti")]),
+                                      _vm._v(
+                                        ": " +
+                                          _vm._s(
+                                            _vm.getTreatments(
+                                              _vm.settedAppuntamento
+                                            )
+                                          )
+                                      )
+                                    ])
+                                  ])
                                 ]
                               )
+                            : _vm.isNotFree(orario, user)
+                              ? _c("td", {
+                                  staticClass: "text-center",
+                                  staticStyle: {
+                                    cursor: "not-allowed",
+                                    "background-color": "#FFE9B4",
+                                    width: "20%"
+                                  }
+                                })
+                              : _c(
+                                  "td",
+                                  {
+                                    staticClass: "block__wrap",
+                                    staticStyle: { cursor: "pointer" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.create(orario, user)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "block__description text-center"
+                                      },
+                                      [_vm._v("Nuovo appuntamento")]
+                                    )
+                                  ]
+                                )
                         })
                       ],
                       2
@@ -50787,40 +50864,6 @@ var render = function() {
           ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-2" }, [
-      _c("label", [_vm._v("Seleziona il giorno:")]),
-      _vm._v(" "),
-      _c(
-        "form",
-        { attrs: { name: "changeDate", action: "/", method: "GET" } },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.date,
-                expression: "date"
-              }
-            ],
-            attrs: { type: "date", name: "date" },
-            domProps: { value: _vm.date },
-            on: {
-              change: function($event) {
-                _vm.changeDate()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.date = $event.target.value
-              }
-            }
-          })
-        ]
-      )
     ]),
     _vm._v(" "),
     _vm._m(0)
